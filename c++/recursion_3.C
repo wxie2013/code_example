@@ -19,7 +19,6 @@ class Node
         void init(int N, int);
         int get_level() const {return level;}
         void set_level(int in_level) {level = in_level;}
-        int size(Node* node);
 };
 
 //.. add values and nodes to a tree
@@ -42,8 +41,8 @@ void Node::init(int N, int in_level)
     }
 }
 
-//
-int Node::size(Node* node)
+// number of nodes in the tree
+int size(Node* node)
 {
     int tmp =0;
     for(int i = 0; i<node->child.size(); i++) {
@@ -53,6 +52,20 @@ int Node::size(Node* node)
 
     return tmp;
 }
+
+//.. find the maximum depth of a tree
+int maxLevel(Node* node)
+{
+    int max_level = 0;
+    for(int i = 0; i<node->child.size(); i++) {
+        int tmp = maxLevel(node->child[i]);
+        if(max_level < tmp)
+            max_level = tmp;
+    }
+
+    return max_level+1;
+}
+
 
 //
 void print(Node * root) 
@@ -205,15 +218,18 @@ int main()
 {
     Node *s = new Node;
     s->init(2, 0);
-    cout<<"size: "<<s->size(s)<<endl;
+    cout<<"size: "<<size(s)<<endl;
+    cout<<"max level: "<<maxLevel(s)<<endl;
 
     Node *t = new Node;
     t->init(4, 0);
-    cout<<"size: "<<s->size(t)<<endl;
+    cout<<"size: "<<size(t)<<endl;
+    cout<<"max level: "<<maxLevel(t)<<endl;
 
     Node *a = new Node;
     a->init(2, 0);
-    cout<<"size: "<<s->size(a)<<endl;
+    cout<<"size: "<<size(a)<<endl;
+    cout<<"max level: "<<maxLevel(a)<<endl;
 
     cout<<" ==============================================================   "<<endl;
     // when s->id == a->id, the adress of a is changed to the address of s
