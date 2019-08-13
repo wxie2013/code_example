@@ -1,0 +1,3 @@
+/home/wxie/AI/code_example/cmake_example/example_1/Build/CMakeFiles/rebuild_cache.dir
+/home/wxie/AI/code_example/cmake_example/example_1/Build/CMakeFiles/hello.dir
+/home/wxie/AI/code_example/cmake_example/example_1/Build/CMakeFiles/edit_cache.dir

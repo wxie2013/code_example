@@ -1,0 +1,4 @@
+/home/wxie/AI/code_example/cmake_example/example_2/CMakeFiles/edit_cache.dir
+/home/wxie/AI/code_example/cmake_example/example_2/CMakeFiles/G__Event.dir
+/home/wxie/AI/code_example/cmake_example/example_2/CMakeFiles/rebuild_cache.dir
+/home/wxie/AI/code_example/cmake_example/example_2/CMakeFiles/Event.dir

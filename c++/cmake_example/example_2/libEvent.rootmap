@@ -1,0 +1,7 @@
+[ libEvent.so ]
+# List of selected classes
+class Event
+class EventHeader
+class HistogramManager
+class Track
+header Event.h

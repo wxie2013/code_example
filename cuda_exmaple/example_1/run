@@ -1,0 +1,5 @@
+g++ add.cpp -o add
+nvcc add_grid_2.cu -o add_grid_2
+
+time ./add
+time ./add_grid_2

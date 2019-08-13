@@ -1,0 +1,8 @@
+cd Build
+
+./build.sh
+
+cd ../
+
+root -b run.C
+

@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/hello.dir/Source/test.C.o  -o ../bin/hello 
