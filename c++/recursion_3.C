@@ -213,7 +213,26 @@ int in_existing_root(Node **ptr_t0,  Node **ptr_t1)
 //    return found;
 //}
 
-//
+// check if the input is already in the node
+bool in_the_node(Node* node, int input)
+{
+    bool found = false;
+
+    cout<<"level: "<<node->get_level()<<endl;
+    if(node->id == input) {
+        return true;
+    }
+
+    for(int i = 0; i < node->child.size(); i++) {
+        found = in_the_node(node->child[i], input);
+
+        if(found)
+            return true;
+    }
+
+    return found;
+}
+
 int main()
 {
     Node *s = new Node;
