@@ -12,7 +12,7 @@ class Node
     public:
         int id;
         int level; //.. level in the tree
-        vector<Node> child; 
+        vector<Node *> child; 
 
     public:
         Node():id{0}, level{0} {;}
@@ -30,13 +30,12 @@ void Node::init(int N, int in_level)
 
     if(N!=0) {
         for(int i = 0; i<n_child; i++) {
-            Node node;
-            child.push_back(node);
+            child.push_back(new Node);
         }
 
         //in_level += 1; //.. add one level up for the child 
         for(int i = 0; i<child.size(); i++) {
-            child[i].init(N-1, in_level);
+            child[i]->init(N-1, in_level);
         }
     }
 }
@@ -46,7 +45,7 @@ int size(Node* node)
 {
     int tmp =0;
     for(int i = 0; i<node->child.size(); i++) {
-        tmp += size(&(node->child[i]));
+        tmp += size(node->child[i]);
     }
     tmp +=1;
 
@@ -58,7 +57,7 @@ int maxLevel(Node* node)
 {
     int max_level = 0;
     for(int i = 0; i<node->child.size(); i++) {
-        int tmp = maxLevel(&(node->child[i]));
+        int tmp = maxLevel(node->child[i]);
         if(max_level < tmp)
             max_level = tmp;
     }
@@ -88,12 +87,12 @@ void print(Node * root)
             // Dequeue an item from queue and print it 
             Node * p = q.front(); 
             q.pop(); 
-            cout << p->id << "(level: "<<p->get_level()<<") "; 
-            //cout << p << "(level: "<<p->get_level()<<") "; //.. can print address for debugging to see if it's changed..
+            //cout << p->id << "(level: "<<p->get_level()<<") "; 
+            cout << p << "(level: "<<p->get_level()<<") "; //.. can print address for debugging to see if it's changed..
    
             // Enqueue all children of the dequeued item 
             for (int i=0; i<p->child.size(); i++) 
-                q.push(&(p->child[i])); 
+                q.push(p->child[i]); 
             n--; 
         } 
    
@@ -124,8 +123,8 @@ int in_existing_root(Node *&ptr_t0,  Node *&ptr_t1)
         return std::min(ptr_t0->get_level(), ptr_t1->get_level()) ;
     }
 
-    Node *n0 = 0;
-    Node *n1 = 0;
+    Node **n0 = 0;
+    Node **n1 = 0;
     for(int i = 0; i < ptr_t0->child.size()+1; i++) {
         for(int m = 0; m < ptr_t1->child.size()+1; m++) {
 
@@ -134,18 +133,18 @@ int in_existing_root(Node *&ptr_t0,  Node *&ptr_t1)
                 continue;
 
             if(i==ptr_t0->child.size())
-                n0 = ptr_t0;
+                n0 = &ptr_t0;
             else {
                 n0 = &ptr_t0->child[i];
             }
 
             if(m==ptr_t1->child.size())
-                n1 = ptr_t1;
+                n1 = &ptr_t1;
             else {
                 n1 = &ptr_t1->child[m];
             }
 
-            found = in_existing_root(n0, n1);
+            found = in_existing_root(*n0, *n1);
 
             // one can return here but it will only allow changes in one node. 
             // if there can be more than one nodes common between the two trees, comment the following out
@@ -227,7 +226,7 @@ bool in_the_node(Node* node, int input)
     }
 
     for(int i = 0; i < node->child.size(); i++) {
-        found = in_the_node(&(node->child[i]), input);
+        found = in_the_node(node->child[i], input);
 
         if(found)
             return true;
