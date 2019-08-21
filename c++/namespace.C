@@ -47,6 +47,23 @@ namespace O
     std::string a = "hello";
 }
 
+//
+namespace common
+{
+    class A
+    {
+        public:
+        A(); 
+    };
+}
+
+namespace common
+{
+    A::A()
+    {
+        int num = 10;
+    }
+}
 
 //using namespace N::m;  //..calling this leads to ambiguity with the global "int a = 100"
 //using namespace O; //..calling this leads to ambiguity with the global "int a = 100"
@@ -75,6 +92,9 @@ int main()
 
     //...
     std::cout<<O::a<<std::endl;
+
+    //..
+    common::A a;
 
     return 0;
 }
