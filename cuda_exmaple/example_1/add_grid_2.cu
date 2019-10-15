@@ -18,7 +18,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-	int N = 1<<30;
+	int N = 1<<29; //..not sure why 1<<30 does not work
     float *d_x = NULL, *d_y = NULL;
     CudaSafeCall(cudaMalloc((void **)&d_x, sizeof(float)*N));
     CudaSafeCall(cudaMalloc((void **)&d_y, sizeof(float)*N));
