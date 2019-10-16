@@ -1,6 +1,8 @@
 #include <iostream>
 #include <math.h>
 #include <vector>
+
+#define CUDA_ERROR_CHECK
 #include "/home/wxie/AI/Spike/July_2019/Spike_July_2019/Spike/Backend/CUDA/Helpers/ErrorCheck.hpp"
 
 using namespace std;
@@ -18,7 +20,7 @@ void add(int n, float *x, float *y)
 
 int main(void)
 {
-	int N = 1<<29; //..not sure why 1<<30 does not work
+	int N = 1<<29; //..not sure why 1<<30 gives out of memory error
     float *d_x = NULL, *d_y = NULL;
     CudaSafeCall(cudaMalloc((void **)&d_x, sizeof(float)*N));
     CudaSafeCall(cudaMalloc((void **)&d_y, sizeof(float)*N));
