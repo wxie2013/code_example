@@ -39,8 +39,8 @@ add_custom_target(move_pcmfile
     COMMAND cp ${BUILD_DIR}/Source/*.pcm  ${LIBRARY_OUTPUT_PATH}
 )
 
-## make distclean ==> clean all build files and start from scratch
-add_custom_target(distclean
+## make clean_all ==> clean all build files and start from scratch
+add_custom_target(clean_all
     COMMAND find ${BUILD_DIR}/. ! -name 'build.sh' -type f -exec rm -f {} +
     COMMAND rm -f ${LIBRARY_OUTPUT_PATH}/lib*
     COMMAND rm -rf ${BUILD_DIR}/Source ${BUILD_DIR}/CMakeFiles
