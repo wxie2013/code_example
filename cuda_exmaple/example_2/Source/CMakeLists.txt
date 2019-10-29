@@ -12,7 +12,7 @@ foreach(main_file ${MAIN_FILES})
 
   get_filename_component(barename ${main_file} NAME_WE) # get the name without the extension
 
-  ROOT_GENERATE_DICTIONARY(G__${barename} ${barename}.h LINKDEF LinkDef.h)
+  ROOT_GENERATE_DICTIONARY(G__${barename} Source/${barename}.h LINKDEF LinkDef.h)
 
   #message("+++ list of files +++++")  # print out 
   #message(${barename})
