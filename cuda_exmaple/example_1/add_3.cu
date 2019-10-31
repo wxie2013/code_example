@@ -102,6 +102,7 @@ int main(void)
 	// Free memory
 	CudaSafeCall(cudaFree(d_x));
 	CudaSafeCall(cudaFree(d_y));
+	CudaSafeCall(cudaFree(d_tot));
 
 	return 0;
 }
