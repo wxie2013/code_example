@@ -1,0 +1,22 @@
+#optimization option can be found at: 
+# "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+
+g++ example.C -o example
+g++ example.C -o example_optimized_O3 -O3
+g++ example.C -o example_optimized_O2 -O2
+g++ example.C -o example_optimized_O1 -O1
+g++ example.C -o example_optimized_O0 -O0
+g++ example.C -o example_optimized_Os -Os
+
+echo "time ./example"
+time ./example 
+echo "time ./example_optimized_O0"
+time ./example_optimized_O0
+echo "time ./example_optimized_O1"
+time ./example_optimized_O1
+echo "time ./example_optimized_O2"
+time ./example_optimized_O2
+echo "time ./example_optimized_O3"
+time ./example_optimized_O3
+echo "time ./example_optimized_Os"
+time ./example_optimized_Os

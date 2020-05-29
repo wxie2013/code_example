@@ -1,0 +1,6 @@
+#optimization option can be found at:
+# "https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html"
+
+"-O3" turns on free vectorization 
+
+execute "run" to see the timing for different options. 
