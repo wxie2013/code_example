@@ -1,0 +1,96 @@
+PS1="\h:\u:\W>"
+alias m='less -r'
+alias ls='ls -F --color=tty'
+alias l='ls -lrt'
+alias lm='ls -l|less'
+alias ed='vim -N'
+alias cuw+='chmod u+w '
+alias cuw-='chmod u-w '
+alias cux='chmod u+x '
+alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
+alias ldr='ls -lrt|grep dr'
+alias scrh='cd /usr/rmt_share/scratch96/w/wxie'
+alias str='cd /mnt/hadoop/store/user/wxie'
+alias cpl='scram b --reset -j 4'
+
+
+alias py2='python2'
+alias py='python'
+
+alias rtl='root -l'
+alias rtb='root -b'
+
+alias cqwx='condor_q -sub wxie'
+alias crm='condor_rm '
+alias csub='condor_submit '
+
+alias dp="display"
+
+alias scmb='scram b -j 4'
+
+alias 5324='cd ~/CMSSW_5_3_24; eval `scramv1 runtime -sh`; cd -'
+alias 5320='cd ~/CMSSW_5_3_20; eval `scramv1 runtime -sh`; cd -'
+alias 5315='cd ~/CMSSW_5_3_15; eval `scramv1 runtime -sh`; cd -'
+alias 529='cd ~/CMSSW_5_2_9; eval `scramv1 runtime -sh`; cd -'
+
+export desktop=wxie@10.164.18.177
+alias lg_desktop='ssh $desktop'
+
+
+export cern=wxie@lxplus.cern.ch
+export PATH=/home/wxie/cmake-3.19.0-rc2/bin:$PATH
+
+#-- kill all root process from wxie 
+#ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
+#-- list tar file content
+#tar tvf *.tar
+#-- extract one directory of a tar file
+#tar xvf *.tar directory_name
+
+alias ai='conda activate brian2'
+export Brian2=/home/wxie/Brian2
+alias brian='cd $Brian2'
+# this make sure the relate path works, e.g. from Brian2.tools.general_tools import *
+export PYTHONPATH=$Brian2/../:$PYTHONPATH
+
+alias ana_brian='cd $Brian2/ana'
+alias job_brian='cd $Brian2/jobs_sub/'
+alias model_brian='cd $Brian2/model'
+alias tools_brian='cd $Brian2/tools'
+
+alias sc='cd /scratch/*/w/wxie/'
+alias scb='cd /scratch/*/wxie/'
+alias sqwx='squeue -u wxie'
+
+#alias load_root='module load gcc/4.8.5; cd ~/CMSSW_11_1_8/; cmsenv; cd -'
+alias load_root='module purge; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
+
+eval load_root
+
+#
+alias py='python3'
+alias ipy='ipython'
+
+export ROOTSYS=$HOME/root
+export PATH=$PATH:$ROOTSYS/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
+
+#voms-proxy-init -voms cms -valid 180:00:00
+# add the following to make sure package argparse, etc comes from the brian2 environmen, otherwise brian2.test() won't work.
+#export PYTHONPATH=/home/wxie/.conda/envs/brian2/lib/python3.7/:$PYTHONPATH
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+#__conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/wxie/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/wxie/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/wxie/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
+# <<< conda initialize <<<
+#
