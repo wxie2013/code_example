@@ -63,7 +63,7 @@ alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 
 #alias load_root='module load gcc/4.8.5; cd ~/CMSSW_11_1_8/; cmsenv; cd -'
-alias load_root='module purge; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
+alias load_root='module purge; module load anaconda/5.1.0-py36; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
 
 eval load_root
 
