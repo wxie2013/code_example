@@ -63,7 +63,7 @@ alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 
 #alias load_root='module load gcc/4.8.5; cd ~/CMSSW_11_1_8/; cmsenv; cd -'
-alias load_root='module purge; unset PYTHONPATH; module load use.own; module load conda-env/myPythonEnv-py3.6.4; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
+alias load_root='module purge; unset PYTHONPATH; export PYTHONPATH=/home/wxie; module load use.own; module load conda-env/myPythonEnv-py3.6.4; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
 
 eval load_root
 
@@ -75,22 +75,6 @@ export ROOTSYS=$HOME/root
 export PATH=$PATH:$ROOTSYS/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
 
-#voms-proxy-init -voms cms -valid 180:00:00
-# add the following to make sure package argparse, etc comes from the brian2 environmen, otherwise brian2.test() won't work.
-#export PYTHONPATH=/home/wxie/.conda/envs/brian2/lib/python3.7/:$PYTHONPATH
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-#__conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-#if [ $? -eq 0 ]; then
-#    eval "$__conda_setup"
-#else
-#    if [ -f "/home/wxie/anaconda3/etc/profile.d/conda.sh" ]; then
-#        . "/home/wxie/anaconda3/etc/profile.d/conda.sh"
-#    else
-#        export PATH="/home/wxie/anaconda3/bin:$PATH"
-#    fi
-#fi
-#unset __conda_setup
-# <<< conda initialize <<<
-#
+#voms-proxy-init -voms cms -valid 180:00:00
+
