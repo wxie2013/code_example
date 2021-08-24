@@ -9,7 +9,6 @@ alias cuw-='chmod u-w '
 alias cux='chmod u+x '
 alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
 alias ldr='ls -lrt|grep dr'
-alias scrh='cd /usr/rmt_share/scratch96/w/wxie'
 alias str='cd /mnt/hadoop/store/user/wxie'
 alias cpl='scram b --reset -j 4'
 
@@ -20,25 +19,9 @@ alias py='python'
 alias rtl='root -l'
 alias rtb='root -b'
 
-alias cqwx='condor_q -sub wxie'
-alias crm='condor_rm '
-alias csub='condor_submit '
-
-alias dp="display"
-
 alias scmb='scram b -j 4'
 
-alias 5324='cd ~/CMSSW_5_3_24; eval `scramv1 runtime -sh`; cd -'
-alias 5320='cd ~/CMSSW_5_3_20; eval `scramv1 runtime -sh`; cd -'
-alias 5315='cd ~/CMSSW_5_3_15; eval `scramv1 runtime -sh`; cd -'
-alias 529='cd ~/CMSSW_5_2_9; eval `scramv1 runtime -sh`; cd -'
-
-export desktop=wxie@10.164.18.177
-alias lg_desktop='ssh $desktop'
-
-
 export cern=wxie@lxplus.cern.ch
-export PATH=/home/wxie/cmake-3.19.0-rc2/bin:$PATH
 
 #-- kill all root process from wxie 
 #ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
@@ -47,12 +30,8 @@ export PATH=/home/wxie/cmake-3.19.0-rc2/bin:$PATH
 #-- extract one directory of a tar file
 #tar xvf *.tar directory_name
 
-alias ai='conda activate brian2'
 export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
-# this make sure the relate path works, e.g. from Brian2.tools.general_tools import *
-export PYTHONPATH=$Brian2/../:$PYTHONPATH
-
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/'
 alias model_brian='cd $Brian2/model'
@@ -62,19 +41,20 @@ alias sc='cd /scratch/*/w/wxie/'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 
-#alias load_root='module load gcc/4.8.5; cd ~/CMSSW_11_1_8/; cmsenv; cd -'
-alias load_root='module purge; unset PYTHONPATH; export PYTHONPATH=/home/wxie; module load use.own; module load conda-env/myPythonEnv-py3.6.4; source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh; source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh'
+load_root() {
+module purge
+unset PYTHONPATH
+export PYTHONPATH=/home/wxie
+module load use.own; module load conda-env/myPythonEnv-py3.6.4 
+source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh 
+source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
+}
 
 eval load_root
 
 #
 alias py='python3'
 alias ipy='ipython'
-
-export ROOTSYS=$HOME/root
-export PATH=$PATH:$ROOTSYS/bin
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ROOTSYS/lib
-
 
 #voms-proxy-init -voms cms -valid 180:00:00
 
