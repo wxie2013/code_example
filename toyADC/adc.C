@@ -1,11 +1,16 @@
-{
+{ // simulate 2-bit ADC
+  TFile result("adc.root", "RECREATE");
   //amp: test pulse amplitude 
+  //adc: adc value of a input pulse
+  TNtuple *nt = new TNtuple("nt", "", "amp:adc");
+
   //th0: threshold of comparator c0
   //th1: threshold of comparator c1
   //th2: threshold of comparator c2
   //th3: threshold of comparator c3
-  //adc: adc value of a input pulse
-  TNtuple *nt = new TNtuple("nt", "", "amp:th0:th1:th2:th3:adc");
+  //c0,c1,c2,c3: 0:OFF 1:ON, comparator0, 1, 2, 3
+  //aid: id of amp_mean;
+  TNtuple *nt_detail = new TNtuple("nt_detail", "", "amp:aid:c0:c1:c2:c3:th0:th1:th2:th3:adc");
 
   const int n_pulse = 50000;  // number of test pulse
   const int n_adc = 4;  //.. number of ADCs
@@ -27,21 +32,38 @@
     for(int it = 0; it<n_adc; it++) 
       thres[it] = gRandom->Gaus(thres_mean[it], thres_width[it]);
 
+    // comparator 0-3 initially OFF
+    int c0 = 0;
+    int c1 = 0;
+    int c2 = 0;
+    int c3 = 0;
     // now determind the ADC value of this test pulse
     float adc = -1;  // initial value
-    if(amp >= thres[0] && amp < thres[1]) 
+    if(amp >= thres[0] && amp < thres[1]) {   // comparator C0 ON
       adc = 0;  // this test pulse output adc0
-    else if(amp >= thres[1] && amp <thres[2]) 
+      c0=1;  
+    } else if(amp >= thres[1] && amp <thres[2])  {  // comparator C0 and C1 ON
       adc = 1;  // this test pulse output adc1
-    else if(amp >= thres[2] && amp <thres[3]) 
+      c0=1;
+      c1=1;
+    } else if(amp >= thres[2] && amp <thres[3])  {// comparator C0,C1 and C2 ON
       adc = 2;  // this test pulse output adc2
-    else if(amp >= thres[3]) 
+      c0=1;
+      c1=1;
+      c2=1;
+    } else if(amp >= thres[3]) {// comparator C0,C1,C2 and C3 ON
+      c0=1;
+      c1=1;
+      c2=1;
+      c3=1;
       adc = 3; // this test pulse output adc3
+    }
 
-    nt->Fill(amp, thres[0], thres[1], thres[2], thres[3], adc);
+    nt->Fill(amp,adc);
+    nt_detail->Fill(amp, idx, c0, c1, c2, c3, thres[0], thres[0], thres[2], thres[3], adc);
   }
-  // make some plot
-  TCanvas *c = new TCanvas("c", "", 800, 600);
+  // make some plot for nt
+  TCanvas *c0 = new TCanvas("c0", "", 800, 600);
   gStyle->SetOptStat(0);
   nt->SetLineWidth(2);
   TH1F *hall = new TH1F("hall", "", 200, 8, 100);
@@ -88,4 +110,37 @@
   legend0->SetTextFont(42);
   legend0->SetTextSize(0.03);
 
+  // make plot for nt_detail
+  TCanvas *c1 = new TCanvas("c1", "", 800, 600);
+  gStyle->SetOptStat(0);
+  nt_detail->SetLineWidth(2);
+  TH1F *hin = new TH1F("hin", "", 120, 10, 70);
+  hin->SetLineWidth(2);
+  hin->Draw();
+  hin->SetMaximum(700);
+  nt_detail->Draw("amp>>hin0", "aid==0", "same"); // input pulse from amp_mean[0]
+  nt_detail->Draw("amp>>hin1", "aid==1", "same"); // input pulse from amp_mean[1]
+  nt_detail->Draw("amp>>hin2", "aid==2", "same"); // input pulse from amp_mean[2]
+  hin0->SetLineStyle(2);
+  hin1->SetLineStyle(2);
+  hin2->SetLineStyle(2);
+  hin0->SetLineColor(1);
+  hin1->SetLineColor(3);
+  hin2->SetLineColor(4);
+  nt_detail->Draw("amp>>hadc0", "adc==0", "same");
+  nt_detail->Draw("amp>>hin0_adc0", "aid==0 && adc==0", "same");
+  nt_detail->Draw("amp>>hin0_adc1", "aid==1 && adc==0", "same");
+  nt_detail->Draw("amp>>hin0_adc2", "aid==2 && adc==0", "same");
+  hadc0->SetLineColor(2);
+  hin0_adc0->SetLineColor(1);
+  hin0_adc1->SetLineColor(3);
+  hin0_adc2->SetLineColor(4);
+  hin->GetXaxis()->CenterTitle();
+  hin->GetXaxis()->SetTitle("Amplitude");
+  hin->GetYaxis()->SetTitle("counts");
+
+  // save the file
+  result.cd();
+  nt->Write();
+  nt_detail->Write();
 }
