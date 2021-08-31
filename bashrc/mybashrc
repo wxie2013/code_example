@@ -45,11 +45,10 @@ load_root() {
 module purge
 unset PYTHONPATH
 export PYTHONPATH=/home/wxie
+source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
+source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
 module load cmake/3.15.4
 module load use.own; module load conda-env/myPythonEnv-py3.6.4 
-#source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
-source /cvmfs/sft.cern.ch/lcg/external/gcc/6.2.0/x86_64-centos7/setup.sh
-source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
 }
 
 eval load_root
