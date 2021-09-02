@@ -9,14 +9,12 @@
   //th2: threshold of comparator c2
   //th3: threshold of comparator c3
   //c0,c1,c2,c3: 0:OFF 1:ON, comparator0, 1, 2, 3
-  //aid: id of amp_mean;
-  TNtuple *nt_detail = new TNtuple("nt_detail", "", "amp:aid:c0:c1:c2:c3:th0:th1:th2:th3:adc");
+  TNtuple *nt_detail = new TNtuple("nt_detail", "", "amp:c0:c1:c2:c3:th0:th1:th2:th3:adc");
 
   const int n_pulse = 50000;  // number of test pulse
   const int n_adc = 4;  //.. number of ADCs
 
-  float amp_mean[n_adc] = {30, 40, 50, 60};  // Gaussian mean of input pulse amplitude 
-  float amp_width[n_adc] = {5, 5, 5, 5};   // Gaussian width of input pulse amplitude
+  float amp_noise = 2;   // Gaussian width of input pulse amplitude
 
   float thres_mean[n_adc] = {30, 40, 50, 60};  // Gaussian mean of threshod of adc0, adc1, adc2, adc3
   float thres_width[n_adc] = {2, 2, 2, 2};  // Gaussian width of the threshold of adc0, adc1, adc2, adc3
@@ -24,8 +22,9 @@
   for(int i = 0; i<n_pulse; i++) {
     int idx = int(gRandom->Rndm()/0.25); // each amp_mean has 25% probility to generator pulse
 
-    // amplitude of input test pulse
-    float amp = gRandom->Gaus(amp_mean[idx], amp_width[idx]);
+    // input amplitude witha flat distribution
+    float amp = gRandom->Rndm()*100;
+    float amp_with_noise = gRandom->Gaus(amp, amp_noise);
 
     // threshold for each comparator
     float thres[n_adc] = {0};
@@ -39,19 +38,19 @@
     int c3 = 0;
     // now determind the ADC value of this test pulse
     float adc = -1;  // initial value
-    if(amp >= thres[0] && amp < thres[1]) {   // comparator C0 ON
+    if(amp_with_noise >= thres[0] && amp_with_noise < thres[1]) {   // comparator C0 ON
       adc = 0;  // this test pulse output adc0
       c0=1;  
-    } else if(amp >= thres[1] && amp <thres[2])  {  // comparator C0 and C1 ON
+    } else if(amp_with_noise >= thres[1] && amp_with_noise <thres[2])  {  // comparator C0 and C1 ON
       adc = 1;  // this test pulse output adc1
       c0=1;
       c1=1;
-    } else if(amp >= thres[2] && amp <thres[3])  {// comparator C0,C1 and C2 ON
+    } else if(amp_with_noise >= thres[2] && amp_with_noise <thres[3])  {// comparator C0,C1 and C2 ON
       adc = 2;  // this test pulse output adc2
       c0=1;
       c1=1;
       c2=1;
-    } else if(amp >= thres[3]) {// comparator C0,C1,C2 and C3 ON
+    } else if(amp_with_noise >= thres[3]) {// comparator C0,C1,C2 and C3 ON
       c0=1;
       c1=1;
       c2=1;
@@ -60,7 +59,7 @@
     }
 
     nt->Fill(amp,adc);
-    nt_detail->Fill(amp, idx, c0, c1, c2, c3, thres[0], thres[0], thres[2], thres[3], adc);
+    nt_detail->Fill(amp, c0, c1, c2, c3, thres[0], thres[0], thres[2], thres[3], adc);
   }
   // make some plot for nt
   TCanvas *c0 = new TCanvas("c0", "", 800, 600);
@@ -85,6 +84,7 @@
     mean_thres[i]->Draw("same");
   }
   hall->SetLineStyle(2);
+  hall->SetMinimum(0);
   hadc->SetLineColor(1);
   h0->SetLineColor(adc_color[0]);
   h1->SetLineColor(adc_color[1]);
@@ -96,7 +96,7 @@
   hall->GetXaxis()->SetTitle("Amplitude");
   hall->GetYaxis()->SetTitle("Counts");
 
-  TLegend* legend0 = new TLegend(0.65,0.50,0.9,0.9, "", "NDC" );
+  TLegend* legend0 = new TLegend(0.65,0.15,0.9,0.6, "", "NDC" );
   legend0->SetFillColor(0);
   legend0->SetBorderSize(0);
   legend0->Draw();
@@ -109,35 +109,18 @@
   legend0->AddEntry(h3, "amp with adc3", "L");
   legend0->SetTextFont(42);
   legend0->SetTextSize(0.03);
+  c0->SaveAs("amp.gif");
 
-  // make plot for nt_detail
+  //
   TCanvas *c1 = new TCanvas("c1", "", 800, 600);
-  gStyle->SetOptStat(0);
-  nt_detail->SetLineWidth(2);
-  TH1F *hin = new TH1F("hin", "", 120, 10, 70);
-  hin->SetLineWidth(2);
-  hin->Draw();
-  hin->SetMaximum(700);
-  nt_detail->Draw("amp>>hin0", "aid==0", "same"); // input pulse from amp_mean[0]
-  nt_detail->Draw("amp>>hin1", "aid==1", "same"); // input pulse from amp_mean[1]
-  nt_detail->Draw("amp>>hin2", "aid==2", "same"); // input pulse from amp_mean[2]
-  hin0->SetLineStyle(2);
-  hin1->SetLineStyle(2);
-  hin2->SetLineStyle(2);
-  hin0->SetLineColor(1);
-  hin1->SetLineColor(3);
-  hin2->SetLineColor(4);
-  nt_detail->Draw("amp>>hadc0", "adc==0", "same");
-  nt_detail->Draw("amp>>hin0_adc0", "aid==0 && adc==0", "same");
-  nt_detail->Draw("amp>>hin0_adc1", "aid==1 && adc==0", "same");
-  nt_detail->Draw("amp>>hin0_adc2", "aid==2 && adc==0", "same");
-  hadc0->SetLineColor(2);
-  hin0_adc0->SetLineColor(1);
-  hin0_adc1->SetLineColor(3);
-  hin0_adc2->SetLineColor(4);
-  hin->GetXaxis()->CenterTitle();
-  hin->GetXaxis()->SetTitle("Amplitude");
-  hin->GetYaxis()->SetTitle("counts");
+  nt->SetMarkerStyle(24);
+  nt->Draw("adc:amp>>h2d");
+  h2d->GetXaxis()->CenterTitle();
+  h2d->GetYaxis()->CenterTitle();
+  h2d->GetXaxis()->SetTitle("Amplitude");
+  h2d->GetYaxis()->SetTitle("ADC");
+  h2d->Draw("colz");
+  c1->SaveAs("adc_vs_amp.gif");
 
   // save the file
   result.cd();
