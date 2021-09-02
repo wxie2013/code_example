@@ -130,7 +130,7 @@
     mean_thres[i]->SetLineColor(adc_color[i]);
     mean_thres[i]->Draw("same");
   }
-  TLegend* legend1 = new TLegend(0.65,0.15,0.9,0.6, "", "NDC" );
+  TLegend* legend1 = new TLegend(0.6,0.15,0.9,0.6, "", "NDC" );
   legend1->SetFillColor(0);
   legend1->SetBorderSize(0);
   legend1->Draw();
@@ -142,6 +142,18 @@
   legend1->AddEntry(hi3, "amp with adc3", "L");
   legend1->SetTextFont(42);
   legend1->SetTextSize(0.03);
+
+  //. now fit with error function
+  TF1 *f1 = new TF1("f1","[0]+[0]*TMath::Erf((x-[1])/sqrt(2)/[2])",0, 100);
+  f1->SetLineColor(1);
+  f1->SetParameters(100, 20, 3);
+  hadc->Fit(f1);
+  f1->SetParameters(100, 20, 3);
+  hi1->Fit(f1);
+  f1->SetParameters(100, 20, 3);
+  hi2->Fit(f1);
+  f1->SetParameters(100, 60, 3);
+  hi3->Fit(f1);
   c1->SaveAs("amp_int.gif");
 
   // save the file
