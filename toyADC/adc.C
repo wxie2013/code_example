@@ -20,8 +20,6 @@
   float thres_width[n_adc] = {2, 2, 2, 2};  // Gaussian width of the threshold of adc0, adc1, adc2, adc3
 
   for(int i = 0; i<n_pulse; i++) {
-    int idx = int(gRandom->Rndm()/0.25); // each amp_mean has 25% probility to generator pulse
-
     // input amplitude witha flat distribution
     float amp = gRandom->Rndm()*100;
     float amp_with_noise = gRandom->Gaus(amp, amp_noise);
