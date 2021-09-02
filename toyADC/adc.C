@@ -111,14 +111,38 @@
 
   //
   TCanvas *c1 = new TCanvas("c1", "", 800, 600);
-  nt->SetMarkerStyle(24);
-  nt->Draw("adc:amp>>h2d");
-  h2d->GetXaxis()->CenterTitle();
-  h2d->GetYaxis()->CenterTitle();
-  h2d->GetXaxis()->SetTitle("Amplitude");
-  h2d->GetYaxis()->SetTitle("ADC");
-  h2d->Draw("colz");
-  c1->SaveAs("adc_vs_amp.gif");
+  gStyle->SetOptStat(0);
+  nt->SetLineWidth(2);
+  hall->Draw("same");
+  hadc->Draw("same");
+  nt->Draw("amp>>hi1", "adc!=-1 && adc!=0 ", "same"); // input amp with adc1 || adc2 || adc3
+  nt->Draw("amp>>hi2", "adc!=-1 && adc!=0 && adc!=1", "same"); // input amp with adc2 || adc3
+  nt->Draw("amp>>hi3", "adc!=-1 && adc!=0 && adc!=1 && adc!=2", "same"); // input amp with adc3
+
+  hadc->SetLineColor(adc_color[0]);
+  hi1->SetLineColor(adc_color[1]);
+  hi2->SetLineColor(adc_color[2]);
+  hi3->SetLineColor(adc_color[3]);
+
+  for(int i = 0; i<n_adc; i++) {
+    mean_thres[i]->SetLineWidth(5);
+    mean_thres[i]->SetLineStyle(2);
+    mean_thres[i]->SetLineColor(adc_color[i]);
+    mean_thres[i]->Draw("same");
+  }
+  TLegend* legend1 = new TLegend(0.65,0.15,0.9,0.6, "", "NDC" );
+  legend1->SetFillColor(0);
+  legend1->SetBorderSize(0);
+  legend1->Draw();
+
+  legend1->AddEntry(hall, "all input amp", "L");
+  legend1->AddEntry(hadc, "amp with adc0||adc1||adc2||adc3", "L");
+  legend1->AddEntry(hi1, "amp with adc1||adc2||adc3", "L");
+  legend1->AddEntry(hi2, "amp with adc2||adc3", "L");
+  legend1->AddEntry(hi3, "amp with adc3", "L");
+  legend1->SetTextFont(42);
+  legend1->SetTextSize(0.03);
+  c1->SaveAs("amp_int.gif");
 
   // save the file
   result.cd();
