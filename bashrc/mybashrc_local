@@ -37,6 +37,7 @@ alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&
 export hep=wxie@hep.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
+export bell=wxie@bell.rcac.purdue.edu
 export rice=wxie@rice.rcac.purdue.edu
 export brown=wxie@brown.rcac.purdue.edu
 export gilbreth=wxie@gilbreth.rcac.purdue.edu
@@ -71,9 +72,11 @@ alias lg_hep='ssh  $hep'
 alias lg_desktop='ssh  $desktop'
 alias lg_physics='ssh  $physics'
 alias lg_halstead='ssh  $halstead'
+alias lg_bell='ssh  $bell'
 alias lg_rice='ssh  $rice'
 alias lg_brown='ssh  $brown'
 alias lg_gilbreth='ssh  $gilbreth'
+cd ~/
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
