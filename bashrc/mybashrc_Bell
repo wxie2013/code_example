@@ -1,0 +1,61 @@
+alias m='less -r'
+alias ls='ls -F --color=tty'
+alias l='ls -lrt'
+alias lm='ls -l|less'
+alias ed='vim -N'
+alias cuw+='chmod u+w '
+alias cuw-='chmod u-w '
+alias cux='chmod u+x '
+alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
+alias ldr='ls -lrt|grep dr'
+alias str='cd /mnt/hadoop/store/user/wxie'
+alias cpl='scram b --reset -j 4'
+
+
+alias py2='python2'
+alias py='python'
+
+alias rtl='root -l'
+alias rtb='root -b'
+
+alias scmb='scram b -j 4'
+
+export cern=wxie@lxplus.cern.ch
+
+#-- kill all root process from wxie 
+#ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
+#-- list tar file content
+#tar tvf *.tar
+#-- extract one directory of a tar file
+#tar xvf *.tar directory_name
+
+export Brian2=/home/wxie/Brian2
+alias brian='cd $Brian2'
+alias ana_brian='cd $Brian2/ana'
+alias job_brian='cd $Brian2/jobs_sub/'
+alias model_brian='cd $Brian2/model'
+alias tools_brian='cd $Brian2/tools'
+
+alias sc='cd /scratch/*/w/wxie/'
+alias scb='cd /scratch/*/wxie/'
+alias sqwx='squeue -u wxie'
+
+load_root() {
+module purge
+unset PYTHONPATH
+export PYTHONPATH=/home/wxie
+source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
+source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
+module load cmake/3.18.2
+module load anaconda/2020.11-py38     
+source activate myPythonEnv-py36
+}
+#
+eval load_root
+
+#
+alias py='python3'
+alias ipy='ipython'
+
+PS1="\h:\u:\W>"
+#voms-proxy-init -voms cms -valid 180:00:00
