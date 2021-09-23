@@ -19,7 +19,8 @@ export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'
 
 alias scmb='scram b -j 4'
-PS1="\h:\u:\W>"
+#PS1="\h:\u:\W>"
+PS1="\u:\W>"
 
 
 #-- kill all root process from wxie 
