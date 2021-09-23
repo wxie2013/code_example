@@ -1,4 +1,3 @@
-PS1="\h:\u:\W>"
 alias m='less -r'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
@@ -57,5 +56,7 @@ eval load_root
 alias py='python3'
 alias ipy='ipython'
 
+#PS1="\h:\u:\W>"
+PS1="\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
 
