@@ -40,6 +40,9 @@ alias sc='cd /scratch/*/w/wxie/'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 
+alias nb2py='jupyter nbconvert --to script '
+alias rnb='jupyter nbconvert --to notebook --execute  '
+
 load_root() {
 module purge
 unset PYTHONPATH
@@ -49,6 +52,7 @@ source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt
 module load cmake/3.18.2
 module load anaconda/2020.11-py38     
 source activate myPythonEnv-py36
+unset JUPYTER_CONFIG_DIR 
 }
 #
 eval load_root
