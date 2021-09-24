@@ -40,6 +40,9 @@ alias sc='cd /scratch/*/w/wxie/'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 
+alias nb2py='jupyter nbconvert --to script '
+alias rnb='jupyter nbconvert --to notebook --execute  '
+
 load_root() {
 module purge
 unset PYTHONPATH
