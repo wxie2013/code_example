@@ -1,0 +1,5 @@
+# run promptly
+mpirun -n 4 python test.py
+
+# submit slum jobs
+sbatch test.sub

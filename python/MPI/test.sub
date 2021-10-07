@@ -1,0 +1,10 @@
+#!/bin/bash
+# FILENAME:  test.sub
+#SBATCH  --nodes=4
+#SBATCH  --ntasks-per-node=20
+#SBATCH  --time=00:01:00
+#SBATCH  -A standby
+#SBATCH --output='./log'
+#SBATCH --error='./err'
+
+srun -n 4 python test.py
