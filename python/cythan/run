@@ -1,0 +1,5 @@
+python setup.py build_ext --inplace --build-temp=compiled_code --build-lib=compiled_code
+
+python -m timeit -s 'from example_py import primes_python' 'primes_python(1000)'
+
+python -m timeit -s 'from example_py_cy import primes_python_compiled' 'primes_python_compiled(1000)'
