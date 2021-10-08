@@ -52,6 +52,7 @@ source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt
 module load cmake/3.15.4
 module load anaconda/5.1.0-py36; source activate myPythonEnv
 unset JUPYTER_CONFIG_DIR 
+module --force unload xalt
 }
 
 eval load_root
