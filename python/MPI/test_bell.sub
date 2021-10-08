@@ -1,10 +1,19 @@
 #!/bin/bash
 # FILENAME:  test.sub
-#SBATCH  --nodes=4
+#SBATCH  --nodes=10
 #SBATCH  --ntasks-per-node=20
 #SBATCH  --time=00:01:00
 #SBATCH  -A standby
 #SBATCH --output='./log'
 #SBATCH --error='./err'
 
-srun -n 4 python test.py
+unset PYTHONPATH
+export PYTHONPATH=/home/wxie
+source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
+source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
+module load cmake/3.18.2
+module load anaconda/2020.11-py38
+source activate myPythonEnv-py36
+unset JUPYTER_CONFIG_DIR 
+
+srun -n 170 python test.py
