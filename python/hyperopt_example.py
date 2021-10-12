@@ -1,8 +1,9 @@
 # define an objective function
-def objective(params):
+def objective(params, idx_start=0, idx_end = 100):
     # Note: params are dictionaries defined from the following 'space'
     #print(type(params))
     #print(params['test0'])
+    #print(idx_start, idx_end)
     case, val = params['test1']
     if case == 'case 1':
         return val
