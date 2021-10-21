@@ -47,11 +47,13 @@ load_root() {
 module purge
 unset PYTHONPATH
 export PYTHONPATH=/home/wxie
-source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
-source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
+module load gcc/4.8.5
+source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.06/x86_64-centos7-gcc48-opt/bin/thisroot.sh
 module load cmake/3.18.2
-module load anaconda/2020.11-py38     
-source activate myPythonEnv-py36
+__conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+eval "$__conda_setup"
+conda activate brian2
+unset __conda_setup
 unset JUPYTER_CONFIG_DIR 
 }
 #
@@ -63,3 +65,4 @@ alias ipy='ipython'
 
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
+
