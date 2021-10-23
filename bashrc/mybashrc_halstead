@@ -44,17 +44,16 @@ alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
 
 load_root() {
-module purge
+   module --force purge
    unset PYTHONPATH
    export PYTHONPATH=/home/wxie
-   module load gcc/4.8.5
-   source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.06/x86_64-centos7-gcc48-opt/bin/thisroot.sh
    module load cmake/3.15.4
-   __conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-   eval "$__conda_setup"
-   conda activate brian2
+   cd CMSSW_11_2_0_pre9/
+   cmsenv
+   cd ~/.
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
+   
    module --force unload xalt
 }
 
@@ -62,9 +61,7 @@ eval load_root
 
 #
 alias py='python3'
-alias ipy='ipython'
+alias ipy='ipython3'
 
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
-
-# added by Anaconda3 installer
