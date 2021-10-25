@@ -1,4 +1,8 @@
 import numpy as np
+
+import sys
+sys.path.append('/home/wxie/Brian2/pkgs')
+
 from mpi4py import MPI
 import code_example.python.repeated_K_fold as rkf
 
