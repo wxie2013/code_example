@@ -5,15 +5,12 @@
 #SBATCH  --time=00:01:00
 #SBATCH  -A standby
 #SBATCH --output='./log'
-#SBATCH --error='./err'
 
-module purge
-unset PYTHONPATH
 export PYTHONPATH=/home/wxie
-source /cvmfs/sft.cern.ch/lcg/external/gcc/4.8.4/x86_64-centos7/setup.sh
-source /cvmfs/sft.cern.ch/lcg/app/releases/ROOT/6.24.02/x86_64-centos7-gcc48-opt/bin/thisroot.sh
 module load cmake/3.15.4
-module load anaconda/5.1.0-py36; source activate myPythonEnv
+cd /home/wxie/CMSSW_11_2_0_pre9/
+eval `scramv1 runtime -sh`
+cd ~/.
 unset JUPYTER_CONFIG_DIR 
 
-mpirun -n 4 python3 test.py
+mpirun -n 4 python3 /home/wxie/code_example/python/MPI/test.py
