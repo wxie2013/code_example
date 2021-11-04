@@ -4,6 +4,7 @@ def objective(params, idx_start=0, idx_end = 100):
     #print(type(params))
     #print(params['test0'])
     #print(idx_start, idx_end)
+    print('test0: ', params['test0'][0], params['test0'][1])
     case, val = params['test1']
     if case == 'case 1':
         return val
@@ -13,7 +14,7 @@ def objective(params, idx_start=0, idx_end = 100):
 # define a search space
 from hyperopt import hp
 space = {
-        'test0': hp.uniform('test0', 0.6, 1.0), 
+        'test0': [hp.uniform('s0', 0.6, 1.0), hp.uniform('s1', 0., 0.6)], 
         'test1': hp.choice('a',
             [
                 ('case 1', 1 + hp.lognormal('c1', 0, 1)),
