@@ -1,4 +1,4 @@
-alias m='less -r'
+alias m='less'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
 alias lm='ls -l|less'
@@ -65,3 +65,5 @@ alias ipy='ipython3'
 
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
+alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+

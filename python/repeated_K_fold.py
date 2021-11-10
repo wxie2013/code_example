@@ -16,5 +16,7 @@ kf.get_n_splits(X)
 list_train_index = []
 list_test_index = []
 for train_index, test_index in kf.split(X):
-     list_train_index.append(train_index)
-     list_test_index.append(test_index)
+    print(type(train_index))
+    list_train_index.append(train_index)
+    list_test_index.append(test_index)
+    print(train_index, test_index)

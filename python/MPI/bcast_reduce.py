@@ -10,6 +10,7 @@ if rank == 0:
 else:
     a = None
 a = comm.bcast(a, root=0)
+print('rank: ', rank, ' a: ', a)
 s = comm.reduce(a, op=MPI.SUM)
 if rank == 0:
     print('From process 0, sum =', s)
