@@ -9,8 +9,15 @@ def objective(params, idx_start=0, idx_end = 100, nnn = NNN):
     #print(idx_start, idx_end)
     print('test0: ', params['test0'])
     print('test1: ', params['test1'][0], params['test1'][1])
+    print('test2: ', params['test2'])
     print('switch: ', params['switch'])
     print('nnn: ', nnn)
+    case, val = params['test0']
+    if case == 'case 1':
+        print('1___: ', val)
+    if case == 'case 2':
+        print('2___: ', val)
+
     case, val = params['test2']
     if case == 'case 1':
         return val
@@ -21,7 +28,11 @@ def objective(params, idx_start=0, idx_end = 100, nnn = NNN):
 from hyperopt import hp
 space = {
         'switch': True, 
-        'test0': hp.randint('s2', 1, 10), 
+        'test0': hp.choice('s2', 
+            [
+                ('case 1', {'a': 10, 'b': hp.uniform('s', 100, 200)}), 
+                ('case 2', {'c': 5, 'd': 20 }), 
+                ]), 
         'test1': [hp.uniform('s0', 0.6, 1.0), hp.uniform('s1', 0., 0.6)], 
         'test2': hp.choice('a',
             [
