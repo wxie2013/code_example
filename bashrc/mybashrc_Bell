@@ -1,4 +1,4 @@
-alias m='less -r'
+alias m='less'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
 alias lm='ls -l|less'
@@ -46,7 +46,7 @@ alias rnb='jupyter nbconvert --to notebook --execute  '
 load_root() {
 module --force purge
 unset PYTHONPATH
-export PYTHONPATH=/home/wxie
+export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
 module load cmake/3.18.2
 cd CMSSW_11_2_0_pre9/
 cmsenv 
@@ -63,4 +63,4 @@ alias ipy='ipython3'
 
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
-
+alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
