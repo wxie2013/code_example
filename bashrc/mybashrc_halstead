@@ -46,7 +46,7 @@ alias rnb='jupyter nbconvert --to notebook --execute  '
 load_root() {
    module --force purge
    unset PYTHONPATH
-   export PYTHONPATH=/home/wxie
+   export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
    module load cmake/3.15.4
    cd CMSSW_11_2_0_pre9/
    cmsenv
