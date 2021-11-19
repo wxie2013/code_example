@@ -15,7 +15,7 @@ alias ipy='ipython'
 alias rtl='root -l'
 alias rtb='root -b'
 
-#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
 alias scmb='scram b -j 4'
 
@@ -76,6 +76,7 @@ alias lg_rice='ssh  $rice'
 alias lg_brown='ssh  $brown'
 alias lg_gilbreth='ssh  $gilbreth'
 cd ~/
+unset JUPYTER_CONFIG_DIR 
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
