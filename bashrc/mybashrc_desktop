@@ -1,0 +1,96 @@
+alias m='less -r'
+alias ls='ls -F --color=tty'
+alias l='ls -lrt'
+alias lm='ls -lrt|less'
+alias ed='vim -N'
+alias cuw+='chmod u+w '
+alias cuw-='chmod u-w '
+alias cux='chmod u+x '
+alias ldr='ls -lrt|grep dr'
+alias str='cd /mnt/hadoop/store/user/wxie'
+
+
+alias py='python'
+alias ipy='ipython'
+alias rtl='root -l'
+alias rtb='root -b'
+
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+alias gn='gnome-session&'
+
+alias scmb='scram b -j 4'
+
+
+#-- kill all root process from wxie 
+#ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
+#-- list tar file content
+#tar tvf *.tar
+#-- extract one directory of a tar file
+#tar xvf *.tar directory_name
+source /home/ROOT/bin/thisroot.sh
+alias dp='cd /mnt/c/Users/puppy/Desktop'
+alias dl='cd /mnt/c/Users/puppy/Downloads'
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
+alias wxt='xterm -bg white -fg black -fa 'Proportional' -fs 14 -geometry 120x40&'
+alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&'
+export cms=wxie@cms.rcac.purdue.edu
+export cern=wxie@lxplus.cern.ch
+export halstead=wxie@halstead.rcac.purdue.edu
+export bell=wxie@bell.rcac.purdue.edu
+export rice=wxie@rice.rcac.purdue.edu
+export brown=wxie@brown.rcac.purdue.edu
+export gilbreth=wxie@gilbreth.rcac.purdue.edu
+export Brian2=/home/wxie/Brian2
+alias brian='cd $Brian2'
+export PYTHONPATH=$Brian2/../:$PYTHONPATH
+alias ana_brian='cd $Brian2/ana'
+alias job_brian='cd $Brian2/jobs_sub/'
+alias model_brian='cd $Brian2/model'
+alias jn='jupyter notebook --no-browser&'
+alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
+
+export desktop=wxie@10.164.18.177
+alias localhost='ssh -N -f -L localhost:8888:localhost:8888 wxie@10.164.18.177'
+export physics=wxie@planck.physics.purdue.edu
+
+export QT_QPA_PLATFORM='offscreen'
+alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
+alias xtw="xterm -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30&" 
+alias xtb="xterm -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
+alias xtg="xterm -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
+#alias lg_cern='ssh -X $cern'
+#alias lg_cms='ssh -X $cms'
+#alias lg_desktop='ssh -X $desktop'
+#alias lg_physics='ssh -X $physics'
+#alias lg_halstead='ssh -X $halstead'
+#alias lg_rice='ssh -X $rice'
+#alias lg_brown='ssh -X $brown'
+#alias lg_gilbreth='ssh -X $gilbreth'
+alias lg_cern='ssh  $cern'
+alias lg_cms='ssh  $cms'
+alias lg_desktop='ssh  $desktop'
+alias lg_physics='ssh  $physics'
+alias lg_halstead='ssh  $halstead'
+alias lg_bell='ssh  $bell'
+alias lg_rice='ssh  $rice'
+alias lg_brown='ssh  $brown'
+alias lg_gilbreth='ssh  $gilbreth'
+cd ~/
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/wxie/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wxie/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/wxie/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+#xrdb -merge ~/.Xresources
+PS1="\h:\u:\W>"
