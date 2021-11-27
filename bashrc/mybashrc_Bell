@@ -36,7 +36,7 @@ alias job_brian='cd $Brian2/jobs_sub/'
 alias model_brian='cd $Brian2/model'
 alias tools_brian='cd $Brian2/tools'
 
-alias sc='cd /scratch/*/w/wxie/'
+alias sc='cd /scratch/bell/wxie'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
 

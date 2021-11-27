@@ -55,9 +55,9 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtw="xterm -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 110x30&" 
-alias xtb="xterm -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 110x30+2753+450&"
-alias xtg="xterm -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 110x30+2753+450&"
+alias xtw="xterm -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30&" 
+alias xtb="xterm -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
+alias xtg="xterm -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
