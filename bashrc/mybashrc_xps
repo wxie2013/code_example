@@ -83,6 +83,7 @@ alias lg_brown='ssh  $brown'
 alias lg_gilbreth='ssh  $gilbreth'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
+#alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 cd ~/
 unset JUPYTER_CONFIG_DIR 
