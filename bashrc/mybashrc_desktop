@@ -75,6 +75,8 @@ alias lg_bell='ssh  $bell'
 alias lg_rice='ssh  $rice'
 alias lg_brown='ssh  $brown'
 alias lg_gilbreth='ssh  $gilbreth'
+alias lg_rhic_gateway='ssh weixie@ssh.sdcc.bnl.gov'
+alias lg_star='ssh rcas6009'
 cd ~/
 
 # >>> conda initialize >>>

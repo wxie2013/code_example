@@ -84,6 +84,8 @@ alias lg_bell00='ssh wxie@bell-fe00.rcac.purdue.edu'
 alias lg_rice='ssh  $rice'
 alias lg_brown='ssh  $brown'
 alias lg_gilbreth='ssh  $gilbreth'
+alias lg_rhic_gateway='ssh weixie@ssh.sdcc.bnl.gov'
+alias lg_star='ssh rcas6009'
 cd ~/
 unset JUPYTER_CONFIG_DIR 
 
