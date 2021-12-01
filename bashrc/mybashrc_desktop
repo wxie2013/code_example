@@ -94,4 +94,5 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 #xrdb -merge ~/.Xresources
+conda activate brian2.5
 PS1="\h:\u:\W>"
