@@ -9,11 +9,11 @@ alias cux='chmod u+x '
 alias ldr='ls -lrt|grep dr'
 alias str='cd /mnt/hadoop/store/user/wxie'
 
-
 alias py='python'
 alias ipy='ipython'
 alias rtl='root -l'
 alias rtb='root -b'
+alias gpr='grep -R '
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'

@@ -11,6 +11,7 @@ alias ldr='ls -lrt|grep dr'
 alias str='cd /mnt/hadoop/store/user/wxie'
 alias cpl='scram b --reset -j 4'
 
+alias gpr='grep -R '
 
 alias py2='python2'
 alias py='python'
