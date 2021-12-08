@@ -8,18 +8,20 @@ alias cuw-='chmod u-w '
 alias cux='chmod u+x '
 alias ldr='ls -lrt|grep dr'
 alias str='cd /mnt/hadoop/store/user/wxie'
+alias gpr='grep -R '
+
 
 alias py='python'
 alias ipy='ipython'
 alias rtl='root -l'
 alias rtb='root -b'
-alias gpr='grep -R '
 
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'
 
-alias scmb='scram b -j 4'
-
+alias macro_intt='cd /sphenix/u/wxie/sphnx_software/INTT/macro'
+alias source_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/simulation/g4simulation/g4intt'
+alias build_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/simulation/g4simulation/build_intt'
 
 #-- kill all root process from wxie 
 #ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
@@ -79,5 +81,6 @@ alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 
 export MYINSTALL='/sphenix/u/wxie/sphnx_software/install'
 source /opt/sphenix/core/bin/sphenix_setup.sh $MYINSTALL
-export LD_LIBRARY_PATH=$MYINSTALL:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=$MYINSTALL/lib:$LD_LIBRARY_PATH
+export ROOT_INCLUDE_PATH=$MYINSTALL/include:$ROOT_INCLUDE_PATH
 PS1="\h:\u:\W>"
