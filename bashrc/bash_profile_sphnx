@@ -22,6 +22,8 @@ alias gn='gnome-session&'
 alias macro_intt='cd /sphenix/u/wxie/sphnx_software/INTT/macro'
 alias g4_src_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/simulation/g4simulation/g4intt'
 alias build_g4_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/simulation/g4simulation/build_intt'
+alias build_off_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/build_intt'
+alias build_trackbase='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/build_trackbase'
 alias off_src_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/intt'
 
 #-- kill all root process from wxie 
