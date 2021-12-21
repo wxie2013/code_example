@@ -43,7 +43,7 @@ export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
 export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
-alias job_brian='cd $Brian2/jobs_sub/'
+alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
 alias model_brian='cd $Brian2/model'
 #alias jn='jupyter notebook --no-browser&'
 alias jn='jupyter notebook --no-browser --NotebookApp.kernel_manager_class=notebook.services.kernels.kernelmanager.AsyncMappingKernelManager&'

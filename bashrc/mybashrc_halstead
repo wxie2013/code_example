@@ -33,7 +33,7 @@ export cern=wxie@lxplus.cern.ch
 export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
 alias ana_brian='cd $Brian2/ana'
-alias job_brian='cd $Brian2/jobs_sub/'
+alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
 alias model_brian='cd $Brian2/model'
 alias tools_brian='cd $Brian2/tools'
 
