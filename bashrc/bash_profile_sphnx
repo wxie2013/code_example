@@ -25,6 +25,10 @@ alias build_g4_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/simulation/g
 alias build_off_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/build_intt'
 alias build_trackbase='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/build_trackbase'
 alias off_src_intt='cd /sphenix/u/wxie/sphnx_software/coresoftware/offline/packages/intt'
+alias kf='cd /sphenix/u/wxie/sphnx_software/analysis/HF-Particle/KFParticle_sPHENIX'
+alias cq='condor_q'
+alias crm='condor_rm'
+alias csub='condor_submit'
 
 #-- kill all root process from wxie 
 #ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
