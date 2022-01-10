@@ -40,6 +40,7 @@ alias tools_brian='cd $Brian2/tools'
 alias sc='cd /scratch/bell/wxie'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
+alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %.9l %.6D %R"'
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
