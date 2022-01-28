@@ -12,6 +12,7 @@ alias str='cd /mnt/hadoop/store/user/wxie'
 
 alias py='python'
 alias ipy='ipython'
+alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 alias gpr='grep -R '

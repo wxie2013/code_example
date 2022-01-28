@@ -16,6 +16,7 @@ alias gpr='grep -R '
 alias py2='python2'
 alias py='python'
 
+alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 
