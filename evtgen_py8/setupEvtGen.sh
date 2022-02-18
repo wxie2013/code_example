@@ -40,12 +40,13 @@
 
 # Location in which to install
 INSTALL_PREFIX="/home/py8_evtgen_HepMC"
+mkdir $INSTALL_PREFIX
 
 # EvtGen version or tag number (or branch name). No extra spaces on this line!
 VERSION=R02-01-01
 
 # HepMC version numbers - change HEPMCMAJORVERSION to 2 in order to use HepMC2
-HEPMCMAJORVERSION="2"
+HEPMCMAJORVERSION="3"
 HEPMC2VER="2.06.10"
 HEPMC3VER="3.2.0"
 HEPMC2PKG="HepMC-"$HEPMC2VER
@@ -58,18 +59,6 @@ HEPMC3TAR=$HEPMC3PKG".tar.gz"
 PYTHIAVER=8306
 PYTHIAPKG="pythia"$PYTHIAVER
 PYTHIATAR=$PYTHIAPKG".tgz"
-
-# Photos++ version number
-#PHOTOSVER="3.64"
-#PHOTOSPKG="PHOTOS"
-#PHOTOSDIR="PHOTOS."$PHOTOSVER
-#PHOTOSTAR=$PHOTOSDIR".tar.gz"
-
-# Tauola++ version number
-#TAUOLAVER="1.1.8"
-#TAUOLAPKG="TAUOLA"
-#TAUOLADIR="TAUOLA."$TAUOLAVER
-#TAUOLATAR=$TAUOLADIR".tar.gz"
 
 # Determine OS
 osArch=`uname`
