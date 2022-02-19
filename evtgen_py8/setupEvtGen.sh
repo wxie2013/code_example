@@ -39,6 +39,7 @@
 # https://phab.hepforge.org/source/evtgen/browse/master/setupEvtGen.sh?view=raw
 
 # Location in which to install
+ROOTSYS=/home/ROOT
 INSTALL_PREFIX="/home/py8_evtgen_HepMC"
 mkdir $INSTALL_PREFIX
 
@@ -59,6 +60,18 @@ HEPMC3TAR=$HEPMC3PKG".tar.gz"
 PYTHIAVER=8306
 PYTHIAPKG="pythia"$PYTHIAVER
 PYTHIATAR=$PYTHIAPKG".tgz"
+
+# Photos++ version number
+PHOTOSVER="3.64"
+PHOTOSPKG="PHOTOS"
+PHOTOSDIR="PHOTOS."$PHOTOSVER
+PHOTOSTAR=$PHOTOSDIR".tar.gz"
+
+# Tauola++ version number
+TAUOLAVER="1.1.8"
+TAUOLAPKG="TAUOLA"
+TAUOLADIR="TAUOLA."$TAUOLAVER
+TAUOLATAR=$TAUOLADIR".tar.gz"
 
 # Determine OS
 osArch=`uname`
@@ -107,6 +120,8 @@ else
     curl -O http://hepmc.web.cern.ch/hepmc/releases/$HEPMC3TAR
 fi
 curl -O https://pythia.org/download/pythia83/$PYTHIATAR
+curl -O http://photospp.web.cern.ch/photospp/resources/$PHOTOSDIR/$PHOTOSTAR
+curl -O http://tauolapp.web.cern.ch/tauolapp/resources/$TAUOLADIR/$TAUOLATAR
 
 cd $BUILD_BASE/sources
 
@@ -118,6 +133,22 @@ else
     tar -xzf $BUILD_BASE/tarfiles/$HEPMC3TAR
 fi
 tar -xzf $BUILD_BASE/tarfiles/$PYTHIATAR
+tar -xzf $BUILD_BASE/tarfiles/$PHOTOSTAR
+tar -xzf $BUILD_BASE/tarfiles/$TAUOLATAR
+
+# Patch TAUOLA and PHOTOS on Darwin (Mac)
+if [ "$osArch" == "Darwin" ]
+then
+    sed -i '' 's/soname/install_name/g' PHOTOS/Makefile
+    sed -i '' 's/soname/install_name/g' TAUOLA/Makefile
+    patch -p0 < $BUILD_BASE/sources/evtgen/platform/tauola_Darwin.patch
+    patch -p0 < $BUILD_BASE/sources/evtgen/platform/photos_Darwin.patch
+    # Uncomment the lines below to force usage of clang
+    # export CC=clang
+    # export CXX=clang++
+    # sed -i '' 's/\-lstdc++/-lc++/g' PHOTOS/platform/make.inc.in
+    # sed -i '' 's/\-lstdc++/-lc++/g' TAUOLA/platform/make.inc.in
+fi
 
 cd $BUILD_BASE
 
@@ -136,6 +167,21 @@ then
     make
     make install
 
+    echo Installing PHOTOS from $BUILD_BASE/sources/$PHOTOSPKG
+    cd $BUILD_BASE/sources/$PHOTOSPKG
+    ./configure --with-hepmc3= --with-hepmc=$INSTALL_PREFIX --prefix=$INSTALL_PREFIX
+    make
+    make install
+
+    if [ "$osArch" != "Darwin" ]
+    then
+        echo Installing TAUOLA from $BUILD_BASE/sources/$TAUOLAPKG
+        cd $BUILD_BASE/sources/$TAUOLAPKG
+        ./configure --without-hepmc3 --with-hepmc=$INSTALL_PREFIX --prefix=$INSTALL_PREFIX
+        make
+        make install
+    fi
+
 else
 
     echo Installing HepMC3 from $BUILD_BASE/sources/$HEPMC3PKG
@@ -150,10 +196,27 @@ else
     ./configure --enable-shared --prefix=$INSTALL_PREFIX
     make
     make install
+
+    echo Installing PHOTOS from $BUILD_BASE/sources/$PHOTOSPKG
+    cd $BUILD_BASE/sources/$PHOTOSPKG
+    ./configure --without-hepmc --with-hepmc3=$INSTALL_PREFIX --prefix=$INSTALL_PREFIX
+    make
+    make install
+
+    if [ "$osArch" != "Darwin" ]
+    then
+        echo Installing TAUOLA from $BUILD_BASE/sources/$TAUOLAPKG
+        cd $BUILD_BASE/sources/$TAUOLAPKG
+        ./configure --without-hepmc --with-hepmc3=$INSTALL_PREFIX --prefix=$INSTALL_PREFIX
+        make
+        make install
+    fi
 fi
 
 echo Installing EvtGen from $BUILD_BASE/sources/evtgen
 mkdir -p $BUILD_BASE/builds/evtgen
+echo "========================"
+echo $ROOTSYS
 cd $BUILD_BASE/builds/evtgen
 if [ "$osArch" == "Darwin" ]
 then
@@ -161,22 +224,34 @@ then
     then
         $CMAKE -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/evtgen \
 		-DEVTGEN_HEPMC3:BOOL=OFF -DHEPMC2_ROOT_DIR:PATH=$INSTALL_PREFIX \
-		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX 
+		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_PHOTOS:BOOL=ON  -DPHOTOSPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_TAUOLA:BOOL=OFF  \
+		-DEVTGEN_BUILD_TESTS=ON -DEVTGEN_BUILD_VALIDATIONS=ON -D CMAKE_PREFIX_PATH=$ROOTSYS
     else
         $CMAKE -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/evtgen \
 		-DEVTGEN_HEPMC3:BOOL=ON  -DHEPMC3_ROOT_DIR:PATH=$INSTALL_PREFIX \
-		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX 
+		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_PHOTOS:BOOL=ON  -DPHOTOSPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_TAUOLA:BOOL=OFF \
+	        -DEVTGEN_BUILD_TESTS=ON -DEVTGEN_BUILD_VALIDATIONS=ON -D CMAKE_PREFIX_PATH=$ROOTSYS
     fi
 else
     if [ "$HEPMCMAJORVERSION" -lt "3" ]
     then
         $CMAKE -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/evtgen \
 		-DEVTGEN_HEPMC3:BOOL=OFF -DHEPMC2_ROOT_DIR:PATH=$INSTALL_PREFIX \
-		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX 
+		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_PHOTOS:BOOL=ON  -DPHOTOSPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_TAUOLA:BOOL=ON  -DTAUOLAPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_BUILD_TESTS=ON -DEVTGEN_BUILD_VALIDATIONS=ON -D CMAKE_PREFIX_PATH=$ROOTSYS
     else
         $CMAKE -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/evtgen \
 		-DEVTGEN_HEPMC3:BOOL=ON  -DHEPMC3_ROOT_DIR:PATH=$INSTALL_PREFIX \
-		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX
+		-DEVTGEN_PYTHIA:BOOL=ON  -DPYTHIA8_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_PHOTOS:BOOL=ON  -DPHOTOSPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_TAUOLA:BOOL=ON  -DTAUOLAPP_ROOT_DIR:PATH=$INSTALL_PREFIX \
+		-DEVTGEN_BUILD_TESTS=ON -DEVTGEN_BUILD_VALIDATIONS=ON -D CMAKE_PREFIX_PATH=$ROOTSYS
     fi
 fi
 make
