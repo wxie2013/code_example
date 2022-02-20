@@ -17,7 +17,6 @@ alias gpr='grep -R '
 alias py2='python2'
 alias py='python'
 
-alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 
@@ -70,4 +69,4 @@ alias ipy='ipython3'
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
-
+export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
