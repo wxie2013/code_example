@@ -12,7 +12,6 @@ alias str='cd /mnt/hadoop/store/user/wxie'
 
 alias py='python'
 alias ipy='ipython'
-alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 alias gpr='grep -R '
@@ -90,6 +89,8 @@ alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 cd ~/
 unset JUPYTER_CONFIG_DIR 
+
+export PYTHIA8DATA=/home/py8_evtgen_HepMC/share/Pythia8/xmldoc
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
