@@ -9,7 +9,6 @@ alias cux='chmod u+x '
 alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
 alias ldr='ls -lrt|grep dr'
 alias str='cd /mnt/hadoop/store/user/wxie'
-alias depot='cd /depot/cms/users/wxie'
 alias cpl='scram b --reset -j 4'
 
 alias gpr='grep -R '
@@ -17,7 +16,6 @@ alias gpr='grep -R '
 alias py2='python2'
 alias py='python'
 
-alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 
@@ -42,7 +40,6 @@ alias tools_brian='cd $Brian2/tools'
 alias sc='cd /scratch/bell/wxie'
 alias scb='cd /scratch/*/wxie/'
 alias sqwx='squeue -u wxie'
-alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %.9l %.6D %R"'
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
@@ -68,3 +65,4 @@ alias ipy='ipython3'
 PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
