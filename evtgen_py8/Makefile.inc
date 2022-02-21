@@ -3,10 +3,11 @@
 # --prefix=/home/py8_evtgen_HepMC
 
 # Install directory prefixes.
-PREFIX_BIN=/home/py8_evtgen_HepMC/bin
-PREFIX_INCLUDE=/home/py8_evtgen_HepMC/include
-PREFIX_LIB=/home/py8_evtgen_HepMC/lib
-PREFIX_SHARE=/home/py8_evtgen_HepMC/share/Pythia8
+PY_BASE = /home/wxie/py8_evtgen_HepMC
+PREFIX_BIN=$(PY_BASE)/bin
+PREFIX_INCLUDE=$(PY_BASE)/include
+PREFIX_LIB=$(PY_BASE)/lib
+PREFIX_SHARE=$(PY_BASE)/share/Pythia8
 
 # Compilation flags (see ./configure --help for further documentation).
 CXX=g++
@@ -17,16 +18,8 @@ LIB_SUFFIX=.so
 OBJ_COMMON=
 
 EVTGEN_USE=true
-py8_evtgen_HepMC_dir=/home/py8_evtgen_HepMC
+py8_evtgen_HepMC_dir=/home/wxie/py8_evtgen_HepMC
 EVTGEN_CONFIG= 
 EVTGEN_BIN=$(py8_evtgen_HepMC_dir)/bin
 EVTGEN_INCLUDE=-I$(py8_evtgen_HepMC_dir)/include/EvtGen
-EVTGEN_LIB= -lEvtGenExternal -lEvtGen
-#EVTGEN_LIB=$(wildcard $(py8_evtgen_HepMC_dir)/lib/*)
-
-HEPMC2_USE=true
-HEPMC2_CONFIG=
-HEPMC2_BIN=/home/py8_evtgen_HepMC/bin
-HEPMC2_INCLUDE=/home/py8_evtgen_HepMC/include/HepMC3
-HEPMC2_LIB=/home/py8_evtgen_HepMC/lib
-
+EVTGEN_LIB= -L$(PY_BASE)/lib64 -lEvtGenExternal -lEvtGen
