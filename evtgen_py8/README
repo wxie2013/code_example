@@ -1,5 +1,5 @@
 *setupEvtGen.sh:  script to build evtgen, pythia8 and HepMC
 * To build and run main48.cc:
  make main48
-./main48 /home/py8_evtgen_HepMC/share/EvtGen/DECAY_2010.DEC /home/py8_evtgen_HepMC/share/EvtGen/evt.pdl /home/py8_evtgen_HepMC/share/Pythia8/xmldoc true
+./main48 /home/py8_evtgen_HepMC/share/EvtGen/DECAY.DEC /home/py8_evtgen_HepMC/share/EvtGen/evt.pdl /home/py8_evtgen_HepMC/share/Pythia8/xmldoc true
 
