@@ -65,7 +65,7 @@ int main(int argc, char* argv[]) {
   // Initialize EvtGen.
   EvtGenDecays *evtgen = 0;
   if (use) {
-    setenv("PYTHIA8DATA", argv[3], 1);
+    //setenv("PYTHIA8DATA", argv[3], 1);
     evtgen = new EvtGenDecays(&pythia, argv[1], argv[2]);
     //evtgen->readDecayFile(argv[1]);
     evtgen->readDecayFile("main48.dec");
@@ -113,6 +113,6 @@ int main(int argc, char* argv[]) {
   pythia.stat();
   mass /= mass.getEntries();
   cout << "!!!!!: mass: "<<mass<<endl;
-  //if (evtgen) delete evtgen;
+  if (evtgen) delete evtgen;
   return 0;
 }

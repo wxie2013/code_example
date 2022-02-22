@@ -18,8 +18,7 @@ LIB_SUFFIX=.so
 OBJ_COMMON=
 
 EVTGEN_USE=true
-py8_evtgen_HepMC_dir=/home/wxie/py8_evtgen_HepMC
 EVTGEN_CONFIG= 
-EVTGEN_BIN=$(py8_evtgen_HepMC_dir)/bin
-EVTGEN_INCLUDE=-I$(py8_evtgen_HepMC_dir)/include/EvtGen
+EVTGEN_BIN=$(PY_BASE)/bin
+EVTGEN_INCLUDE=-I$(PY_BASE)/include/EvtGen
 EVTGEN_LIB= -L$(PY_BASE)/lib64 -lEvtGenExternal -lEvtGen
