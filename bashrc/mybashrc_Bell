@@ -66,3 +66,7 @@ PS1="\h:\u:\W>"
 #voms-proxy-init -voms cms -valid 180:00:00
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
 export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
+

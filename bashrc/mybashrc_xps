@@ -114,4 +114,7 @@ unset __conda_setup
 conda activate brian2.5
 PS1="\h:\u:\W>"
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
 
