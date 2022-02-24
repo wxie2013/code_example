@@ -4,6 +4,8 @@ alias l='ls -lrt'
 alias lm='ls -l|less'
 alias ed='vim -N'
 alias cuw+='chmod u+w '
+alias depot='cd /depot/cms/users/wxie'
+
 alias cuw-='chmod u-w '
 alias cux='chmod u+x '
 alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
