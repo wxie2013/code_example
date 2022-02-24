@@ -55,6 +55,7 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
+alias xtc="xterm -bg cyan4 -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28&" 
 alias xtw="xterm -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28&" 
 alias xtb="xterm -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
 alias xtg="xterm -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
@@ -117,4 +118,5 @@ alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
+LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 

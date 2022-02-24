@@ -73,4 +73,5 @@ export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
+LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
