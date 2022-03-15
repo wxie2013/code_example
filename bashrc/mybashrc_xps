@@ -13,6 +13,7 @@ alias str='cd /mnt/hadoop/store/user/wxie'
 alias py='python'
 alias ipy='ipython'
 alias rtl='root -l'
+alias rt='root'
 alias rtb='root -b'
 alias gpr='grep -R '
 
@@ -33,7 +34,7 @@ alias dl='cd /mnt/c/Users/puppy/Downloads'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
 alias wxt='xterm -bg white -fg black -fa 'Proportional' -fs 14 -geometry 120x40&'
 alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&'
-export hep=wxie@hep.rcac.purdue.edu
+export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
 export bell=wxie@bell.rcac.purdue.edu
@@ -55,8 +56,8 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28&" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28&" 
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
+alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
 alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
 alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
 
@@ -67,14 +68,14 @@ alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 10000
 	xtw
 }
 #alias lg_cern='ssh -X $cern'
-#alias lg_hep='ssh -X $hep'
+#alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
 #alias lg_physics='ssh -X $physics'
 #alias lg_halstead='ssh -X $halstead'
 #alias lg_brown='ssh -X $brown'
 #alias lg_gilbreth='ssh -X $gilbreth'
 alias lg_cern='ssh  $cern'
-alias lg_hep='ssh  $hep'
+alias lg_cms='ssh  $cms'
 alias lg_desktop='ssh  $desktop'
 alias lg_physics='ssh  $physics'
 alias lg_halstead00='ssh  wxie@halstead-fe00.rcac.purdue.edu'
