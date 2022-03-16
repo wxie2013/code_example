@@ -1,0 +1,12 @@
+# in the crab_PbPb_MC.py,  the following two strings is your choice, you can put whatever 
+config.General.requestName = 'pkpi_pT30'
+config.General.workArea = 'crab_projects'
+
+#update the following to your directory
+config.Data.outLFNDirBase = '/store/user/mstojano/Lc_PbPb_MC'
+
+# submit the crab jobs
+crab submit -c <configfile.py>
+
+# the following macro is the one to produce Dfinder file
+runForestAOD_pponAA_DATA_103X_onlyDfinder_withlist1.py
