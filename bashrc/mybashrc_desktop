@@ -18,7 +18,9 @@ alias rtb='root -b'
 alias gpr='grep -R '
 alias rt='root'
 
-
+4xtw() { 
+	xtw xtw xtw xtw 
+}
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'
 

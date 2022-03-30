@@ -62,10 +62,7 @@ alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000
 alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
 
 4xtw() {
-	xtw 
-	xtw 
-	xtw 
-	xtw
+	xtw xtw xtw xtw
 }
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
