@@ -51,16 +51,17 @@ load_root() {
    unset PYTHONPATH
    export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
    module load cmake/3.15.4
-   cd CMSSW_11_2_0_pre9/
+   cd ~/CMSSW_11_2_0_pre9/
    cmsenv
-   cd ~/.
+   cd -
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
    
    module --force unload xalt
+   export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
 }
 
-eval load_root
+#eval load_root
 
 #
 alias py='python3'
@@ -75,3 +76,5 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
+alias sc_soumik="cd /scratch/halstead/c/chand140"
+export X509_USER_PROXY=/home/wxie/myproxy 

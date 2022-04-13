@@ -56,6 +56,7 @@ cmsenv
 cd ~/.
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR 
+export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
 }
 #
 eval load_root
