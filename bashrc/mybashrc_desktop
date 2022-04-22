@@ -99,6 +99,7 @@ else
         export PATH="/home/wxie/anaconda3/bin:$PATH"
     fi
 fi
+unset JUPYTER_CONFIG_DIR 
 unset __conda_setup
 # <<< conda initialize <<<
 
