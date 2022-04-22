@@ -12,17 +12,12 @@ alias str='cd /mnt/hadoop/store/user/wxie'
 
 alias py='python'
 alias ipy='ipython'
-alias rtq='root -q'
 alias rtl='root -l'
+alias rt='root'
 alias rtb='root -b'
 alias gpr='grep -R '
-alias rt='root'
 
-4xtw() { 
-	xtw xtw xtw xtw 
-}
 export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-alias gn='gnome-session&'
 
 alias scmb='scram b -j 4'
 
@@ -37,6 +32,8 @@ source /home/ROOT/bin/thisroot.sh
 alias dp='cd /mnt/c/Users/puppy/Desktop'
 alias dl='cd /mnt/c/Users/puppy/Downloads'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
+alias wxt='xterm -bg white -fg black -fa 'Proportional' -fs 14 -geometry 120x40&'
+alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&'
 export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
@@ -49,7 +46,8 @@ export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
 alias model_brian='cd $Brian2/model'
-alias jn='jupyter notebook --no-browser&'
+#alias jn='jupyter notebook --no-browser&'
+alias jn='jupyter notebook --no-browser --NotebookApp.kernel_manager_class=notebook.services.kernels.kernelmanager.AsyncMappingKernelManager&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
 
 export desktop=wxie@10.164.18.177
@@ -58,10 +56,17 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&" 
-alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
-alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
+alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
+alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
+alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
+
+4xtw() {
+	xtw 
+	xtw 
+	xtw 
+	xtw
+}
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
@@ -73,8 +78,8 @@ alias lg_cern='ssh  $cern'
 alias lg_cms='ssh  $cms'
 alias lg_desktop='ssh  $desktop'
 alias lg_physics='ssh  $physics'
-alias lg_halstead='ssh  $halstead'
 alias lg_halstead00='ssh  wxie@halstead-fe00.rcac.purdue.edu'
+alias lg_halstead='ssh  $halstead'
 alias lg_bell='ssh  $bell'
 alias lg_bell00='ssh wxie@bell-fe00.rcac.purdue.edu'
 alias lg_brown='ssh  $brown'
@@ -84,8 +89,13 @@ alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
-
 cd ~/
+unset JUPYTER_CONFIG_DIR 
+
+export PYTHIA8DATA=/home/py8_evtgen_HepMC/share/Pythia8/xmldoc
+
+alias nb2py='jupyter nbconvert --to script '
+alias rnb='jupyter nbconvert --to notebook --execute  '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -98,14 +108,14 @@ else
     else
         export PATH="/home/wxie/anaconda3/bin:$PATH"
     fi
-f_i
-unset JUPYTER_CONFIG_DIR 
+fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 #xrdb -merge ~/.Xresources
 conda activate brian2.5
 PS1="\h:\u:\W>"
+alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
