@@ -82,6 +82,7 @@ alias lg_gilbreth='ssh  $gilbreth'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
