@@ -25,5 +25,7 @@ Then please copy Bfinder/ and test/ to src/
 
 scram b -j4
 
+# to run locally for test, do the following 
+cmsRun runForestAOD_pponAA_DATA_103X_onlyDfinder_withlist1.py
 
-Then go to test/: ./submit_all.sh    (this will take a very long time)  or you could do the command in submit_all.sh line by line, since it takes a lot of quota.
+Note: without precut, the #define MAX_XB       20000, might be overflow and cause seg fault

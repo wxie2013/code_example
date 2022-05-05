@@ -1,7 +1,5 @@
 //////
-#include "MyTree_3.C"
-
-void run()
+void loop_via_ifstream(int istart, int iend)
 {
   ifstream file_stream("file.list");
   int nfile_tot = 2;
@@ -15,22 +13,33 @@ void run()
     if(file_stream.eof())
       break;
 
-    ifile++;
+    if(ifile < istart) {
+      ifile++;
+      continue;
+    }
+
+    if(ifile >= iend)
+      break;
 
     cout << "file  = " << ifile<<" name = "<<filename <<endl;
 
-    //TFile fin(filename.c_str());
+    //____ your analysis code
+    TFile fin(filename.c_str());
 
-    //if(fin.IsZombie())
-    //  continue;
+    if(fin.IsZombie()) {
+      ifile ++;   // you need this here to keep track of the file
+      continue;
+    }
 
     //TTree * tree = (TTree*)fin.Get("DecayTree");
 
-    //MyTree_3 t(tree);
+    string output_name = "nt"+std::to_string(istart)+"_"+std::to_string(iend)+".root";
+    cout<<" output_name: "<<output_name<<endl;
 
-    //string output_name = "nt"+std::to_string(ii)+".root";
-    //t.Loop(output_name);
+    fin.Close();
+    //_____ end of your analysis code
 
-    //fin.Close();
+    //
+    ifile++;
   }
 }
