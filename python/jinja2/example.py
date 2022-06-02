@@ -14,6 +14,8 @@ data_file='data/'+args.d
 # find the template 
 templateloader = jinja2.FileSystemLoader(searchpath="./template")
 templateEnv = jinja2.Environment(loader = templateloader)
+templateEnv.trim_blocks = True  # control white space
+templateEnv.lstrip_blocks = True  # control white space
 template = templateEnv.get_template(template_file)
 
 #load the data as string
