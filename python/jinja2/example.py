@@ -24,7 +24,9 @@ with open(data_file) as f:
 
 # convert str to dictionary
 data = yaml.safe_load(data_str)
-
+print('-------------- data ------------')
+print(data)
+print('--------------------------------')
 #render
 output = template.render(data)
 print(output)
