@@ -1,1 +1,1 @@
-from example.t1 import *
+from .t1 import *
