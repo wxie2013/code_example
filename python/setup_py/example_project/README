@@ -11,5 +11,5 @@ Note: I don't how to import a locally installed lib
 --> pip uninstall example2022   # uninstall the package
 
 to use it: 
->>> from example_test_project.example_test import *
->>> test_set_up()
+>>> from example_test_project.example import *
+>>> test_setup()
