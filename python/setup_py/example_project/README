@@ -1,0 +1,15 @@
+->pip install -e .
+the package will be installed at: 
+    "anaconda3/envs/brian2.5/lib/python3.8/site-packages"
+
+-->pip install -e . --prefix=./INSTALL
+the package will be installed at: 
+    "./INSTALL"
+
+Note: I don't how to import a locally installed lib
+
+--> pip uninstall example2022   # uninstall the package
+
+to use it: 
+>>> from example_test_project.example_test import *
+>>> test_set_up()
