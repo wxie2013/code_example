@@ -2,11 +2,9 @@
 the package will be installed at: 
     "anaconda3/envs/brian2.5/lib/python3.8/site-packages"
 
--->pip install -e . --prefix=./INSTALL
+-->pip install -e . --user
 the package will be installed at: 
-    "./INSTALL"
-
-Note: I don't how to import a locally installed lib
+    "/home/wxie/.local/lib/python3.8/site-packages"
 
 --> pip uninstall example2022   # uninstall the package
 
