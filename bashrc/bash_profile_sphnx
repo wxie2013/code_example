@@ -13,11 +13,9 @@ alias gpr='grep -R '
 
 alias py='python'
 alias ipy='ipython'
-alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'
 
 alias macro_intt='cd /sphenix/u/wxie/sphnx_software/INTT/macro'
