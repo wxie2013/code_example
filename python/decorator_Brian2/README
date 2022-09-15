@@ -1,0 +1,20 @@
+Denis Alevi
+@denisalevi
+10:26
+You will have to add an implementation for cuda separately. The cpp implementation is not automatically used. You can have multiple implementations per function like this:
+
+    @implementation('cuda', '''
+          __host__ __device__ double add_more() {
+             return 100;
+          }
+          ''')
+    @implementation('cpp', '''
+          double add_more() {
+             return 100;
+          }
+          ''')
+    @check_units(result=Hz)
+    def add_more():
+        return 100;
+
+
