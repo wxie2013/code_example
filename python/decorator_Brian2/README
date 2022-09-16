@@ -1,3 +1,4 @@
+------------
 Denis Alevi
 @denisalevi
 10:26
@@ -18,3 +19,7 @@ You will have to add an implementation for cuda separately. The cpp implementati
         return 100;
 
 
+-----------------
+for including external source and header files, see:
+
+https://brian.discourse.group/t/how-to-use-prefs-devices-cpp-standalone-extra-make-args-unix/783/3
