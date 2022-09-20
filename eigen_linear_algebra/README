@@ -1,0 +1,3 @@
+g++ oo.C -I ~/local_pkgs/eigen-3.4.0/ -o oo
+
+mm.py is a python version of oo.C to test the usage of different command

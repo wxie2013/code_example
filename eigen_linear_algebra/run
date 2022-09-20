@@ -1,0 +1,1 @@
+g++ oo.C -I ~/local_pkgs/eigen-3.4.0/ -o oo; ./oo
