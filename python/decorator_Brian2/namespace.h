@@ -1,5 +1,5 @@
 using namespace std;
 namespace aaa
 {
-  int val = 10;
+  extern int val;
 }

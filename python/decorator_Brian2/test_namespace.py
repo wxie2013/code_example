@@ -11,6 +11,7 @@ current_dir = os.path.abspath(os.path.dirname(__file__))
      }
      ''', 
      headers=['"namespace.h"'],
+     sources=[os.path.join(current_dir, 'namespace.cpp')], 
      include_dirs=[current_dir]
      )
 @check_units(result=Hz)
