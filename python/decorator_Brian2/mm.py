@@ -23,7 +23,7 @@ spike_rate_code = spike_rate_code.replace('%%SPIKECOUNT%%',
 def spike_rate(scale, t, i):
     raise NotImplementedError('use standalone mode')
 
-input_neurons.scale = 0.1
+input_neurons.scale = [0.1, 1, 10, 100, 1000, 10000]
 input_neurons.run_regularly('rate=spike_rate(scale, t, i)*Hz', dt=0.2*ms)
 run(0.3*ms, report='text')
 print(input_neurons.rate[:])
