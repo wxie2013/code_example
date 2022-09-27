@@ -1,6 +1,14 @@
 import os
-
 from brian2 import *
+
+def read_spike_rate_code(spike_mon_obj):
+    with open(os.path.join(current_dir,'spike_rate.cpp')) as f:
+        spike_rate_code = f.read()
+
+    return spike_rate_code.replace('%%SPIKECOUNT%%',
+        device.get_array_name(spikemon.variables['count']))
+
+
 
 current_dir = os.path.dirname(__file__)
 set_device('cpp_standalone', directory='standalone', debug=True)
@@ -12,11 +20,7 @@ input_neurons = NeuronGroup(N, '''rate : Hz
                                   scale: 1''', threshold='rand()<rate*dt')
 spikemon = SpikeMonitor(input_neurons)
 
-with open(os.path.join(current_dir,'spike_rate.cpp')) as f:
-    spike_rate_code = f.read()
-spike_rate_code = spike_rate_code.replace('%%SPIKECOUNT%%',
-                                          device.get_array_name(spikemon.variables['count']))
-
+spike_rate_code = read_spike_rate_code(spikemon)
 @implementation('cpp', spike_rate_code,
                 dependencies={'ta2d': ta2d})
 @check_units(t=second, i=1, result=1)
