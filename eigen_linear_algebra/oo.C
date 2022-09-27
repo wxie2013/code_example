@@ -33,4 +33,12 @@ int main()
   std::cout<<"matrix n: "<<n<<std::endl;
   std::cout<<"m*n (element-wise): "<<m.array()<<std::endl;
   std::cout<<"m flatten: "<<m.transpose().reshaped(1,nrow*ncol)<<std::endl;
+
+  Eigen::MatrixXf tv = m.transpose().reshaped(1,nrow*ncol);
+
+  float *tt;
+  Eigen::MatrixXf::Map(tt, tv.rows(), tv.cols()) = tv;
+
+  for(int i = 0; i<tv.cols(); i++) 
+    std::cout<<tt[i]<<std::endl;
 }
