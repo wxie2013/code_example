@@ -12,7 +12,7 @@ def read_spike_rate_code():
     return spike_rate_code
 
 # defined user function 
-@implementation('cpp', read_spike_rate_code(),
+@implementation('cpp', read_spike_rate_code().replace('brian::_array_syn_count', 'brian::_array_ttt_count'),
                 dependencies={'ta2d': ta2d})
 @check_units(t=second, i=1, result=1)
 def spike_rate(scale, t, i):
