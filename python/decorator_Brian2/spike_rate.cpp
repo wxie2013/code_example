@@ -1,4 +1,4 @@
-// spike_rate.cpp
+// cpp template for running mm.f
 #define get_name(var) #var
 double spike_rate(double scale, double t, int i) {
    std::cout<<"t = " << t << "s" <<std::endl;
