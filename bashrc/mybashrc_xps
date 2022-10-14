@@ -115,7 +115,7 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 #xrdb -merge ~/.Xresources
-conda activate brian2.5
+conda activate brian2
 PS1="\h:\u:\W>"
 alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
 export LS_OPTIONS='--color=auto'
