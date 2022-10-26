@@ -1,3 +1,4 @@
+import os
 from ray import tune, air
 from hyperopt import hp
 from ray.tune.search.hyperopt import HyperOptSearch
@@ -18,15 +19,27 @@ search_space = {
     "b": hp.uniform("b", 0, 1)
     }
 
-hyperopt_search = HyperOptSearch(search_space, metric="SCORE", mode="max")
+raw_log_dir = "./ray_log"
+raw_log_name = "example"
+
+if os.path.exists(os.path.join(raw_log_dir, raw_log_name)) == False:
+    print('--- this is the 1st run ----')
+    algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max")
+else: #note: restoring described here doesn't work: https://docs.ray.io/en/latest/tune/tutorials/tune-stopping.html 
+    print('--- previous run exist, continue the tuning ----')
+    algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max")
+    algorithm.restore_from_dir(os.path.join(raw_log_dir, raw_log_name))
 
 # 3. Start a Tune run and print the best result.
+
 tuner = tune.Tuner(objective, 
         tune_config = tune.TuneConfig(
-            num_samples = 5, # number of tries. too expensive for Brian2
-            search_alg=hyperopt_search, 
+            num_samples = 2, # number of tries. too expensive for Brian2
+            search_alg=algorithm, 
             ),
-        param_space=search_space
+        param_space=search_space, 
+        run_config = air.RunConfig(local_dir = raw_log_dir, name = raw_log_name) # where to save the log which will be loaded later
         )
+
 results = tuner.fit()
 print(results.get_best_result(metric="SCORE", mode="max").config)
