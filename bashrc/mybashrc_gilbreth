@@ -1,0 +1,105 @@
+alias m='less'
+alias ls='ls -F --color=tty'
+alias l='ls -lrt'
+alias lm='ls -l|less'
+alias ed='vim -N'
+alias cuw+='chmod u+w '
+alias cuw-='chmod u-w '
+alias cux='chmod u+x '
+alias xtm='xterm +tb -sb -sl 10000 -g 85x30 -fn 8x13&'
+alias ldr='ls -lrt|grep dr'
+alias str='cd /mnt/hadoop/store/user/wxie'
+alias depot='cd /depot/cms/users/wxie'
+alias cpl='scram b --reset -j 4'
+
+alias gpr='grep -R '
+
+alias py2='python2'
+alias py='python'
+
+alias rtl='root -l'
+alias rtb='root -b'
+
+alias scmb='scram b -j 4'
+
+export cern=wxie@lxplus.cern.ch
+
+#-- kill all root process from wxie 
+#ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
+#-- list tar file content
+#tar tvf *.tar
+#-- extract one directory of a tar file
+#tar xvf *.tar directory_name
+
+export Brian2=/home/wxie/Brian2
+alias brian='cd $Brian2'
+alias ana_brian='cd $Brian2/ana'
+alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
+alias model_brian='cd $Brian2/model'
+alias tools_brian='cd $Brian2/tools'
+
+alias sc='cd /scratch/*/w/wxie/'
+alias scb='cd /scratch/*/wxie/'
+alias sqwx='squeue -u wxie'
+alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %.9l %.6D %R"'
+
+alias nb2py='jupyter nbconvert --to script '
+alias rnb='jupyter nbconvert --to notebook --execute  '
+alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
+alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
+
+load_root() {
+   module load gcc/9.3.0
+   #module load openmpi
+   source $HOME/local_pkgs/root/bin/thisroot.sh
+}
+eval load_root 
+
+act_brian2() {
+   unset PYTHONPATH
+   export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
+   export PATH=$HOME/local_pkgs/genn/bin:$PATH
+   export CUDA_PATH=/apps/gilbreth/cuda-toolkit/cuda-10.0.130/
+   unset __conda_setup
+   unset JUPYTER_CONFIG_DIR 
+   conda activate brian2
+   eval load_root # need to load after activating the environment
+}
+
+#
+alias py='python3'
+alias ipy='ipython3'
+
+#voms-proxy-init -voms cms -valid 180:00:00
+alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
+LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
+
+alias sc_soumik="cd /scratch/halstead/c/chand140"
+export X509_USER_PROXY=/home/wxie/myproxy 
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+eval act_brian2
+
+export PATH=$HOME/local_pkgs/swig-4.0.2/build/bin:$HOME/local_pkgs/cmake/bin:$PATH
+#export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:/home/wxie/local_pkgs/anaconda3/lib/:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:$LD_LIBRARY_PATH
+
+PS1="\h:\u:\W>"
