@@ -22,19 +22,19 @@ search_space = {
 raw_log_dir = "./ray_log"
 raw_log_name = "example"
 
+algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max", n_initial_points=1)
 if os.path.exists(os.path.join(raw_log_dir, raw_log_name)) == False:
     print('--- this is the 1st run ----')
-    algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max")
 else: #note: restoring described here doesn't work: https://docs.ray.io/en/latest/tune/tutorials/tune-stopping.html 
     print('--- previous run exist, continue the tuning ----')
-    algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max")
     algorithm.restore_from_dir(os.path.join(raw_log_dir, raw_log_name))
 
 # 3. Start a Tune run and print the best result.
 
+trainable_with_resources = tune.with_resources(objective, {"cpu": 8})
 tuner = tune.Tuner(objective, 
         tune_config = tune.TuneConfig(
-            num_samples = 2, # number of tries. too expensive for Brian2
+            num_samples = 100, # number of tries. too expensive for Brian2
             search_alg=algorithm, 
             ),
         param_space=search_space, 
