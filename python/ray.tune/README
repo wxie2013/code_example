@@ -1,0 +1,6 @@
+resume_from_a_finished_run.py:  one need restore_from_dir() in this case. 
+resume_from_a_not_finished_run.py: one need restore() in this case.
+
+see more details at: 
+
+	https://discuss.ray.io/t/correct-way-of-using-tuner-restore/8247/3
