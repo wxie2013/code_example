@@ -1,4 +1,5 @@
 import os
+import multiprocessing
 from ray import tune, air
 from hyperopt import hp
 from ray.tune.search.hyperopt import HyperOptSearch
@@ -31,10 +32,11 @@ else: #note: restoring described here doesn't work: https://docs.ray.io/en/lates
 
 # 3. Start a Tune run and print the best result.
 
-trainable_with_resources = tune.with_resources(objective, {"cpu": 8})
+trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()})
 tuner = tune.Tuner(objective, 
         tune_config = tune.TuneConfig(
             num_samples = 100, # number of tries. too expensive for Brian2
+            time_budget_s = 20, # tot running time in seconds
             search_alg=algorithm, 
             ),
         param_space=search_space, 
