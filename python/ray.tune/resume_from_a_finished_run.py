@@ -32,10 +32,10 @@ else: #note: restoring described here doesn't work: https://docs.ray.io/en/lates
 
 # 3. Start a Tune run and print the best result.
 
-trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()})
-tuner = tune.Tuner(objective, 
+trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()/2})
+tuner = tune.Tuner(trainable_with_resources, 
         tune_config = tune.TuneConfig(
-            num_samples = 100, # number of tries. too expensive for Brian2
+            num_samples = 10, # number of tries. too expensive for Brian2
             time_budget_s = 20, # tot running time in seconds
             search_alg=algorithm, 
             ),
@@ -44,4 +44,10 @@ tuner = tune.Tuner(objective,
         )
 
 results = tuner.fit()
-print(results.get_best_result(metric="SCORE", mode="max").config)
+best_result = results.get_best_result(metric="SCORE", mode="max")
+print('--1: config: ', best_result.config)
+print('--2: log_dir: ', best_result.log_dir)
+print('--3: SCORE: ', best_result.metrics['SCORE'])
+print('--4: trial_id: ', best_result.metrics['trial_id'])
+print('--5: experiment_id: ', best_result.metrics['experiment_id'])
+print('--6: all metrics: ', best_result.metrics) # contains all metrics 
