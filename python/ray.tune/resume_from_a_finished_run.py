@@ -7,6 +7,7 @@ from ray.tune.search.hyperopt import HyperOptSearch
 
 # 1. Define an objective function.
 def objective(config):
+    f = open(os.path.join(os.getcwd(), "oo.root"), "w")
     score = config["a"] ** 2 + config["b"]
     #SCORE 1st apparence which defines the key of the dictionary, i.e. metric="SCORE", 
     # or  return {"SCORE": score}
