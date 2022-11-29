@@ -8,11 +8,12 @@ from ray.tune.search.hyperopt import HyperOptSearch
 # 1. Define an objective function.
 def objective(config):
     f = open(os.path.join(os.getcwd(), "oo.root"), "w")
-    score = config["a"] ** 2 + config["b"]
-    #SCORE 1st apparence which defines the key of the dictionary, i.e. metric="SCORE", 
-    # or  return {"SCORE": score}
-    tune.report(SCORE=score)  # this or the following return should work
-    #return {"SCORE": score}
+    for i in range(10): # 10 epochs
+        score = config["a"] ** 2 + config["b"]
+        #SCORE 1st apparence which defines the key of the dictionary, i.e. metric="SCORE", 
+        # or  return {"SCORE": score}
+        tune.report(SCORE=score)  # this or the following return should work
+        #return {"SCORE": score}
 
 
 # 2. Define a search space.
@@ -52,3 +53,8 @@ print('--3: SCORE: ', best_result.metrics['SCORE'])
 print('--4: trial_id: ', best_result.metrics['trial_id'])
 print('--5: experiment_id: ', best_result.metrics['experiment_id'])
 print('--6: all metrics: ', best_result.metrics) # contains all metrics 
+
+# Obtain a trial dataframe from all run trials of this `tune.run` call.
+dfs = {result.log_dir: result.metrics_dataframe for result in results}
+for d in dfs.values():
+    print(d.SCORE) # this print out SCORE vs. epoch
