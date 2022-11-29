@@ -1,4 +1,5 @@
-import os, time
+import os, time, ray
+import pandas as pd
 import multiprocessing
 from ray import tune, air
 from hyperopt import hp
@@ -61,3 +62,13 @@ print('--6: all metrics: ', best_result.metrics) # contains all metrics
 dfs = {result.log_dir: result.metrics_dataframe for result in results}
 for d in dfs.values():
     print(d.SCORE) # this print out SCORE vs. epoch
+
+# save it to CSV file for future analysis
+csv_name = "all_trials.csv"
+for df in dfs.values():
+    df.to_csv("all_trials.csv", index_label="epoch", mode='a')
+
+# now read it and printout epoch vs. SCORE
+dfs2 = pd.read_csv("all_trials.csv")
+for epoch, score in zip(dfs2.epoch, dfs2.SCORE):
+    print(epoch, score)
