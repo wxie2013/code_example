@@ -1,12 +1,13 @@
-import os
+import os, time
 import multiprocessing
 from ray import tune, air
 from hyperopt import hp
 from ray.tune.search.hyperopt import HyperOptSearch
-
+from ray.tune.search import ConcurrencyLimiter
 
 # 1. Define an objective function.
 def objective(config):
+    #time.sleep(60)
     f = open(os.path.join(os.getcwd(), "oo.root"), "w")
     for i in range(10): # 10 epochs
         score = config["a"] ** 2 + config["b"]
@@ -26,6 +27,7 @@ raw_log_dir = "./ray_log"
 raw_log_name = "example"
 
 algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max", n_initial_points=1)
+algorithm = ConcurrencyLimiter(algorithm, max_concurrent=8)
 if os.path.exists(os.path.join(raw_log_dir, raw_log_name)) == False:
     print('--- this is the 1st run ----')
 else: #note: restoring described here doesn't work: https://docs.ray.io/en/latest/tune/tutorials/tune-stopping.html 
@@ -34,11 +36,12 @@ else: #note: restoring described here doesn't work: https://docs.ray.io/en/lates
 
 # 3. Start a Tune run and print the best result.
 
-trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()/2})
+trainable_with_resources = tune.with_resources(objective, {"cpu": 1})
+#trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()/2})
 tuner = tune.Tuner(trainable_with_resources, 
         tune_config = tune.TuneConfig(
-            num_samples = 10, # number of tries. too expensive for Brian2
-            time_budget_s = 20, # tot running time in seconds
+            num_samples = 8, # number of tries. too expensive for Brian2
+            time_budget_s = 10000, # tot running time in seconds
             search_alg=algorithm, 
             ),
         param_space=search_space, 
