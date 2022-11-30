@@ -6,6 +6,9 @@ from hyperopt import hp
 from ray.tune.search.hyperopt import HyperOptSearch
 from ray.tune.search import ConcurrencyLimiter
 
+# disable dash board. See: https://discuss.ray.io/t/disable-dashboard/8471
+ray.init(include_dashboard=False)
+
 # 1. Define an objective function.
 def objective(config):
     #time.sleep(60)
