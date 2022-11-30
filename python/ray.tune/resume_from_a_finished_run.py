@@ -48,7 +48,6 @@ tuner = tune.Tuner(trainable_with_resources,
             time_budget_s = 10000, # tot running time in seconds
             search_alg=algorithm, 
             ),
-        param_space=search_space, 
         run_config = air.RunConfig(local_dir = raw_log_dir, name = raw_log_name) # where to save the log which will be loaded later
         )
 
