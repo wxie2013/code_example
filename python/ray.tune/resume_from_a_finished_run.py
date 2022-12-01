@@ -10,8 +10,8 @@ from ray.tune.search import ConcurrencyLimiter
 ray.init(include_dashboard=False)
 
 # 1. Define an objective function.
-def objective(config):
-    #time.sleep(60)
+def objective(config, data = None):
+    time.sleep(10)
     f = open(os.path.join(os.getcwd(), "oo.root"), "w")
     for i in range(10): # 10 epochs
         score = config["a"] ** 2 + config["b"]
@@ -40,9 +40,10 @@ else: #note: restoring described here doesn't work: https://docs.ray.io/en/lates
 
 # 3. Start a Tune run and print the best result.
 
-trainable_with_resources = tune.with_resources(objective, {"cpu": 1})
-#trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()/2})
-tuner = tune.Tuner(trainable_with_resources, 
+#trainable_with_resources = tune.with_resources(objective, {"cpu": 1})
+trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()})
+tuner = tune.Tuner(
+        tune.with_parameters(trainable_with_resources, data = "aaaa"),
         tune_config = tune.TuneConfig(
             num_samples = 8, # number of tries. too expensive for Brian2
             time_budget_s = 10000, # tot running time in seconds
