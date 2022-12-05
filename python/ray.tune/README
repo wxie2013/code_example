@@ -4,3 +4,7 @@ resume_from_a_not_finished_run.py: one need restore() in this case.
 see more details at: 
 
 	https://discuss.ray.io/t/correct-way-of-using-tuner-restore/8247/3
+
+# sub the follow script in physics queue
+sbatch -A physics submit_ray_cluster.sh
+
