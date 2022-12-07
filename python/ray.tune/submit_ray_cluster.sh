@@ -8,7 +8,7 @@
 #SBATCH --output=test_1205-1035.log
 
 ### This script works for any number of nodes, Ray will find and manage all resources
-#SBATCH --nodes=3
+#SBATCH --nodes=5
 #SBATCH --exclusive
 ### Give all resources to a single Ray task, ray can manage the resources internally
 #SBATCH --ntasks-per-node=1
@@ -49,17 +49,18 @@ port=6379
 ip_head=$ip:$port
 export ip_head
 echo "IP Head: $ip_head"
+echo "${SLURM_CPUS_PER_TASK}"
 
 echo "STARTING HEAD at $node_1"
 srun --nodes=1 --ntasks=1 -w "$node_1" \
-  ray start --head --node-ip-address="$ip" --port=$port --redis-password="$redis_password" --block &
+  ray start --head --node-ip-address="$ip" --port=$port --redis-password="$redis_password" --num-cpus "${SLURM_CPUS_PER_TASK}" --num-gpus "${SLURM_GPUS_PER_TASK}" --block &
 sleep 30
 
 worker_num=$((SLURM_JOB_NUM_NODES - 1)) #number of nodes other than the head node
 for ((i = 1; i <= worker_num; i++)); do
   node_i=${nodes_array[$i]}
   echo "STARTING WORKER $i at $node_i"
-  srun --nodes=1 --ntasks=1 -w "$node_i" ray start --address "$ip_head" --redis-password="$redis_password" --block &
+  srun --nodes=1 --ntasks=1 -w "$node_i" ray start --address "$ip_head" --redis-password="$redis_password" --num-cpus "${SLURM_CPUS_PER_TASK}" --num-gpus "${SLURM_GPUS_PER_TASK}" --block &
   sleep 5
 done
 
