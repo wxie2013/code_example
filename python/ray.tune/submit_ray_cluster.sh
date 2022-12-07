@@ -9,7 +9,7 @@
 
 ### This script works for any number of nodes, Ray will find and manage all resources
 #SBATCH --nodes=5
-#SBATCH --exclusive
+###SBATCH --exclusive  #book the whole node and others can't use
 ### Give all resources to a single Ray task, ray can manage the resources internally
 #SBATCH --ntasks-per-node=1
 #SBATCH --gpus-per-task=0
