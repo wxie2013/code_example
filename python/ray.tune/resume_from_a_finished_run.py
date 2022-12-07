@@ -7,7 +7,7 @@ from ray.tune.search.hyperopt import HyperOptSearch
 from ray.tune.search import ConcurrencyLimiter
 
 # disable dash board. See: https://discuss.ray.io/t/disable-dashboard/8471
-ray.init(include_dashboard=False)
+ray.init(address=os.environ["ip_head"], include_dashboard=False)
 
 # 1. Define an objective function.
 def objective(config, data = None):
@@ -43,7 +43,8 @@ else: #note: restoring described here doesn't work: https://docs.ray.io/en/lates
 trainable_with_resources = tune.with_resources(objective, {"cpu": 1})
 #trainable_with_resources = tune.with_resources(objective, {"cpu": multiprocessing.cpu_count()})
 tuner = tune.Tuner(
-        tune.with_parameters(trainable_with_resources, data = "aaaa"),
+        #tune.with_parameters(trainable_with_resources, data = "aaaa"),
+        trainable_with_resources,
         tune_config = tune.TuneConfig(
             num_samples = 100, # number of tries. too expensive for Brian2
             time_budget_s = 10000, # tot running time in seconds
