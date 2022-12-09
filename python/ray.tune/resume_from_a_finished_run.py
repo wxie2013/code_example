@@ -7,7 +7,11 @@ from ray.tune.search.hyperopt import HyperOptSearch
 from ray.tune.search import ConcurrencyLimiter
 
 # disable dash board. See: https://discuss.ray.io/t/disable-dashboard/8471
-ray.init(address=os.environ["ip_head"], include_dashboard=False)
+ip_head = os.getenv("ip_head")
+if ip_head != None:
+    ray.init(address=ip_head, include_dashboard=False)
+else:
+    print('-- running without a cluster ---')
 
 # 1. Define an objective function.
 def objective(config, data = None):
