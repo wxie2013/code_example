@@ -6,6 +6,7 @@
 
 #SBATCH --job-name=test_1205-1035
 #SBATCH --output=test_1205-1035.log
+#SBATCH --error=test_1205-1035.err
 
 ### This script works for any number of nodes, Ray will find and manage all resources
 #SBATCH --nodes=5
