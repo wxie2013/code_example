@@ -5,19 +5,22 @@ from ray import tune, air
 from hyperopt import hp
 from ray.tune.search.hyperopt import HyperOptSearch
 from ray.tune.search import ConcurrencyLimiter
+from ray.tune.schedulers import ASHAScheduler
 
 # disable dash board. See: https://discuss.ray.io/t/disable-dashboard/8471
 ip_head = os.getenv("ip_head")
 if ip_head != None:
-    ray.init(address=ip_head, include_dashboard=False)
+    ray.init(address=ip_head)
 else:
     print('-- running without a cluster ---')
+
+n_epoch = 50
 
 # 1. Define an objective function.
 def objective(config, data = None):
     #time.sleep(60)
     f = open(os.path.join(os.getcwd(), "oo.root"), "w")
-    for i in range(10): # 10 epochs
+    for i in range(n_epoch): 
         score = config["a"] ** 2 + config["b"]
         #SCORE 1st apparence which defines the key of the dictionary, i.e. metric="SCORE", 
         # or  return {"SCORE": score}
@@ -53,6 +56,7 @@ tuner = tune.Tuner(
             num_samples = 100, # number of tries. too expensive for Brian2
             time_budget_s = 10000, # tot running time in seconds
             search_alg=algorithm, 
+            scheduler=ASHAScheduler(metric="SCORE", mode="max"),
             ),
         run_config = air.RunConfig(local_dir = raw_log_dir, name = raw_log_name) # where to save the log which will be loaded later
         )
