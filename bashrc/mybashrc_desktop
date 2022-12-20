@@ -49,7 +49,7 @@ alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
 alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
 export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
-alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
+alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
 alias jn='jupyter notebook --no-browser&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
@@ -84,7 +84,7 @@ alias lg_gilbreth00='ssh -Y  $gilbreth00'
 alias lg_gilbreth01='ssh -Y  $gilbreth01'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
-alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+alias rmb='rm -r syn_out spike_out cpp_standalone*'
 alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
@@ -121,3 +121,7 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
