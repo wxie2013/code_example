@@ -46,7 +46,7 @@ alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
 alias b2='cd /home/wxie/local_pkgs/brian2'
 export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
-alias job_brian='cd $Brian2/jobs_sub/bayes_tune/'
+alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
 #alias jn='jupyter notebook --no-browser&'
 alias jn='jupyter notebook --no-browser --NotebookApp.kernel_manager_class=notebook.services.kernels.kernelmanager.AsyncMappingKernelManager&'
@@ -117,7 +117,7 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 PS1="\h:\u:\W>"
-alias rmb='rm -r ana syn_out spike_out adpt_thres_out'
+alias rmb='rm -r syn_out spike_out cpp_standalone root_file'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
