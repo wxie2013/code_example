@@ -17,7 +17,7 @@ alias rt='root --web=off'
 alias rtb='root -b --web=off'
 alias gpr='grep -R '
 
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 
 alias scmb='scram b -j 4'
 
@@ -58,10 +58,10 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&" 
-alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
-alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x28+2753+450&"
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2500+430&" 
+alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2500+430&" 
+alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2500+430&"
+alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2500+430&"
 
 4xtw() {
 	xtw 
@@ -94,7 +94,7 @@ export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 cd ~/
 unset JUPYTER_CONFIG_DIR 
 
-export PYTHIA8DATA=/home/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
