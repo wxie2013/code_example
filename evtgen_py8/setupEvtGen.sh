@@ -40,7 +40,7 @@
 
 # Location in which to install
 ROOTSYS=/home/ROOT
-INSTALL_PREFIX="/home/py8_evtgen_HepMC"
+INSTALL_PREFIX="/home/wxie/local_pkgs/py8_evtgen_HepMC"
 mkdir $INSTALL_PREFIX
 
 # EvtGen version or tag number (or branch name). No extra spaces on this line!
@@ -57,7 +57,7 @@ HEPMC3TAR=$HEPMC3PKG".tar.gz"
 
 # Pythia version number with no decimal points, e.g. 8230 corresponds to version 8.230. This
 # follows the naming convention of Pythia install tar files. Again, no extra spaces allowed.
-PYTHIAVER=8306
+PYTHIAVER=8308
 PYTHIAPKG="pythia"$PYTHIAVER
 PYTHIATAR=$PYTHIAPKG".tgz"
 
