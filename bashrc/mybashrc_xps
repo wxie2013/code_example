@@ -117,7 +117,7 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 PS1="\h:\u:\W>"
-alias rmb='rm -r syn_out spike_out cpp_standalone root_file'
+alias rmb='rm -r syn_out spike_out cpp_standalone root_file tmp'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
