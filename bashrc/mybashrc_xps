@@ -1,4 +1,4 @@
-alias m='less -r'
+alias m='less'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
 alias lm='ls -lrt|less'
@@ -58,16 +58,16 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2490+425&" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2490+425&" 
-alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2490+425&"
-alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28+2490+425&"
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco" 
+alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco" 
+alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco"
+alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco"
 
 4xtw() {
-	xtw 
-	xtw 
-	xtw 
-	xtw
+	xtw -geometry 100x28+2490+425&
+	xtw -geometry 100x28+2490+0&
+	xtw -geometry 100x28+1600+425&
+	xtw -geometry 100x28+1600+0&
 }
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
