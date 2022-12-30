@@ -58,30 +58,21 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco" 
-alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco"
-alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco"
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&" 
+alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco -geometry 100x28&" 
+alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
 
-4xtw() {
-	xtw -geometry 100x28+2490+425&
-	xtw -geometry 100x28+2490+0&
-	xtw -geometry 100x28+1600+425&
-	xtw -geometry 100x28+1600+0&
-}
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
 #alias lg_physics='ssh -X $physics'
-#alias lg_halstead='ssh -X $halstead'
 #alias lg_brown='ssh -X $brown'
 #alias lg_gilbreth='ssh -X $gilbreth'
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh  $cms'
 alias lg_desktop='ssh  $desktop'
 alias lg_physics='ssh  $physics'
-alias lg_halstead00='ssh  wxie@halstead-fe00.rcac.purdue.edu'
-alias lg_halstead='ssh  $halstead'
 alias lg_bell='ssh  $bell'
 alias lg_bell00='ssh wxie@bell-fe00.rcac.purdue.edu'
 alias lg_brown='ssh  $brown'
@@ -117,7 +108,7 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 PS1="\h:\u:\W>"
-alias rmb='rm -r syn_out spike_out cpp_standalone root_file tmp'
+alias rmb='rm -r syn_out spike_out cpp_standalone root_file tmp adpt_thres_out'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
