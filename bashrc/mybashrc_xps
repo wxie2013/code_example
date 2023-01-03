@@ -63,6 +63,13 @@ alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco
 alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
 alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
 
+4xtw() {
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2490+425&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2490+0&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1600+425&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1600+0&
+}
+
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
