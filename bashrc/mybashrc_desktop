@@ -18,10 +18,6 @@ alias rtb='root -b'
 alias gpr='grep -R '
 alias rt='root'
 
-4xtw() { 
-	xtw xtw xtw xtw 
-}
-export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
 alias gn='gnome-session&'
 
 alias scmb='scram b -j 4'
@@ -60,10 +56,17 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&" 
-alias xtw="xterm -sb -rightbar -bg white -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&" 
-alias xtb="xterm -sb -rightbar -bg black -fg white -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
-alias xtg="xterm -sb -rightbar -bg grey -fg black -fn terminus-bold-22 -sl 1000000 -geometry 100x30+2753+450&"
+alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+
+4xtw() {
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2810+425&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2810+0&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+425&
+	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+0&
+}
 #alias lg_cern='ssh -X $cern'
 #alias lg_cms='ssh -X $cms'
 #alias lg_desktop='ssh -X $desktop'
@@ -84,7 +87,7 @@ alias lg_gilbreth00='ssh -Y  $gilbreth00'
 alias lg_gilbreth01='ssh -Y  $gilbreth01'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
-alias rmb='rm -r syn_out spike_out cpp_standalone*'
+alias rmb='rm -r syn_out spike_out cpp_standalone root_file'
 alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
