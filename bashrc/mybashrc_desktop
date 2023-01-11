@@ -67,13 +67,6 @@ alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco
 	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+425&
 	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+0&
 }
-#alias lg_cern='ssh -X $cern'
-#alias lg_cms='ssh -X $cms'
-#alias lg_desktop='ssh -X $desktop'
-#alias lg_physics='ssh -X $physics'
-#alias lg_halstead='ssh -X $halstead'
-#alias lg_brown='ssh -X $brown'
-#alias lg_gilbreth='ssh -X $gilbreth'
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -Y $cms'
 alias lg_desktop='ssh  $desktop'
@@ -87,7 +80,7 @@ alias lg_gilbreth00='ssh -Y  $gilbreth00'
 alias lg_gilbreth01='ssh -Y  $gilbreth01'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
-alias rmb='rm -r syn_out spike_out cpp_standalone root_file'
+alias rmb='rm -r syn_out spike_out cpp_standalone root_file adpt_thres_out'
 alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
@@ -111,9 +104,10 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 #xrdb -merge ~/.Xresources
-source /home/ROOT/bin/thisroot.sh 
-conda activate b2c
+source /home/wxie/local_pkgs/root/bin/thisroot.sh 
+conda activate brian2
 export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
+export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export CUDA_PATH=/usr/local/cuda
 export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin
 unset __conda_setup
@@ -123,7 +117,6 @@ export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
