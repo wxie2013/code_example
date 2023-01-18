@@ -1,4 +1,4 @@
-alias m='less -r'
+alias m='less'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
 alias lm='ls -lrt|less'
