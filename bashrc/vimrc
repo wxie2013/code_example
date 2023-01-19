@@ -86,5 +86,5 @@ set listchars=tab:▸\ ,eol:¬
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
-autocmd Filetype cpp setlocal expandtab tabstop=2 shiftwidth=2
-autocmd Filetype python setlocal expandtab tabstop=2 shiftwidth=2
+autocmd Filetype cpp setlocal expandtab tabstop=4 shiftwidth=4
+autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
