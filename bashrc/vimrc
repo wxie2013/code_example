@@ -54,7 +54,7 @@ set hidden
 set ttyfast
 
 " Status bar
-set laststatus=2
+"set laststatus=2
 
 " Last line
 set showmode
