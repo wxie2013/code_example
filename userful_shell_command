@@ -1,0 +1,3 @@
+#list directory name where a file 'notFinishedLumis.json' does not exist: 
+   find */results -type d  ! -exec test -f {}/notFinishedLumis.json ';' -print
+
