@@ -1,0 +1,4 @@
+convert a python dictionary to a std::map and call c++ macro in a python code.
+
+py test.py
+
