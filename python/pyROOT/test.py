@@ -2,7 +2,12 @@ import ROOT
 
 ROOT.gROOT.LoadMacro('dict.C')
 ROOT.gROOT.LoadMacro('nt.C')
+ROOT.gInterpreter.Declare('''
+            void oo(float t)
+            {cout<<t<<endl;};
+            ''')
 
+ROOT.oo(2023)
 #
 a = ROOT.std.map[ROOT.std.string, ROOT.float]()
 a['test'] =  99
