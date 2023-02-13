@@ -14,7 +14,7 @@ if ip_head != None:
 else:
     print('-- running without a cluster ---')
 
-n_epoch = 50
+n_epoch = 2
 
 # 1. Define an objective function.
 def objective(config, data = None):
@@ -37,7 +37,10 @@ search_space = {
 raw_log_dir = "./ray_log"
 raw_log_name = "example"
 
-algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max", n_initial_points=1)
+initial_params = [
+        {"a": 1, "b": 1},
+        ]
+algorithm = HyperOptSearch(search_space, metric="SCORE", mode="max", n_initial_points=8, points_to_evaluate=initial_params)
 algorithm = ConcurrencyLimiter(algorithm, max_concurrent=8)
 if os.path.exists(os.path.join(raw_log_dir, raw_log_name)) == False:
     print('--- this is the 1st run ----')
