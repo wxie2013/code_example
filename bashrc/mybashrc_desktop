@@ -57,16 +57,20 @@ export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
-alias xtc="xterm -sb -rightbar -bg cyan4 -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
-alias xtw="xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
-alias xtb="xterm -sb -rightbar -bg black -fg white -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
-alias xtg="xterm -sb -rightbar -bg grey -fg black  -sl 1000000 -fs 13 -fa monaco -geometry 100x28&"
+
+export xt="xterm -sb -rightbar -sl 1000000 -fs 13 -fa monaco"
+alias xt_gold="$xt -geometry 100x28 -bg gold&"
+alias xt_cyan="$xt -geometry 100x28 -bg cyan4 -fg white&"
+alias xt_white="$xt -geometry 100x28 -bg white&"
+alias xt_black="$xt -geometry 100x28 -bg black -fg white&"
+alias xt_green="$xt -geometry 100x28 -bg green4 -fg white&"
+alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 
 4xtw() {
-	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2810+425&
-	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+2810+0&
-	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+425&
-	xterm -sb -rightbar -bg white -fg black -sl 1000000 -fs 13 -fa monaco  -geometry 100x28+1920+0&
+	$xt -geometry 100x28+2810+425&
+	$xt -geometry 100x28+2810+0&
+	$xt -geometry 100x28+1920+425&
+	$xt -geometry 100x28+1920+0&
 }
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
