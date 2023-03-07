@@ -61,7 +61,7 @@ tuner = tune.Tuner(
             search_alg=algorithm, 
             scheduler=ASHAScheduler(metric="SCORE", mode="max"),
             ),
-        run_config = air.RunConfig(local_dir = raw_log_dir, name = raw_log_name) # where to save the log which will be loaded later
+        run_config = air.RunConfig(local_dir = raw_log_dir, name = raw_log_name, verbose=2) # where to save the log which will be loaded later
         )
 
 results = tuner.fit()
