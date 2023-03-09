@@ -38,7 +38,7 @@ alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
 alias tools_brian='cd $Brian2/tools'
 
-alias sc='cd /scratch/brown/wxie'
+alias sc='cd /scratch/negishi/wxie'
 alias sqwx='squeue -u wxie'
 alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %.9l %.6D %R"'
 
@@ -50,7 +50,8 @@ load_root() {
   conda activate brian2
   module load cmake/3.24.3
   module load gcc/12.2.0
-  #source /home/wxie/local_pkgs/root/bin/thisroot.sh
+  export CC=gcc
+  export CXX=g++
 }
 eval load_root 
 
@@ -72,7 +73,7 @@ alias ipy='ipython3'
 
 #voms-proxy-init -voms cms -valid 180:00:00
 alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone root_file'
-export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
