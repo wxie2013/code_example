@@ -45,13 +45,6 @@ alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
 
-load_root() {
-   module load cmake/3.20.6
-   module load gcc/8.3.0
-   source /home/wxie/local_pkgs/root/bin/thisroot.sh
-}
-eval load_root 
-
 act_brian2() {
    unset PYTHONPATH
    export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
@@ -60,7 +53,7 @@ act_brian2() {
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
    conda activate brian2
-   eval load_root # need to load after activating the environment
+   module load cmake/3.20.6
 }
 
 export PATH=/home/wxie/local_pkgs/swig-4.0.2/build/bin:$PATH
