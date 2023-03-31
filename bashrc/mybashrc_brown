@@ -65,7 +65,7 @@ alias py='python3'
 alias ipy='ipython3'
 
 #voms-proxy-init -voms cms -valid 180:00:00
-alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone root_file'
+alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __pycache__'
 export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
