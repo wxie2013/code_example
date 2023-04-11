@@ -44,6 +44,7 @@ alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
+alias clear_pycache='find . -name __pycache__ -exec rm -r {} \; '
 
 act_brian2() {
    unset PYTHONPATH
