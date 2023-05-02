@@ -85,5 +85,11 @@ set listchars=tab:▸\ ,eol:¬
 " set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
-autocmd Filetype cpp setlocal expandtab tabstop=4 shiftwidth=4
+autocmd Filetype cpp  setlocal expandtab tabstop=4 shiftwidth=4
 autocmd Filetype python setlocal expandtab tabstop=4 shiftwidth=4
+" Return to last edit position when opening files (You want this!)
+
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
+      \   exe "normal! g`\"" |
+      \ endif
