@@ -59,6 +59,9 @@ set ttyfast
 set showmode
 set showcmd
 
+" diable beeping sound
+set belloff=all
+
 " Searching
 "nnoremap / /\v
 "vnoremap / /\v

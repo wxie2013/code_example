@@ -101,26 +101,25 @@ cd ~/
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/wxie/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/wxie/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/wxie/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/wxie/anaconda3/bin:$PATH"
+        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 # <<< conda initialize <<<
 
 #xrdb -merge ~/.Xresources
-source /home/wxie/local_pkgs/root/bin/thisroot.sh 
 conda activate brian2
 export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
 export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export CUDA_PATH=/usr/local/cuda
-export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin
+export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin:/home/wxie/.codon/bin
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR
 PS1="\h:\u:\W>"
@@ -132,3 +131,4 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+bind 'set bell-style none'
