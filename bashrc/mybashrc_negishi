@@ -75,6 +75,7 @@ alias ipy='ipython3'
 alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __pycache__'
 export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
+export PYTHONUNBUFFERED=True
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS

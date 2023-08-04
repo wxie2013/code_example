@@ -120,6 +120,7 @@ export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/p
 export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export CUDA_PATH=/usr/local/cuda
 export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin:/home/wxie/.codon/bin
+export PYTHONUNBUFFERED=True
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR
 PS1="\h:\u:\W>"

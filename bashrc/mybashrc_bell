@@ -91,5 +91,5 @@ eval act_brian2
 
 export PATH=$HOME/local_pkgs/swig-4.0.2/build/bin:$HOME/local_pkgs/cmake/bin:$PATH
 export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:$LD_LIBRARY_PATH
-
+export PYTHONUNBUFFERED=True
 PS1="\h:\u:\W>"
