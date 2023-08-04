@@ -17,8 +17,6 @@ alias rt='root --web=off'
 alias rtb='root -b --web=off'
 alias gpr='grep -R '
 
-#export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
-
 alias scmb='scram b -j 4'
 
 
@@ -28,7 +26,6 @@ alias scmb='scram b -j 4'
 #tar tvf *.tar
 #-- extract one directory of a tar file
 #tar xvf *.tar directory_name
-source /home/wxie/local_pkgs/root/bin/thisroot.sh
 alias dp='cd /mnt/c/Users/puppy/Desktop'
 alias dl='cd /mnt/c/Users/puppy/Downloads'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
@@ -97,6 +94,7 @@ cd ~/
 unset JUPYTER_CONFIG_DIR 
 
 export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHONUNBUFFERED=True
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
@@ -119,7 +117,7 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 PS1="\h:\u:\W>"
-alias rmb='rm -r syn_out spike_out cpp_standalone root_file tmp adpt_thres_out'
+alias rmb='rm -r syn_out spike_out cpp_standalone* root_file tmp adpt_thres_out __pycache__'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
