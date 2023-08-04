@@ -44,7 +44,6 @@ alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %
 
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
-alias clear_pycache='find . -name __pycache__ -exec rm -r {} \; '
 
 act_brian2() {
    unset PYTHONPATH
@@ -54,6 +53,7 @@ act_brian2() {
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
    conda activate brian2
+   module load cmake/3.20.6
 }
 
 export PATH=/home/wxie/local_pkgs/swig-4.0.2/build/bin:$PATH
@@ -73,6 +73,11 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 alias sc_soumik="cd /scratch/halstead/c/chand140"
 export X509_USER_PROXY=/home/wxie/myproxy 
 
+export PATH=$HOME/local_pkgs/swig-4.0.2/build/bin:$HOME/local_pkgs/cmake/bin:$PATH
+export PATH=/home/wxie/.codon/bin:$PATH
+export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:$LD_LIBRARY_PATH
+export PYTHONUNBUFFERED=True
+
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -87,9 +92,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
 eval act_brian2
 
-export PATH=$HOME/local_pkgs/swig-4.0.2/build/bin:$HOME/local_pkgs/cmake/bin:$PATH
-export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:$LD_LIBRARY_PATH
-export PYTHONUNBUFFERED=True
 PS1="\h:\u:\W>"
