@@ -1,1 +1,2 @@
 when the example tries reaches the maximum, BayesOpt will stop search. Another round of run will casue assert.self_checkpiont error. The hyperopt doesn't have this feature.
+max_concurrent=10 is the maximum number event if one set it to higher number
