@@ -6,3 +6,5 @@ def t1_print():
 
 def t2_print():
     print("----t2 ----");
+
+a = 19
