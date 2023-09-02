@@ -54,8 +54,6 @@ act_brian2() {
    unset JUPYTER_CONFIG_DIR 
    conda activate brian2
    module load cmake/3.20.6
-   module load gcc/8.3.0
-   source /home/wxie/local_pkgs/root/bin/thisroot.sh
 }
 
 export PATH=/home/wxie/local_pkgs/swig-4.0.2/build/bin:$PATH
