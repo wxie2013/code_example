@@ -1,7 +1,7 @@
 import os, time, ray
 import pandas as pd
 import multiprocessing
-from ray import tune, air
+from ray import train, tune, air
 from hyperopt import hp
 from ray.tune.search.skopt import SkOptSearch
 from ray.tune.search import ConcurrencyLimiter
@@ -16,8 +16,9 @@ else:
 
 n_epoch = 2
 
-raw_log_dir = "./ray_log"
+raw_log_dir = os.path.join(os.getcwd(), "ray_log")
 raw_log_name = "example"
+os.environ["RAY_AIR_LOCAL_CACHE_DIR"] = raw_log_dir
 
 def define_tuner(search_space = None):
     trainable_with_resources = tune.with_resources(objective, {"cpu": 1})
@@ -32,7 +33,7 @@ def define_tuner(search_space = None):
                 scheduler=ASHAScheduler(metric="SCORE", mode="max"),
                 ),
             param_space = search_space,
-            run_config = air.RunConfig(storage_path = raw_log_dir, name = raw_log_name, verbose=2) # where to save the log which will be loaded later
+            run_config = air.RunConfig(name = raw_log_name, verbose=2) # where to save the log which will be loaded later
             )
     return tuner
 
@@ -44,7 +45,7 @@ def objective(config, data = None):
         score = config["a"] ** 2 + config["b"]
         #SCORE 1st apparence which defines the key of the dictionary, i.e. metric="SCORE", 
         # or  return {"SCORE": score}
-        tune.report(SCORE=score)  # this or the following return should work
+        train.report({'SCORE':score})  # this or the following return should work
         #return {"SCORE": score}
 
 
@@ -56,13 +57,13 @@ search_space = {
 
 
 initial_params = [
-        {"a": 0.5, "b": 0.5},
+        {"a": 0.0, "b": 0.0},
         ]
 algorithm = SkOptSearch(
         metric="SCORE", 
         mode="max", 
         points_to_evaluate=initial_params)
-algorithm = ConcurrencyLimiter(algorithm, max_concurrent=8)
+algorithm = ConcurrencyLimiter(algorithm, max_concurrent=5)
 if os.path.exists(os.path.join(raw_log_dir, raw_log_name)) == False:
     print('--- this is the 1st run ----')
     tuner = define_tuner(search_space)
@@ -75,6 +76,5 @@ else:  # the difference from the 1st run is w/o param_space because it's already
 results = tuner.fit()
 best_result = results.get_best_result(metric="SCORE", mode="max")
 print('--1: config: ', best_result.config)
-print('--2: log_dir: ', best_result.log_dir)
 print('--3: SCORE: ', best_result.metrics['SCORE'])
 print('--4: trial_id: ', best_result.metrics['trial_id'])
