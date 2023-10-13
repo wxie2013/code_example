@@ -41,7 +41,7 @@
 # Location in which to install
 #ROOTSYS=/home/ROOT
 ROOTSYS=/cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.22.03-ghbfee2/
-INSTALL_PREFIX="/home/wxie/py8_evtgen_HepMC"
+INSTALL_PREFIX="/home/wxie/local_pkgs/py8_evtgen_HepMC"
 mkdir $INSTALL_PREFIX
 
 # EvtGen version or tag number (or branch name). No extra spaces on this line!
