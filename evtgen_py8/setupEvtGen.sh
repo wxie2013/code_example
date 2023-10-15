@@ -39,17 +39,17 @@
 # https://phab.hepforge.org/source/evtgen/browse/master/setupEvtGen.sh?view=raw
 
 # Location in which to install
-ROOTSYS=/home/wxie/local_pkgs/anaconda3/envs/brian2
+ROOTSYS=/cvmfs/cms.cern.ch/slc7_amd64_gcc10/cms/cmssw/CMSSW_12_6_5/external/slc7_amd64_gcc10
 INSTALL_PREFIX="/home/wxie/local_pkgs/py8_evtgen_HepMC"
 mkdir $INSTALL_PREFIX
 
 # EvtGen version or tag number (or branch name). No extra spaces on this line!
-VERSION=R02-01-01
+VERSION=R02-02-01
 
 # HepMC version numbers - change HEPMCMAJORVERSION to 2 in order to use HepMC2
 HEPMCMAJORVERSION="3"
 HEPMC2VER="2.06.10"
-HEPMC3VER="3.2.0"
+HEPMC3VER="3.2.7"
 HEPMC2PKG="HepMC-"$HEPMC2VER
 HEPMC3PKG="HepMC3-"$HEPMC3VER
 HEPMC2TAR="hepmc"$HEPMC2VER".tgz"
@@ -57,7 +57,7 @@ HEPMC3TAR=$HEPMC3PKG".tar.gz"
 
 # Pythia version number with no decimal points, e.g. 8230 corresponds to version 8.230. This
 # follows the naming convention of Pythia install tar files. Again, no extra spaces allowed.
-PYTHIAVER=8308
+PYTHIAVER=8310
 PYTHIAPKG="pythia"$PYTHIAVER
 PYTHIATAR=$PYTHIAPKG".tgz"
 
