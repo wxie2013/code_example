@@ -39,18 +39,18 @@
 # https://phab.hepforge.org/source/evtgen/browse/master/setupEvtGen.sh?view=raw
 
 # Location in which to install
-#ROOTSYS=/home/ROOT
-ROOTSYS=/cvmfs/cms.cern.ch/slc7_amd64_gcc820/lcg/root/6.22.03-ghbfee2/
+cd ~/CMSSW_12_6_5/src; cmsenv; cd -; which root;
+ROOTSYS=/cvmfs/cms.cern.ch/slc7_amd64_gcc10/cms/cmssw/CMSSW_12_6_5/external/slc7_amd64_gcc10
 INSTALL_PREFIX="/home/wxie/local_pkgs/py8_evtgen_HepMC"
 mkdir $INSTALL_PREFIX
 
 # EvtGen version or tag number (or branch name). No extra spaces on this line!
-VERSION=R02-01-01
+VERSION=R02-02-01
 
 # HepMC version numbers - change HEPMCMAJORVERSION to 2 in order to use HepMC2
 HEPMCMAJORVERSION="3"
-HEPMC2VER="2.06.10"
-HEPMC3VER="3.2.0"
+HEPMC2VER="2.06.11"
+HEPMC3VER="3.2.7"
 HEPMC2PKG="HepMC-"$HEPMC2VER
 HEPMC3PKG="HepMC3-"$HEPMC3VER
 HEPMC2TAR="hepmc"$HEPMC2VER".tgz"
@@ -58,7 +58,7 @@ HEPMC3TAR=$HEPMC3PKG".tar.gz"
 
 # Pythia version number with no decimal points, e.g. 8230 corresponds to version 8.230. This
 # follows the naming convention of Pythia install tar files. Again, no extra spaces allowed.
-PYTHIAVER=8306
+PYTHIAVER=8310
 PYTHIAPKG="pythia"$PYTHIAVER
 PYTHIATAR=$PYTHIAPKG".tgz"
 
@@ -164,7 +164,7 @@ then
 
     echo Installing pythia8 from $BUILD_BASE/sources/$PYTHIAPKG
     cd $BUILD_BASE/sources/$PYTHIAPKG
-    ./configure --enable-shared --prefix=$INSTALL_PREFIX
+    ./configure --prefix=$INSTALL_PREFIX --cxx-common="-O2 -std=c++17 -pedantic -W -Wall -Wshadow -fPIC"
     make
     make install
 
@@ -188,13 +188,13 @@ else
     echo Installing HepMC3 from $BUILD_BASE/sources/$HEPMC3PKG
     mkdir -p $BUILD_BASE/builds/HepMC3
     cd $BUILD_BASE/builds/HepMC3
-    $CMAKE -DHEPMC3_ENABLE_ROOTIO:BOOL=OFF -DHEPMC3_ENABLE_PYTHON:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/$HEPMC3PKG
+    $CMAKE -DHEPMC3_ENABLE_ROOTIO:BOOL=OFF -DHEPMC3_ENABLE_PYTHON:BOOL=OFF -DCMAKE_INSTALL_PREFIX:PATH=$INSTALL_PREFIX $BUILD_BASE/sources/$HEPMC3PKG -DCMAKE_CXX_STANDARD=17
     make
     make install
 
-    echo Installing pythia8 from $BUILD_BASE/souces/$PYTHIAPKG
+    echo Installing pythia8 from $BUILD_BASE/sources/$PYTHIAPKG
     cd $BUILD_BASE/sources/$PYTHIAPKG
-    ./configure --enable-shared --prefix=$INSTALL_PREFIX
+    ./configure --prefix=$INSTALL_PREFIX --cxx-common="-O2 -std=c++17 -pedantic -W -Wall -Wshadow -fPIC"
     make
     make install
 
@@ -273,3 +273,6 @@ fi
 
 echo If installation fully successful you can remove the temporary build area $BUILD_BASE
 cd $BUILD_BASE
+
+cd $INSTALL_PREFIX
+mv $INSTALL_PREFIX/lib64/* $INSTALL_PREFIX/lib
