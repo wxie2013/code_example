@@ -61,10 +61,11 @@ export PATH=/home/wxie/local_pkgs/swig-4.0.2/build/bin:$PATH
 #
 alias py='python3'
 alias ipy='ipython3'
+alias run_pythia='conda deactivate; cd ~/CMSSW_12_6_5/src/; cmsenv; export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc; cd -'
 
 #voms-proxy-init -voms cms -valid 180:00:00
-alias rmb='rm -r syn_out spike_out cpp_standalone* root_file tmp adpt_thres_out neuron_group  __pycache__'
-export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
+alias rmb='rm -r syn_out spike_out cpp_standalone* root_file tmp adpt_thres_out __pycache__ neuron_group'
+export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
