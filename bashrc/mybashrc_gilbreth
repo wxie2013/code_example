@@ -48,22 +48,14 @@ alias rnb='jupyter nbconvert --to notebook --execute  '
 alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
 alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
 
-load_root() {
-   module load gcc/9.3.0
-   #module load openmpi
-   source $HOME/local_pkgs/root/bin/thisroot.sh
-}
-eval load_root 
-
 act_brian2() {
    unset PYTHONPATH
-   export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs
+   export PYTHONPATH=$Brian2/../:$PYTHONPATH
    export PATH=$HOME/local_pkgs/genn/bin:$PATH
    export CUDA_PATH=/apps/gilbreth/cuda-toolkit/cuda-10.0.130/
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
    conda activate brian2
-   eval load_root # need to load after activating the environment
 }
 
 #
