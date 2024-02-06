@@ -41,7 +41,7 @@ export brown00=wxie@brown-fe00.rcac.purdue.edu
 export negishi=wxie@negishi.rcac.purdue.edu
 export negishi00=wxie@login00.negishi.rcac.purdue.edu
 export gilbreth00=wxie@gilbreth-fe00.rcac.purdue.edu
-export gilbreth01=wxie@gilbreth-fe01.rcac.purdue.edu
+export gilbreth=wxie@gilbreth.rcac.purdue.edu
 export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
 alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
@@ -50,7 +50,7 @@ export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
-alias jn='jupyter notebook --no-browser&'
+alias jn='jupyter notebook&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
 alias clear_pycache='find . -name __pycache__ -exec rm -r {} \; '
 
@@ -70,10 +70,10 @@ alias xt_green="$xt -geometry 100x28 -bg green4 -fg white&"
 alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 
 4xtw() {
-	$xt -geometry 100x28+2810+425&
-	$xt -geometry 100x28+2810+0&
-	$xt -geometry 100x28+1920+425&
-	$xt -geometry 100x28+1920+0&
+	$xt -geometry 100x28+4730+425&
+	$xt -geometry 100x28+4730+0&
+	$xt -geometry 100x28+3841+425&
+	$xt -geometry 100x28+3841+0&
 }
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
@@ -88,10 +88,10 @@ alias lg_brown00='ssh  -X $brown00'
 alias lg_negishi='ssh  -X $negishi'
 alias lg_negishi00='ssh  -X $negishi00'
 alias lg_gilbreth00='ssh -X  $gilbreth00'
-alias lg_gilbreth01='ssh -X  $gilbreth01'
+alias lg_gilbreth='ssh -X  $gilbreth'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
-alias rmb='rm -r syn_out spike_out cpp_standalone* root_file adpt_thres_out __pycache__ neuron_group'
+alias rmb='rm -r syn_out spike_out cpp_standalone* cuda_standalone* root_file adpt_thres_out neuron_group  __pycache__'
 alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
@@ -117,10 +117,10 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
-export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
 export CUDA_PATH=/usr/local/cuda
 export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin:/home/wxie/.codon/bin
-export PYTHONUNBUFFERED=True
+export PYTHONUNBUFFERED=True # disable buffering
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR
 PS1="\h:\u:\W>"

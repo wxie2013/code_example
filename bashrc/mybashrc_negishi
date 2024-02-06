@@ -65,7 +65,6 @@ act_brian2() {
    eval load_root # need to load after activating the environment
 }
 
-export PATH=/home/wxie/.codon/bin:/home/wxie/local_pkgs/swig-4.0.2/build/bin:$PATH
 
 #
 alias py='python3'
@@ -73,7 +72,8 @@ alias ipy='ipython3'
 
 #voms-proxy-init -voms cms -valid 180:00:00
 alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __pycache__ neuron_group'
-export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/.conda/envs/2022.10-py39/brian2/share/Pythia8/xmldoc
+export LD_LIBRARY_PATH=/usr/lib64:$LD_LIBRARY_PATH
 export LS_OPTIONS='--color=auto'
 export PYTHONUNBUFFERED=True
 eval "$(dircolors -b)"
@@ -81,8 +81,6 @@ alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
 eval act_brian2
-
-export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:/home/wxie/local_pkgs/libXpm/lib:$LD_LIBRARY_PATH
 
 PS1="\h:\u:\W>"
 bind 'set bell-style none'
