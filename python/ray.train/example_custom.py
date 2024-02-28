@@ -40,6 +40,16 @@ def get_dataloaders(batch_size):
 
     return train_dataloader, test_dataloader
 
+# Model Definition
+class NeuralNetwork(nn.Module):
+    def __init__(self):
+        super(NeuralNetwork, self).__init__()
+        pass
+
+    def forward(self, x):
+        logits = 0.1
+        return logits
+
 def train_func_per_worker(config: Dict):
     lr = config["lr"]
     epochs = config["epochs"]
@@ -54,24 +64,36 @@ def train_func_per_worker(config: Dict):
     train_dataloader = ray.train.torch.prepare_data_loader(train_dataloader)
     test_dataloader = ray.train.torch.prepare_data_loader(test_dataloader)
 
+    model = NeuralNetwork()
+
+    # [2] Prepare and wrap your model with DistributedDataParallel
+    # Move the model to the correct GPU/CPU device
+
+    # ============================================================
+    model = ray.train.torch.prepare_model(model, parallel_strategy=None)
+
     # Model training loop
     for epoch in range(epochs):
-        for X, y in tqdm(test_dataloader, desc=f"Test Epoch {epoch}"):
-            pred = 1 
+        model.train()
+        for X, y in tqdm(train_dataloader, desc=f"Train Epoch {epoch}"):
+            pred = model(X)
 
-        test_loss = 0.0
-        accuracy = 0.5
+        model.eval()
+        test_loss, num_correct, num_total = 0, 0, 0
+        with torch.no_grad():
+            for X, y in tqdm(test_dataloader, desc=f"Test Epoch {epoch}"):
+                pred = model(X)
 
         # [3] Report metrics to Ray Train
         # ===============================
-        ray.train.report(metrics={"loss": test_loss, "accuracy": accuracy})
+        ray.train.report(metrics={"loss": 0, "accuracy": 1})
 
 
 def train_fashion_mnist(num_workers=2, use_gpu=False):
     global_batch_size = 32
     train_config = {
         "lr": 1e-3,
-        "epochs": 2,
+        "epochs": 10,
         "batch_size_per_worker": global_batch_size // num_workers,
     }
 
@@ -90,6 +112,8 @@ def train_fashion_mnist(num_workers=2, use_gpu=False):
     # =============================================
     result = trainer.fit()
     print(f"Training result: {result}")
+
+
 
 
 if __name__ == "__main__":
