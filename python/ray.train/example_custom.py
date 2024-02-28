@@ -10,14 +10,15 @@ from tqdm import tqdm
 import ray.train
 from ray.train import ScalingConfig
 from ray.train.torch import TorchTrainer
+import numpy as np
 
 def get_dataloaders(batch_size):
     # Transform to normalize the input images
-    transform = transforms.Compose([ToTensor(), Normalize((0.5,), (0.5,))])
+    transform = transforms.Compose([ToTensor()]) # normalize pixel to [0,1]
 
     with FileLock(os.path.expanduser("~/data.lock")):
         # Download training data from open datasets
-        training_data = datasets.FashionMNIST(
+        training_data = datasets.MNIST(
             root="~/data",
             train=True,
             download=True,
@@ -25,13 +26,12 @@ def get_dataloaders(batch_size):
         )
 
         # Download test data from open datasets
-        test_data = datasets.FashionMNIST(
+        test_data = datasets.MNIST(
             root="~/data",
             train=False,
             download=True,
             transform=transform,
         )
-
 
 
     # Create data loaders
@@ -44,10 +44,14 @@ def get_dataloaders(batch_size):
 class NeuralNetwork(nn.Module):
     def __init__(self):
         super(NeuralNetwork, self).__init__()
-        pass
+        self.ttt = 0.1
 
-    def forward(self, x):
-        logits = 0.1
+    def forward(self, x, y):
+        x = x.numpy()*255  # resize the pixel amplitude to [0,255]
+        print('1-----: ', x.shape) #(8, 1, 28, 28). [batch_size, channel, width, height]. channel: Black/wihte channel, dim = 1. RGB channel, dim = 3
+        print('2-----: ', y.numpy())
+
+        logits = self.ttt
         return logits
 
 def train_func_per_worker(config: Dict):
@@ -74,26 +78,22 @@ def train_func_per_worker(config: Dict):
 
     # Model training loop
     for epoch in range(epochs):
-        model.train()
         for X, y in tqdm(train_dataloader, desc=f"Train Epoch {epoch}"):
-            pred = model(X)
+            pred = model(X, y)
+            print(pred)
 
-        model.eval()
-        test_loss, num_correct, num_total = 0, 0, 0
-        with torch.no_grad():
-            for X, y in tqdm(test_dataloader, desc=f"Test Epoch {epoch}"):
-                pred = model(X)
+        for X, y in tqdm(test_dataloader, desc=f"Test Epoch {epoch}"):
+            pred = model(X, y)
 
         # [3] Report metrics to Ray Train
         # ===============================
         ray.train.report(metrics={"loss": 0, "accuracy": 1})
 
-
 def train_fashion_mnist(num_workers=2, use_gpu=False):
     global_batch_size = 32
     train_config = {
         "lr": 1e-3,
-        "epochs": 10,
+        "epochs": 5,
         "batch_size_per_worker": global_batch_size // num_workers,
     }
 
@@ -112,9 +112,6 @@ def train_fashion_mnist(num_workers=2, use_gpu=False):
     # =============================================
     result = trainer.fit()
     print(f"Training result: {result}")
-
-
-
 
 if __name__ == "__main__":
 
