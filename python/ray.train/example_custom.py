@@ -50,6 +50,12 @@ class NeuralNetwork(nn.Module):
         x = x.numpy()*255  # resize the pixel amplitude to [0,255]
         print('1-----: ', x.shape) #(8, 1, 28, 28). [batch_size, channel, width, height]. channel: Black/wihte channel, dim = 1. RGB channel, dim = 3
         print('2-----: ', y.numpy())
+        tt = {}
+        tt['img'] = x[:,0,:,:]
+        tt['label'] = y
+        print('3-----: ', tt['img'])
+        print('31-----: ', tt['img'].shape)
+        print('4-----: ', tt['label'])
 
         logits = self.ttt
         return logits

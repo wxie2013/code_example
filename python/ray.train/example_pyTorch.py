@@ -6,6 +6,7 @@ from torch import nn
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from torchvision.transforms import Normalize, ToTensor
+import torch.distributed as dist
 from tqdm import tqdm
 import ray.train
 from ray.train import ScalingConfig
@@ -65,6 +66,7 @@ def train_func_per_worker(config: Dict):
     lr = config["lr"]
     epochs = config["epochs"]
     batch_size = config["batch_size_per_worker"]
+    print('1------------------- rank', dist.get_rank())
 
     # Get dataloaders inside the worker training function
     train_dataloader, test_dataloader = get_dataloaders(batch_size=batch_size)
@@ -118,7 +120,7 @@ def train_fashion_mnist(num_workers=2, use_gpu=False):
     global_batch_size = 32
     train_config = {
         "lr": 1e-3,
-        "epochs": 10,
+        "epochs": 2,
         "batch_size_per_worker": global_batch_size // num_workers,
     }
 
