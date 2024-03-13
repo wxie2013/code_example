@@ -3,18 +3,23 @@ import ray
 
 @ray.remote
 class Tester:
-    def __init__(self, param):
-        self.param = param
+    def __init__(self, fun, kwargs):
+        self.kwargs = kwargs
+        self.fun = fun
 
     def run(self):
-        return self.param
+        return self.fun(self.kwargs)
 
 
-params = [0, 1, 2]
+def ttt(param):
+    for key, val in param.items():
+        print(f'key: {key}, val: {val}')
+    return param
 
 
+params = [{'a0':0}, {'a1':1}, {'a2':2}]
 # I use list comprehensions instead of for loops for terseness.
-testers = [Tester.remote(p) for p in params]
+testers = [Tester.remote(ttt, p) for p in params]
 not_done_ids = [tester.run.remote() for tester in testers]
 
 # len() is not required to check that the list is empty.
