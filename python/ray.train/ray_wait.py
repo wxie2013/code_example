@@ -3,19 +3,18 @@ import ray
 
 @ray.remote
 class Tester:
-    def __init__(self, fun, kwargs):
-        self.kwargs = kwargs
+    def __init__(self, fun, *args):
+        self.args = args
         self.fun = fun
 
     def run(self):
-        return self.fun(self.kwargs)
+        return self.fun(self.args)
 
 
-def ttt(param):
-    for key, val in param.items():
-        print(f'key: {key}, val: {val}')
-    return param
-
+def ttt(*args):
+    for arg in args:
+        print(f"Argument: {arg}")
+    return args
 
 params = [{'a0':0}, {'a1':1}, {'a2':2}]
 # I use list comprehensions instead of for loops for terseness.
