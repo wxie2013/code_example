@@ -48,8 +48,7 @@ export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
-#alias jn='jupyter notebook --no-browser&'
-alias jn='jupyter notebook --no-browser --NotebookApp.kernel_manager_class=notebook.services.kernels.kernelmanager.AsyncMappingKernelManager&'
+alias jn='jupyter notebook&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
 
 export desktop=wxie@10.164.18.177
@@ -93,7 +92,7 @@ export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 cd ~/
 unset JUPYTER_CONFIG_DIR 
 
-export PYTHIA8DATA=/home/wxie/local_pkgs/py8_evtgen_HepMC/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
 export PYTHONUNBUFFERED=True
 
 alias nb2py='jupyter nbconvert --to script '
