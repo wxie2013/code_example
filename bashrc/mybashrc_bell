@@ -51,6 +51,7 @@ act_brian2() {
    export CUDA_PATH=/usr/local/cuda
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
+   module load anaconda/2024.02-py311
    conda activate brian2
    module load cmake/3.20.6
 }
@@ -72,22 +73,6 @@ export X509_USER_PROXY=/home/wxie/myproxy
 
 export PATH=/home/wxie/.codon/bin:$PATH
 export PYTHONUNBUFFERED=True
-
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/depot/wxie/apps/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/depot/wxie/apps/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/depot/wxie/apps/local_pkgs/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/depot/wxie/apps/local_pkgs/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
 
 eval act_brian2
 PS1="\h:\u:\W>"
