@@ -24,3 +24,6 @@ for i in range(data.m):
 t1.Fill()
 t1.Print()
 t1.Scan("E:m:n")
+
+for entry in t1:
+    print(entry.n, entry.m, entry.E)
