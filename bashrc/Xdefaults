@@ -1,1 +1,10 @@
 XTerm*selectToClipboard: true
+XTerm*cursorTheme: Adwaita
+XTerm*pointerShape: left_ptr
+XTerm*cursorColor: orange
+XTerm*pointerColor: red
+XTerm*pointerColorBackground: red
+XTerm*pointerShape: left_ptr
+XTerm*faceName: Monospace
+XTerm*faceSize: 18
+Xcursor.size: 20
