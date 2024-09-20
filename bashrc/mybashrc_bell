@@ -22,6 +22,8 @@ alias rtb='root -b'
 
 alias scmb='scram b -j 4'
 
+export opc=wxie@10.164.18.177
+alias lg_opc='ssh $opc'
 export cern=wxie@lxplus.cern.ch
 
 #-- kill all root process from wxie 
