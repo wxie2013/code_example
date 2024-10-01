@@ -124,3 +124,9 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
+# share ssh-agent among different terms, i.e. need password only once
+export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+if [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+fi
