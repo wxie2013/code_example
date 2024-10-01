@@ -74,7 +74,6 @@ alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __py
 export opc=wxie-opc.physics.purdue.edu
 alias lg_opc='ssh $opc'
 export PYTHIA8DATA=/home/wxie/.conda/envs/2022.10-py39/brian2/share/Pythia8/xmldoc
-export LD_LIBRARY_PATH=/usr/lib64:$LD_LIBRARY_PATH
 export LS_OPTIONS='--color=auto'
 export PYTHONUNBUFFERED=True
 eval "$(dircolors -b)"
