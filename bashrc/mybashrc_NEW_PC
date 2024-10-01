@@ -69,7 +69,6 @@ alias localhost='ssh -N -f -L localhost:8888:localhost:8888 wxie@10.164.18.177'
 export physics=wxie@planck.physics.purdue.edu
 
 export QT_QPA_PLATFORM='offscreen'
-alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
 
 export xt="xterm -sb -rightbar -sl 1000000 -fs 13 -fa monaco"
 alias xt_gold="$xt -geometry 100x28 -bg gold&"
@@ -152,4 +151,11 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-bind 'set bell-style none'
+
+# share ssh-agent among different terms, i.e. need password only once
+export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+#if ! [[-f "$SSH_AUTH_SOCK" ]] || [[ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]]; then
+if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+fi
