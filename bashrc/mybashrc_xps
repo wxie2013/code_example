@@ -86,6 +86,8 @@ alias lg_negishi00='ssh -X $negishi00'
 alias lg_gilbreth='ssh -X $gilbreth'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
+export opc=wxie-opc.physics.purdue.edu
+alias lg_opc='ssh $opc'
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
@@ -122,3 +124,9 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
+# share ssh-agent among different terms, i.e. need password only once
+export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+if [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+fi
