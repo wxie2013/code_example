@@ -29,8 +29,8 @@ alias scmb='scram b -j 4'
 #tar tvf *.tar
 #-- extract one directory of a tar file
 #tar xvf *.tar directory_name
-alias dp='cd /mnt/c/Users/puppy/Desktop'
-alias dl='cd /mnt/c/Users/puppy/Downloads'
+alias dp='cd /mnt/c/Users/wxie/Desktop'
+alias dl='cd /mnt/c/Users/wxie/Downloads'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
 export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
@@ -79,10 +79,10 @@ alias xt_green="$xt -geometry 100x28 -bg green4 -fg white&"
 alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 
 4xtw() {
-	$xt -geometry 100x28+4730+425&
-	$xt -geometry 100x28+4730+0&
-	$xt -geometry 100x28+3841+425&
-	$xt -geometry 100x28+3841+0&
+	$xt -geometry 100x28+1890+425&
+	$xt -geometry 100x28+1890+0&
+	$xt -geometry 100x28+2800+425&
+	$xt -geometry 100x28+2800+0&
 }
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
@@ -150,4 +150,10 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-bind 'set bell-style none'
+
+# share ssh-agent among different terms, i.e. need password only once
+export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+if [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+fi
