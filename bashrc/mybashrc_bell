@@ -22,7 +22,7 @@ alias rtb='root -b'
 
 alias scmb='scram b -j 4'
 
-export opc=wxie@10.164.18.177
+export opc=wxie-opc.physics.purdue.edu
 alias lg_opc='ssh $opc'
 export cern=wxie@lxplus.cern.ch
 
