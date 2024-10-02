@@ -1,0 +1,132 @@
+alias m='less'
+alias ls='ls -F --color=tty'
+alias l='ls -lrt'
+alias lm='ls -lrt|less'
+alias ed='vim -N'
+alias cuw+='chmod u+w '
+alias cuw-='chmod u-w '
+alias cux='chmod u+x '
+alias ldr='ls -lrt|grep dr'
+alias str='cd /mnt/hadoop/store/user/wxie'
+
+
+alias py='python'
+alias ipy='ipython'
+alias rtl='root -l --web=off'
+alias rt='root --web=off'
+alias rtb='root -b --web=off'
+alias gpr='grep -R '
+
+alias scmb='scram b -j 4'
+
+
+#-- kill all root process from wxie 
+#ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
+#-- list tar file content
+#tar tvf *.tar
+#-- extract one directory of a tar file
+#tar xvf *.tar directory_name
+alias dp='cd /mnt/c/Users/puppy/onedrive/Desktop'
+alias dl='cd /mnt/c/Users/puppy/Downloads'
+export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
+alias wxt='xterm -bg white -fg black -fa 'Proportional' -fs 14 -geometry 120x40&'
+alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&'
+export cms=wxie@cms.rcac.purdue.edu
+export cern=wxie@lxplus.cern.ch
+export halstead=wxie@halstead.rcac.purdue.edu
+export bell=wxie@bell.rcac.purdue.edu
+export brown=wxie@brown.rcac.purdue.edu
+export brown00=wxie@brown-fe00.rcac.purdue.edu
+export gilbreth=wxie@gilbreth.rcac.purdue.edu
+export negishi=wxie@negishi.rcac.purdue.edu
+export negishi00=wxie@login00.negishi.rcac.purdue.edu
+export Brian2=/home/wxie/Brian2
+alias brian='cd $Brian2'
+alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
+alias b2='cd /home/wxie/local_pkgs/brian2'
+export PYTHONPATH=$Brian2/../:$PYTHONPATH
+alias ana_brian='cd $Brian2/ana'
+alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
+alias model_brian='cd $Brian2/model'
+alias jn='jupyter notebook&'
+alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
+
+export desktop=wxie@10.164.18.177
+alias localhost='ssh -N -f -L localhost:8888:localhost:8888 wxie@10.164.18.177'
+export physics=wxie@planck.physics.purdue.edu
+
+export QT_QPA_PLATFORM='offscreen'
+alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
+
+export xt="xterm -sb -rightbar -sl 1000000 -fa monaco"
+alias xt_gold="$xt -fs 18 -geometry 100x25 -bg gold&"
+alias xt_cyan="$xt -fs 18 -geometry 100x25 -bg cyan4 -fg white&"
+alias xt_white="$xt -fs 18 -geometry 100x25 -bg white&"
+alias xt_black="$xt -fs 18 -geometry 100x25 -bg black -fg white&"
+alias xt_green="$xt -fs 18 -geometry 100x25 -bg green4 -fg white&"
+alias xt_red="$xt -fs 18 -geometry 100x25 -bg red3 -fg white&"
+
+4xtw() {
+  $xt -fs 13 -geometry 100x28+2940+425&
+  $xt -fs 13 -geometry 100x28+2940+0&
+  $xt -fs 13 -geometry 100x28+2050+425&
+  $xt -fs 13 -geometry 100x28+2050+0&
+}
+
+alias lg_cern='ssh -X $cern'
+alias lg_cms='ssh -X $cms'
+alias lg_desktop='ssh -X $desktop'
+alias lg_physics='ssh -X $physics'
+alias lg_bell='ssh -X $bell'
+alias lg_bell00='ssh -X wxie@bell-fe00.rcac.purdue.edu'
+alias lg_brown='ssh -X $brown'
+alias lg_brown00='ssh -X $brown00'
+alias lg_negishi='ssh -X $negishi'
+alias lg_negishi00='ssh -X $negishi00'
+alias lg_gilbreth='ssh -X $gilbreth'
+alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
+alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
+export opc=wxie-opc.physics.purdue.edu
+alias lg_opc='ssh $opc'
+#alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
+#alias lg_star='ssh rcas6009'
+export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
+cd ~/
+unset JUPYTER_CONFIG_DIR 
+
+export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
+export PYTHONUNBUFFERED=True
+
+alias nb2py='jupyter nbconvert --to script '
+alias rnb='jupyter nbconvert --to notebook --execute  '
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+#xrdb -merge ~/.Xresources
+conda activate brian2
+PS1="\h:\u:\W>"
+alias rmb='rm -r syn_out spike_out cpp_standalone* root_file tmp adpt_thres_out __pycache__ neuron_group'
+export LS_OPTIONS='--color=auto'
+eval "$(dircolors -b)"
+alias ls='ls $LS_OPTIONS'
+LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
+
+# share ssh-agent among different terms, i.e. need password only once
+export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+fi
