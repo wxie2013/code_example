@@ -12,13 +12,18 @@ alias str='cd /mnt/hadoop/store/user/wxie'
 
 alias py='python'
 alias ipy='ipython'
-alias rtl='root -l --web=off'
-alias rt='root --web=off'
-alias rtb='root -b --web=off'
+alias rtq='root -q'
+alias rtl='root -l'
+alias rtb='root -b'
 alias gpr='grep -R '
+alias rt='root'
+
+alias gn='gnome-session&'
 
 alias scmb='scram b -j 4'
 
+export opc=wxie@10.164.18.177
+alias lg_opc='ssh $opc'
 
 #-- kill all root process from wxie 
 #ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
@@ -26,30 +31,39 @@ alias scmb='scram b -j 4'
 #tar tvf *.tar
 #-- extract one directory of a tar file
 #tar xvf *.tar directory_name
-alias dp='cd /mnt/c/Users/puppy/Desktop'
-alias dl='cd /mnt/c/Users/puppy/Downloads'
+alias dp='cd /mnt/c/Users/puppy/onedrive/Desktop'
+alias dl='cd /mnt/c/Users/wxie/Downloads'
 export LS_COLORS="$LS_COLORS:ow=1;34:tw=1;34:ex=1;34"
-alias wxt='xterm -bg white -fg black -fa 'Proportional' -fs 14 -geometry 120x40&'
-alias bxt='xterm -bg black -fg white -fa 'Proportional' -fs 14 -geometry 120x40&'
 export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
 export bell=wxie@bell.rcac.purdue.edu
 export brown=wxie@brown.rcac.purdue.edu
 export brown00=wxie@brown-fe00.rcac.purdue.edu
-export gilbreth=wxie@gilbreth.rcac.purdue.edu
 export negishi=wxie@negishi.rcac.purdue.edu
 export negishi00=wxie@login00.negishi.rcac.purdue.edu
+export negishi01=wxie@login01.negishi.rcac.purdue.edu
+export negishi02=wxie@login02.negishi.rcac.purdue.edu
+export negishi03=wxie@login03.negishi.rcac.purdue.edu
+export negishi04=wxie@login04.negishi.rcac.purdue.edu
+export gilbreth00=wxie@gilbreth-fe00.rcac.purdue.edu
+export gilbreth=wxie@gilbreth.rcac.purdue.edu
 export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
 alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
-alias b2='cd /home/wxie/local_pkgs/brian2'
+alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
 export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
+alias adv_brian='cd $Brian2/AdvAtk'
+alias tool_brian='cd $Brian2/tools'
+alias hyp_brian='cd $Brian2/hyper_param_tune'
 alias jn='jupyter notebook&'
+alias jl='jupyter lab&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
+alias clean_tmp='find /tmp -type d -mtime +7 -exec rm -rf {} \;; find /tmp -type f -mtime +7 -exec rm -rf {} \;'
+alias clear_pycache='find . -name __pycache__ -exec rm -r {} \; '
 
 export desktop=wxie@10.164.18.177
 alias localhost='ssh -N -f -L localhost:8888:localhost:8888 wxie@10.164.18.177'
@@ -58,45 +72,51 @@ export physics=wxie@planck.physics.purdue.edu
 export QT_QPA_PLATFORM='offscreen'
 alias nopasswd='eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa'
 
-export xt="xterm -sb -rightbar -sl 1000000 -fa monaco"
-alias xt_gold="$xt -fs 18 -geometry 100x25 -bg gold&"
-alias xt_cyan="$xt -fs 18 -geometry 100x25 -bg cyan4 -fg white&"
-alias xt_white="$xt -fs 18 -geometry 100x25 -bg white&"
-alias xt_black="$xt -fs 18 -geometry 100x25 -bg black -fg white&"
-alias xt_green="$xt -fs 18 -geometry 100x25 -bg green4 -fg white&"
-alias xt_red="$xt -fs 18 -geometry 100x25 -bg red3 -fg white&"
+export xt="xterm -sb -rightbar -sl 1000000 -fs 13 -fa monaco"
+alias xt_gold="$xt -geometry 100x28 -bg gold&"
+alias xt_cyan="$xt -geometry 100x28 -bg cyan4 -fg white&"
+alias xt_white="$xt -geometry 100x28 -bg white&"
+alias xt_black="$xt -geometry 100x28 -bg black -fg white&"
+alias xt_green="$xt -geometry 100x28 -bg green4 -fg white&"
+alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 
 4xtw() {
-  $xt -fs 13 -geometry 100x28+2940+425&
-  $xt -fs 13 -geometry 100x28+2940+0&
-  $xt -fs 13 -geometry 100x28+2050+425&
-  $xt -fs 13 -geometry 100x28+2050+0&
+	$xt -geometry 100x28+1890+425&
+	$xt -geometry 100x28+1890+0&
+	$xt -geometry 100x28+2800+425&
+	$xt -geometry 100x28+2800+0&
 }
-
-alias lg_cern='ssh -X $cern'
+alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
-alias lg_desktop='ssh -X $desktop'
-alias lg_physics='ssh -X $physics'
+alias lg_desktop='ssh  $desktop'
+alias lg_physics='ssh  $physics'
+alias lg_halstead='ssh -X $halstead'
+alias lg_halstead00='ssh -X wxie@halstead-fe00.rcac.purdue.edu'
 alias lg_bell='ssh -X $bell'
 alias lg_bell00='ssh -X wxie@bell-fe00.rcac.purdue.edu'
-alias lg_brown='ssh -X $brown'
-alias lg_brown00='ssh -X $brown00'
-alias lg_negishi='ssh -X $negishi'
-alias lg_negishi00='ssh -X $negishi00'
-alias lg_gilbreth='ssh -X $gilbreth'
+alias lg_bell01='ssh -X wxie@bell-fe01.rcac.purdue.edu'
+alias lg_bell02='ssh -X wxie@bell-fe02.rcac.purdue.edu'
+alias lg_bell03='ssh -X wxie@bell-fe03.rcac.purdue.edu'
+alias lg_bell04='ssh -X wxie@bell-fe04.rcac.purdue.edu'
+alias lg_brown='ssh  -X $brown'
+alias lg_brown00='ssh  -X $brown00'
+alias lg_negishi='ssh  -X $negishi'
+alias lg_negishi00='ssh  -X $negishi00'
+alias lg_negishi01='ssh  -X $negishi01'
+alias lg_negishi02='ssh  -X $negishi02'
+alias lg_negishi03='ssh  -X $negishi03'
+alias lg_negishi04='ssh  -X $negishi04'
+alias lg_gilbreth00='ssh -X  $gilbreth00'
+alias lg_gilbreth='ssh -X  $gilbreth'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
+alias rmb='rm -r syn_out cpp_standalone* cuda_standalone* root_file neuron_group  __pycache__ ray_log'
+alias nb2py='jupyter nbconvert --to script '
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
+
 cd ~/
-unset JUPYTER_CONFIG_DIR 
-
-export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
-export PYTHONUNBUFFERED=True
-
-alias nb2py='jupyter nbconvert --to script '
-alias rnb='jupyter nbconvert --to notebook --execute  '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -115,10 +135,20 @@ unset __conda_setup
 
 #xrdb -merge ~/.Xresources
 conda activate brian2
+export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
+export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
+
+export CUDA_PATH=/usr/local/cuda
+export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin:/home/wxie/.codon/bin
+export PYTHONUNBUFFERED=True # disable buffering
+unset __conda_setup
+unset JUPYTER_CONFIG_DIR
 PS1="\h:\u:\W>"
-alias rmb='rm -r syn_out spike_out cpp_standalone* root_file tmp adpt_thres_out __pycache__ neuron_group'
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
