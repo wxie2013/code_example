@@ -84,6 +84,7 @@ alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 	$xt -geometry 100x28+2800+425&
 	$xt -geometry 100x28+2800+0&
 }
+alias lg_henp01='ssh wxie@henp01.physics.purdue.edu'
 alias lg_opc='ssh $opc'
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
