@@ -39,6 +39,7 @@ export bell=wxie@bell.rcac.purdue.edu
 export brown=wxie@brown.rcac.purdue.edu
 export brown00=wxie@brown-fe00.rcac.purdue.edu
 export opc=wxie-opc.physics.purdue.edu
+export henp01=wxie@henp01.physics.purdue.edu
 export negishi=wxie@negishi.rcac.purdue.edu
 export negishi00=wxie@login00.negishi.rcac.purdue.edu
 export negishi01=wxie@login01.negishi.rcac.purdue.edu
@@ -84,7 +85,7 @@ alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 	$xt -geometry 100x28+2800+425&
 	$xt -geometry 100x28+2800+0&
 }
-alias lg_henp01='ssh wxie@henp01.physics.purdue.edu'
+alias lg_henp01='ssh $henp01'
 alias lg_opc='ssh $opc'
 alias lg_cern='ssh  $cern'
 alias lg_cms='ssh -X $cms'
