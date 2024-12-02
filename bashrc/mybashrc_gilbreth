@@ -54,9 +54,12 @@ act_brian2() {
    export PATH=$HOME/local_pkgs/genn/bin:$PATH
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
+   module --force unload xalt
+   module load  anaconda/2024.02-py311
    conda activate brian2
-   module load gcc/9.3.0
-   export CUDA_PATH=/apps/gilbreth/cuda-toolkit/cuda-11.2.0
+   module load gcc/9.3.0   # gcc version larger than 11 doesn't support cuda
+   export CUDA_PATH=/apps/gilbreth/cuda-toolkit/cuda-11.7.0
+   export LD_LIBRARY_PATH=$CUDA_PATH/lib64:$LD_LIBRARY_PATH
 }
 
 #
@@ -64,7 +67,7 @@ alias py='python3'
 alias ipy='ipython3'
 
 #voms-proxy-init -voms cms -valid 180:00:00
-alias rmb='rm -r ana syn_out spike_out adpt_thres_out neuron_group'
+alias rmb='rm -r ana syn_out spike_out adpt_thres_out neuron_group root_file cuda_standalone* cpp_standalone*'
 export PYTHIA8DATA=/home/wxie/py8_evtgen_HepMC/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
@@ -74,25 +77,6 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 alias sc_soumik="cd /scratch/halstead/c/chand140"
 export X509_USER_PROXY=/home/wxie/myproxy 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 eval act_brian2
-
-export PATH=$HOME/local_pkgs/swig-4.0.2/build/bin:$HOME/local_pkgs/cmake/bin:$PATH
-#export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:/home/wxie/local_pkgs/anaconda3/lib/:$LD_LIBRARY_PATH
-export LD_LIBRARY_PATH=/home/wxie/local_pkgs/tbb/lib/lib/:$LD_LIBRARY_PATH
 
 PS1="\h:\u:\W>"
