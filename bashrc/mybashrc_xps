@@ -49,6 +49,7 @@ alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
 alias jn='jupyter notebook&'
+alias jl='jupyter lab&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
 
 export desktop=wxie@10.164.18.177
