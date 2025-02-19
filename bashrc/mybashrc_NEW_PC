@@ -79,6 +79,8 @@ alias xt_black="$xt -geometry 100x28 -bg black -fg white&"
 alias xt_green="$xt -geometry 100x28 -bg green4 -fg white&"
 alias xt_red="$xt -geometry 100x28 -bg red3 -fg white&"
 
+alias list_git_tag="git tag --sort=creatordate -n"
+
 4xtw() {
 	$xt -geometry 100x28+1890+425&
 	$xt -geometry 100x28+1890+0&
