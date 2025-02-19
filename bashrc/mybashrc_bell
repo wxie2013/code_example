@@ -54,7 +54,6 @@ act_brian2() {
    unset __conda_setup
    unset JUPYTER_CONFIG_DIR 
    conda activate brian2
-   module load cmake/3.20.6
 }
 
 #
