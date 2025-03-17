@@ -82,6 +82,8 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
 eval act_brian2
 
+export X509_USER_PROXY=/home/awesole/myproxy
+
 PS1="\h:\u:\W>"
 bind 'set bell-style none'
 
