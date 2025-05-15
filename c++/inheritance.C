@@ -2,16 +2,20 @@
 using namespace std;
 class parent
 {
+    private: 
     public:
-        parent(int mm) {cout<<"mm"<<mm<<endl;}
+        float nn;
+        parent() {;}
+        parent(int mm) {nn = mm*10; cout<<"mm: "<<mm<<" nn: "<<nn<<endl;}
         ~parent() {cout<<" done1 "<<endl;}
         virtual void print() {cout<<"1______________"<<endl;}
+        float get_nn() {return nn;}
 };
 
 class daughter: public parent
 {
     public:
-        daughter():parent(10) {cout<<"2222222222222222222222222222222"<<endl;}
+        daughter(parent& b): parent(b) {;}
         ~daughter() {cout<<" done 2"<<endl;}
         void print() {
             parent::print();
@@ -19,9 +23,12 @@ class daughter: public parent
         }
 };
 
-void inheritance()
+int main()
 {
-    parent *a = new daughter;
-    a->print();
-    delete a;
+    parent *a = new parent(10);
+    cout<<a->get_nn()<<endl;
+    daughter d(*a);
+
+    cout<<d.get_nn()<<endl;
 }
+
