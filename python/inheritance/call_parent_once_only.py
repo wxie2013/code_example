@@ -1,12 +1,15 @@
 # example to show how different child classes call parent class only once
 class parent:
     called_once = False
-    ttt = None
     def __init__(self):
         if parent.called_once is False:
             parent.ttt = 101
             parent.called_once = True
-            print('--------------------')
+            print('1-------------------')
+            self.assign()
+    def assign(self):
+        print('2------')
+        parent.ttt = 102 # don't use self.ttt which will mask the parent.ttt
 
 class child1(parent):
     def __init__(self):
