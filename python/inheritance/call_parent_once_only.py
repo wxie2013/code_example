@@ -14,12 +14,15 @@ class parent:
 class child1(parent):
     def __init__(self):
         super().__init__()
-        print(f'child1 ttt = {self.ttt}')
+
+        # since python look for instance attribute first followed by class attribute, 
+        # if ttt is not changed in child class, better has prefix "parent." to avoid being shadowed
+        print(f'child1 ttt = {self.ttt}, parent ttt = {parent.ttt}')
 
 class child2(parent):
     def __init__(self):
         super().__init__()
-        print(f'child2 ttt = {self.ttt}')
+        print(f'child2 ttt = {self.ttt}, parent ttt = {parent.ttt}')
 
 c1 = child1()
 c2 = child2()
