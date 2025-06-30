@@ -5,11 +5,12 @@ class parent(ABC):
         if parent.called:
             return
         print("parent constructor")
-        self.build()
+        parent.build()  # if use self.build(), it create a child1.a instead of parent.a
         parent.called = True
 
-    def build(self):
-        parent.a = 2025
+    @classmethod
+    def build(cls):
+        cls.a = 2025
 
     @classmethod
     def get_a(cls):
