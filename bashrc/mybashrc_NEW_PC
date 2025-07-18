@@ -156,10 +156,35 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+export GOOGLE_API_KEY="AIzaSyCBlHC4o5QxjJByDgJBAWYRhApXnwvvlhw"
+
 # share ssh-agent among different terms, i.e. need password only once
-export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
-#if ! [[-f "$SSH_AUTH_SOCK" ]] || [[ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]]; then
-if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
-  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
-  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+#export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
+##if ! [[-f "$SSH_AUTH_SOCK" ]] || [[ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]]; then
+#if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
+#  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
+#  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+#fi
+#
+
+# the first time login, run ssh-add ~/.ssh/id_rsa
+SSH_ENV="$HOME/.ssh/agent-environment"
+
+# Start the agent if it's not running or its environment file is stale
+if ! [ -f "$SSH_ENV" ]; then
+    ssh-agent -s > "$SSH_ENV"
+    chmod 600 "$SSH_ENV"
 fi
+
+# Source the agent environment (PID and socket path)
+. "$SSH_ENV" > /dev/null
+
+# Check if the agent is actually running
+if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
+    # If not, restart it and recreate the environment file
+    ssh-agent -s > "$SSH_ENV"
+    chmod 600 "$SSH_ENV"
+    . "$SSH_ENV" > /dev/null
+fi
+
+alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
