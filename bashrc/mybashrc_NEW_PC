@@ -64,6 +64,7 @@ alias jl='jupyter lab&'
 alias update_clean='sudo apt-get update && sudo apt-get upgrade -y && sudo apt-get dist-upgrade -y && sudo apt-get autoremove -y && sudo apt-get autoclean -y && sudo sync && sudo sync'
 alias clean_tmp='find /tmp -type d -mtime +7 -exec rm -rf {} \;; find /tmp -type f -mtime +7 -exec rm -rf {} \;'
 alias clear_pycache='find . -name __pycache__ -exec rm -r {} \; '
+alias list_git_tag='git tag --sort=version:refname -n'
 
 export desktop=wxie@10.164.18.177
 alias localhost='ssh -N -f -L localhost:8888:localhost:8888 wxie@10.164.18.177'
@@ -123,14 +124,14 @@ cd ~/
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/wxie/local_pkgs/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
+        export PATH="/home/wxie/local_pkgs/miniconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -139,7 +140,7 @@ unset __conda_setup
 #xrdb -merge ~/.Xresources
 conda activate brian2
 export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
-export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
 
 export CUDA_PATH=/usr/local/cuda
 export PATH=$PATH:$HOME/local_pkgs/genn/bin:/home/swig-4.0.2/build/bin:$CUDA_PATH/bin:/home/wxie/.codon/bin
@@ -188,3 +189,5 @@ if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
 fi
 
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
