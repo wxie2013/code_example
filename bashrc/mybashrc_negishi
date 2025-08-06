@@ -46,10 +46,9 @@ alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
 
 load_root() {
-  module load anaconda/2024.02-py311
+  module load conda/2024.09
   conda activate brian2
   module load cmake/3.24.3
-  #module load gcc/12.2.0
   export CC=gcc
   export CXX=g++
 }
@@ -73,7 +72,7 @@ alias ipy='ipython3'
 alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __pycache__ neuron_group'
 export opc=wxie-opc.physics.purdue.edu
 alias lg_opc='ssh $opc'
-export PYTHIA8DATA=/home/wxie/.conda/envs/2024.02-py311/brian2/share/Pythia8/xmldoc
+export PYTHIA8DATA=/home/wxie/.conda/envs/brian2/share/Pythia8/xmldoc
 export LS_OPTIONS='--color=auto'
 export PYTHONUNBUFFERED=True
 eval "$(dircolors -b)"
