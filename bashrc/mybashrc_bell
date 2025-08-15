@@ -22,6 +22,7 @@ alias rtb='root -b'
 
 alias scmb='scram b -j 4'
 
+alias list_git_tag='git tag --sort=version:refname -n'
 export opc=wxie-opc.physics.purdue.edu
 alias lg_opc='ssh $opc'
 export cern=wxie@lxplus.cern.ch

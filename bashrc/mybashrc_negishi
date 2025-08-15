@@ -22,6 +22,7 @@ alias rtb='root -b --web=off'
 
 alias scmb='scram b -j 4'
 
+alias list_git_tag='git tag --sort=version:refname -n'
 export cern=wxie@lxplus.cern.ch
 
 #-- kill all root process from wxie 

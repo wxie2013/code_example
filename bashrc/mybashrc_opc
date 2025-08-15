@@ -22,6 +22,7 @@ alias gn='gnome-session&'
 
 alias scmb='scram b -j 4'
 
+alias list_git_tag='git tag --sort=version:refname -n'
 
 #-- kill all root process from wxie 
 #ps -ef | grep wxie |grep root.exe | awk '{print $2}' | xargs kill
