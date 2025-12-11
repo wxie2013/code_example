@@ -1,0 +1,9 @@
+export PYTHONPATH=$PYTHONPATH:/home/wxie/code_example/python/packages
+
+py -m t0.test.run_test
+
+The output is:
+
+------ tt -----
+----  t1_test   ----
+------ t2_test
