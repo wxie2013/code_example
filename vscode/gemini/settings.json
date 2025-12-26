@@ -1,0 +1,14 @@
+{
+  "general": {
+    "previewFeatures": true
+  },
+  "mcpServers": {
+    "shell": {
+      "command": "wsl",
+      "args": ["bash"],
+      "env": {
+        "ALLOW_COMMANDS": "rm,mkdir,ls,cp,mv" 
+      }
+    }
+  }
+}
