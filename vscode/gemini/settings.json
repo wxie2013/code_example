@@ -3,14 +3,16 @@
     "previewFeatures": true
   },
   "model": {
-    "modelName": "gemini-2.5-pro"
+    "modelName": "gemini-2.5-pro" 
   },
-  "coreTools": [
-    "ShellTool" 
-  ],
-  "excludeTools": [
-    "ShellTool(git)"
-  ],
+  "tools": {
+    "core": [
+      "run_shell_command"
+    ],
+    "exclude": [
+      "run_shell_command(git)"
+    ]
+  },
   "mcpServers": {
     "shell": {
       "command": "wsl",
@@ -18,3 +20,4 @@
     }
   }
 }
+
