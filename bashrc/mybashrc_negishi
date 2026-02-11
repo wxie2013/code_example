@@ -22,7 +22,6 @@ alias rtb='root -b --web=off'
 
 alias scmb='scram b -j 4'
 
-alias list_git_tag='git tag --sort=version:refname -n'
 export cern=wxie@lxplus.cern.ch
 
 #-- kill all root process from wxie 
@@ -38,6 +37,7 @@ alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
 alias tools_brian='cd $Brian2/tools'
+alias hyp_brian='cd $Brian2/hyper_param_tune'
 
 alias sc='cd /scratch/negishi/wxie'
 alias sqwx='squeue -u wxie'
@@ -46,6 +46,9 @@ alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %
 alias nb2py='jupyter nbconvert --to script '
 alias rnb='jupyter nbconvert --to notebook --execute  '
 
+#source /cvmfs/cms.cern.ch/cmsset_default.sh
+#source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh
+#source /cvmfs/cms.cern.ch/crab3/crab.sh
 load_root() {
   module load conda/2024.09
   conda activate brian2
@@ -70,7 +73,7 @@ alias py='python3'
 alias ipy='ipython3'
 
 #voms-proxy-init -voms cms -valid 180:00:00
-alias rmb='rm -r syn_out spike_out adpt_thres_out cpp_standalone* root_file __pycache__ neuron_group'
+alias rmb='rm -r syn_out cpp_standalone* cuda_standalone* root_file neuron_group  __pycache__ ray_log; find . -type d -name "__pycache__" -exec rm -rf {} +'
 export opc=wxie-opc.physics.purdue.edu
 alias lg_opc='ssh $opc'
 export PYTHIA8DATA=/home/wxie/.conda/envs/brian2/share/Pythia8/xmldoc
@@ -82,7 +85,7 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
 eval act_brian2
 
-export X509_USER_PROXY=/home/awesole/myproxy
+export X509_USER_PROXY=/home/wxie/myproxy
 
 PS1="\h:\u:\W>"
 bind 'set bell-style none'
