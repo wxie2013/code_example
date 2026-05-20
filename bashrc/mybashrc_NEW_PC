@@ -16,7 +16,7 @@ alias rtq='root -q'
 alias rtl='root -l'
 alias rtb='root -b'
 alias gpr='grep -R '
-alias rt='root'
+alias rt='root --web=off'
 
 alias gn='gnome-session&'
 
@@ -160,33 +160,24 @@ export NVM_DIR="$HOME/.nvm"
 
 export GOOGLE_API_KEY="AIzaSyCBlHC4o5QxjJByDgJBAWYRhApXnwvvlhw"
 
-# share ssh-agent among different terms, i.e. need password only once
-#export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
-##if ! [[-f "$SSH_AUTH_SOCK" ]] || [[ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]]; then
-#if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
-#  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
-#  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
-#fi
-#
+# 1. If the system desktop manager already set up a working agent, use it!
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    SSH_ENV="$HOME/.ssh/environment"
 
-# the first time login, run ssh-add ~/.ssh/id_rsa
-SSH_ENV="$HOME/.ssh/agent-environment"
+    function start_agent {
+        rm -f "$SSH_ENV"
+        /usr/bin/ssh-agent -s > "$SSH_ENV"
+        chmod 600 "$SSH_ENV"
+        . "$SSH_ENV" > /dev/null
+    }
 
-# Start the agent if it's not running or its environment file is stale
-if ! [ -f "$SSH_ENV" ]; then
-    ssh-agent -s > "$SSH_ENV"
-    chmod 600 "$SSH_ENV"
-fi
-
-# Source the agent environment (PID and socket path)
-. "$SSH_ENV" > /dev/null
-
-# Check if the agent is actually running
-if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
-    # If not, restart it and recreate the environment file
-    ssh-agent -s > "$SSH_ENV"
-    chmod 600 "$SSH_ENV"
-    . "$SSH_ENV" > /dev/null
+    # 2. No system agent found, fallback to the file approach
+    if [ -f "$SSH_ENV" ]; then
+        . "$SSH_ENV" > /dev/null
+        ps -p "$SSH_AGENT_PID" | grep -q ssh-agent || start_agent
+    else
+        start_agent
+    fi
 fi
 
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'

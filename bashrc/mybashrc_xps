@@ -126,9 +126,25 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
-# share ssh-agent among different terms, i.e. need password only once
-export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
-if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
-  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
-  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+# 1. If the system desktop manager already set up a working agent, use it!
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    SSH_ENV="$HOME/.ssh/environment"
+
+    function start_agent {
+        rm -f "$SSH_ENV"
+        /usr/bin/ssh-agent -s > "$SSH_ENV"
+        chmod 600 "$SSH_ENV"
+        . "$SSH_ENV" > /dev/null
+    }
+
+    # 2. No system agent found, fallback to the file approach
+    if [ -f "$SSH_ENV" ]; then
+        . "$SSH_ENV" > /dev/null
+        ps -p "$SSH_AGENT_PID" | grep -q ssh-agent || start_agent
+    else
+        start_agent
+    fi
 fi
+alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
