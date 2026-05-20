@@ -126,20 +126,15 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
-# Define a reliable, static path for your custom agent socket
 export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
 
-# If the socket file exists but the agent died (e.g. after a reboot), clean it up
-if [ -S "$SSH_AUTH_SOCK" ] && ! pgrep -u "$USER" -x ssh-agent > /dev/null; then
-    rm -f "$SSH_AUTH_SOCK"
-fi
-
-# If the agent isn't running, start a fresh one bound to our static socket path
-if ! pgrep -u "$USER" -x ssh-agent > /dev/null; then
-    # Kill any stale system agents that might block the port or cause confusion
+# Check if our specific custom socket is working right now
+if ! ssh-add -l > /dev/null 2>&1; then
+    # If the socket is dead or throwing errors, clear the deck completely
     killall ssh-agent 2>/dev/null
+    rm -f "$SSH_AUTH_SOCK"
     
-    # Launch a new agent forced to use our custom socket location
+    # Force launch our master agent on our designated path
     eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
 fi
 
