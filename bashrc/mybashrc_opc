@@ -154,25 +154,23 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# 1. If the system desktop manager already set up a working agent, use it!
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    SSH_ENV="$HOME/.ssh/environment"
+# Define a reliable, static path for your custom agent socket
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
 
-    function start_agent {
-        rm -f "$SSH_ENV"
-        /usr/bin/ssh-agent -s > "$SSH_ENV"
-        chmod 600 "$SSH_ENV"
-        . "$SSH_ENV" > /dev/null
-    }
-
-    # 2. No system agent found, fallback to the file approach
-    if [ -f "$SSH_ENV" ]; then
-        . "$SSH_ENV" > /dev/null
-        ps -p "$SSH_AGENT_PID" | grep -q ssh-agent || start_agent
-    else
-        start_agent
-    fi
+# If the socket file exists but the agent died (e.g. after a reboot), clean it up
+if [ -S "$SSH_AUTH_SOCK" ] && ! pgrep -u "$USER" -x ssh-agent > /dev/null; then
+    rm -f "$SSH_AUTH_SOCK"
 fi
+
+# If the agent isn't running, start a fresh one bound to our static socket path
+if ! pgrep -u "$USER" -x ssh-agent > /dev/null; then
+    # Kill any stale system agents that might block the port or cause confusion
+    killall ssh-agent 2>/dev/null
+    
+    # Launch a new agent forced to use our custom socket location
+    eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
+fi
+
 
 
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
