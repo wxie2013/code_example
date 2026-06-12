@@ -1,0 +1,5 @@
+[wsl2]
+memory=50GB
+autoMemoryReclaim=dropcache
+sudo sysctl -w vm.max_map_count=1048576
+sudo sysctl -w vm.overcommit_memory=1
