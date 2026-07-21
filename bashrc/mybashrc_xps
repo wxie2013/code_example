@@ -126,9 +126,18 @@ eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
 LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 
-# share ssh-agent among different terms, i.e. need password only once
-export SSH_AUTH_SOCK=/tmp/ssh-agent.sock
-if ! [ -f "$SSH_AUTH_SOCK" ] || [ -L "$SSH_AUTH_SOCK" ] && ! [ -e "$(readlink "$SSH_AUTH_SOCK")" ]; then
-  eval `ssh-agent -s`; ssh-add ~/.ssh/*_rsa
-  ln -sf "$SSH_AUTH_SOCK" /tmp/ssh-agent.sock
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
+
+# Check if our specific custom socket is working right now
+if ! ssh-add -l > /dev/null 2>&1; then
+    # If the socket is dead or throwing errors, clear the deck completely
+    killall ssh-agent 2>/dev/null
+    rm -f "$SSH_AUTH_SOCK"
+    
+    # Force launch our master agent on our designated path
+    eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
 fi
+
+alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+

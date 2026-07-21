@@ -1,0 +1,10 @@
+[wsl2]
+memory=50GB
+
+[experimental]
+autoMemoryReclaim=dropcache
+
+# Linux terminal commands executed to handle Python's massive VIRT memory:
+# echo "vm.max_map_count=1048576" | sudo tee -a /etc/sysctl.conf
+# echo "vm.overcommit_memory=1" | sudo tee -a /etc/sysctl.conf
+# sudo sysctl -p

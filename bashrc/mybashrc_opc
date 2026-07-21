@@ -154,24 +154,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# the first time login, run ssh-add ~/.ssh/id_rsa
-SSH_ENV="$HOME/.ssh/agent-environment"
+export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
 
-# Start the agent if it's not running or its environment file is stale
-if ! [ -f "$SSH_ENV" ]; then
-    ssh-agent -s > "$SSH_ENV"
-    chmod 600 "$SSH_ENV"
-fi
-
-# Source the agent environment (PID and socket path)
-. "$SSH_ENV" > /dev/null
-
-# Check if the agent is actually running
-if ! ps -p "$SSH_AGENT_PID" > /dev/null; then
-    # If not, restart it and recreate the environment file
-    ssh-agent -s > "$SSH_ENV"
-    chmod 600 "$SSH_ENV"
-    . "$SSH_ENV" > /dev/null
+# Check if our specific custom socket is working right now
+if ! ssh-add -l > /dev/null 2>&1; then
+    # If the socket is dead or throwing errors, clear the deck completely
+    killall ssh-agent 2>/dev/null
+    rm -f "$SSH_AUTH_SOCK"
+    
+    # Force launch our master agent on our designated path
+    eval $(ssh-agent -a "$SSH_AUTH_SOCK") > /dev/null
 fi
 
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
