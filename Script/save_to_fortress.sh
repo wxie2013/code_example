@@ -2,7 +2,6 @@
 
 # Array of directories to back up
 folders=(
-    "/scratch/bell/mstojano/d0outputs_new_07a"
     "/scratch/bell/mstojano/forHoney_07a"
     "/scratch/bell/mstojano/forSoumik_04a"
     "/scratch/bell/mstojano/hepdata_05"
@@ -14,9 +13,10 @@ folders=(
     "/scratch/bell/mstojano/tmpFolder_07a"
     "/scratch/bell/mstojano/tmphadoopbackup_04a"
     "/scratch/bell/mstojano/XeXe_07a"
+    "/scratch/bell/mstojano/d0outputs_new_07a"
 )
 
-HPSS_TARGET_DIR="/group/wxie/Milan/BELL_scratch"
+HPSS_TARGET_DIR="/home/wxie/Milan/BELL_scratch"
 
 echo "=== Starting HSI Archival with Checksum Verification ==="
 
