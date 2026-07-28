@@ -140,9 +140,9 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export CPATH=$CPATH:/home/wxie/local_pkgs/tunfold_standalone
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wxie/local_pkgs/tunfold_standalone
-export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:/home/wxie/local_pkgs/tunfold_standalone
+export CPATH=$CPATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
+export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
 
 #xrdb -merge ~/.Xresources
 conda activate brian2
