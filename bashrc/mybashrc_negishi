@@ -52,7 +52,6 @@ alias rnb='jupyter nbconvert --to notebook --execute  '
 load_root() {
   module load conda/2026.03
   conda activate brian2
-  module load cmake/3.24.3
   export CC=gcc
   export CXX=g++
 }
