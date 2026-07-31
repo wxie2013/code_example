@@ -87,6 +87,6 @@ eval act_brian2
 
 export X509_USER_PROXY=/home/wxie/myproxy
 
-PS1="\h:\u:\W>"
+PS1="\[\e[1;32m\]negishi:\h\[\e[0m\]:\u:\W> "
 bind 'set bell-style none'
 
