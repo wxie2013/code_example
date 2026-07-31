@@ -50,7 +50,7 @@ alias rnb='jupyter nbconvert --to notebook --execute  '
 #source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh
 #source /cvmfs/cms.cern.ch/crab3/crab.sh
 load_root() {
-  module load conda/2024.09
+  module load conda/2026.03
   conda activate brian2
   module load cmake/3.24.3
   export CC=gcc
