@@ -56,7 +56,6 @@ export gilbreth00=wxie@gilbreth-fe00.rcac.purdue.edu
 export gilbreth=wxie@gilbreth.rcac.purdue.edu
 export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
-alias b2g='cd /home/wxie/local_pkgs/brian2genn/brian2genn'
 alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
 export PYTHONPATH=$Brian2/../:$PYTHONPATH
 alias ana_brian='cd $Brian2/ana'
@@ -157,6 +156,8 @@ if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_
 else
     unset PROMPT_COMMAND
     export PS1="eic_shell:\u:\W>"
+    export PATH="/home/wxie/local_pkgs/miniconda3/envs/brian2/bin:$PATH"
+
 fi
 
 unset __conda_setup
