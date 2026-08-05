@@ -200,3 +200,8 @@ fi
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# opencode
+export PATH=/home/wxie/.opencode/bin:$PATH
+export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
+[ -f ~/.api_keys ] && source ~/.api_keys
