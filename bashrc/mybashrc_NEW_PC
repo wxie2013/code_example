@@ -132,7 +132,6 @@ alias eic_shell='/home/wxie/eic/eic-shell -- bash -c "exec bash --rcfile ~/.bash
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 
 cd ~/
-
 # don't run when in eic_shell
 if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_NAME" ]; then
     # >>> conda initialize >>>
@@ -149,7 +148,7 @@ if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_
     fi
     unset __conda_setup
     # <<< conda initialize <<<
-    conda activate brian2
+    alias act_brian2='conda activate brian2; export PS1="\h:\u:\W>"'
     export PATH=$PATH:/usr/local/go/bin
     export PATH=$PATH:$(go env GOPATH)/bin
     export PS1="\h:\u:\W>"
@@ -157,8 +156,10 @@ if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
     export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
     export PYTHIA8DATA=/home/wxie/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
+    export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
 
 else
+    cd ~/eic
     unset PROMPT_COMMAND
     export PS1="eic_shell:\u:\W>"
     alias nvim="/home/wxie/local_pkgs/miniconda3/envs/brian2/bin/nvim"
@@ -169,7 +170,6 @@ unset __conda_setup
 unset JUPYTER_CONFIG_DIR
 
 #xrdb -merge ~/.Xresources
-export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
 
 export CUDA_PATH=/usr/local/cuda
 export PYTHONUNBUFFERED=True # disable buffering
