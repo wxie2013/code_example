@@ -2,6 +2,9 @@ alias m='less'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
 alias lm='ls -lrt|less'
+if ! command -v nvim >/dev/null 2>&1; then
+    alias nvim='/home/wxie/local_pkgs/miniconda3/envs/brian2/bin/nvim'
+fi
 alias ed='nvim'
 alias cuw+='chmod u+w '
 alias cuw-='chmod u-w '
@@ -162,8 +165,6 @@ else
     cd ~/eic
     unset PROMPT_COMMAND
     export PS1="eic_shell:\u:\W>"
-    alias nvim="/home/wxie/local_pkgs/miniconda3/envs/brian2/bin/nvim"
-
 fi
 
 unset __conda_setup
