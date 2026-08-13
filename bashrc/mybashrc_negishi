@@ -90,3 +90,6 @@ export X509_USER_PROXY=/home/wxie/myproxy
 PS1="\[\e[1;32m\]negishi:\[\e[0m\]:\u:\W> "
 bind 'set bell-style none'
 
+source /cvmfs/cms.cern.ch/cmsset_default.sh
+source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh
+alias voms='voms-proxy-init -voms cms -rfc -valid 168:00'
