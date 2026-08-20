@@ -1,3 +1,4 @@
+export cluster_name=$(uname -n | awk -F'.' '{print $2}')
 alias m='less -r'
 alias ls='ls -F --color=tty'
 alias l='ls -lrt'
@@ -39,7 +40,7 @@ alias model_brian='cd $Brian2/model'
 alias tools_brian='cd $Brian2/tools'
 alias hyp_brian='cd $Brian2/hyper_param_tune'
 
-alias sc='cd /scratch/negishi/wxie'
+alias sc='cd /scratch/$cluster_name/wxie'
 alias sqwx='squeue -u wxie'
 alias sqwx_fullname='squeue -u wxie --format="%.18i %.9P %.60j %.8u %.8T %.10M %.9l %.6D %R"'
 
@@ -85,7 +86,7 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 # don't run when in eic_shell
 if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_NAME" ]; then
     eval act_brian2
-    PS1="\[\e[1;32m\]negishi:\[\e[0m\]:\u:\W> "
+    PS1="\[\e[1;32m\]$cluster_name:\[\e[0m\]:\u:\W> "
 else
     PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
 fi
@@ -109,13 +110,12 @@ eic-shell() {
     fi
     # Clear the prompt hook and set PS1 explicitly
     unset PROMPT_COMMAND
-    PS1="\[\e[1;32m\]negishi:\[\e[0m\]:\u:\W> "
+    PS1="\[\e[1;32m\]$cluster_name:\[\e[0m\]:\u:\W> "
 }
 
 
 export X509_USER_PROXY=/home/wxie/myproxy
 
-#PS1="\[\e[1;32m\]negishi:\h\[\e[0m\]:\u:\W> "
 bind 'set bell-style none'
 
 source /cvmfs/cms.cern.ch/cmsset_default.sh
