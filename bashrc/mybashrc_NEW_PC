@@ -161,7 +161,10 @@ if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_
 else
     PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
     if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
-    export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
+        export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
+    fi
+    if [ -d "$HOME/.local/bin" ] ; then
+        PATH="$HOME/.local/bin:$PATH"
     fi
 fi
 #
