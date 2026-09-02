@@ -163,11 +163,11 @@ else
     if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
         export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
     fi
-    if [ -d "$HOME/.local/bin" ] ; then
-        PATH="$HOME/.local/bin:$PATH"
-    fi
+
 fi
 #
+
+PATH="$HOME/.local/bin:$PATH"
 
 eic-shell() {
     local OLD_CONDA="$CONDA_DEFAULT_ENV"
