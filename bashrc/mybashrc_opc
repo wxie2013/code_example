@@ -117,34 +117,11 @@ alias nb2py='jupyter nbconvert --to script '
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 
-cd ~/
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
-#xrdb -merge ~/.Xresources
-conda activate brian2
-export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
-export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
-
 export CUDA_PATH=/usr/local/cuda
 export PATH=$CUDA_PATH/bin:$PATH
 export PYTHONUNBUFFERED=True # disable buffering
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR
-PS1="\h:\u:\W>"
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
@@ -169,3 +146,69 @@ fi
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# opencode
+export PATH=/home/wxie/.opencode/bin:$PATH
+
+HOSTNAME=$(uname -n)
+eic-shell() {
+    local OLD_CONDA="$CONDA_DEFAULT_ENV"
+    if [ -n "$OLD_CONDA" ]; then
+        conda deactivate
+    fi
+
+    # 1. Consolidate your core paths and WSL-specific interop bridges in one place
+    local BINDS="/home,/media,/mnt"
+
+    env -i \
+        HOME="$HOME" \
+        PATH="$PATH" \
+        TERM="$TERM" \
+        USER="$USER" \
+        APPTAINER_BINDPATH="$BINDS" \
+        SINGULARITY_BINDPATH="$BINDS" \
+        /home/wxie/eic/eic-shell \
+        -- bash --rcfile <(
+            echo "source ~/.bashrc; PS1='eic_shell:\u:\W> '"
+        ) "$@"
+
+    if [ -n "$OLD_CONDA" ]; then
+        conda activate "$OLD_CONDA"
+    fi
+    unset PROMPT_COMMAND
+    PS1="\[\e[1;32m\]$HOSTNAME:\[\e[0m\]:\u:\W> "
+
+}
+
+export APPTAINER_TMPDIR="$HOME/.apptainer/tmp"
+export SINGULARITY_TMPDIR="$HOME/.apptainer/tmp"
+export APPTAINER_CACHEDIR="$HOME/.apptainer/cache"
+export SINGULARITY_CACHEDIR="$HOME/.apptainer/cache"
+export TMPDIR="$HOME/.apptainer/tmp"
+
+cd ~/
+if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_NAME" ]; then
+    __conda_setup="$('/home/wxie/local_pkgs/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/wxie/local_pkgs/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/wxie/local_pkgs/anaconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+
+    PS1="\[\e[1;32m\]$HOSTNAME:\[\e[0m\]:\u:\W> "
+
+    conda activate brian2
+    export PYTHONPATH=/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
+    export PYTHIA8DATA=/home/wxie/local_pkgs/anaconda3/envs/brian2/share/Pythia8/xmldoc
+
+else
+    cd ~/eic
+    PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
+fi
+
+export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
