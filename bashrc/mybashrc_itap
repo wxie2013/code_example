@@ -86,38 +86,50 @@ LS_COLORS=$LS_COLORS:'di=0;34:' ; export LS_COLORS
 # don't run when in eic_shell
 if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_NAME" ]; then
     eval act_brian2
+    source /cvmfs/cms.cern.ch/cmsset_default.sh
+    source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh
+    alias voms='voms-proxy-init -voms cms -rfc -valid 168:00'
+
     PS1="\[\e[1;32m\]$cluster_name:\[\e[0m\]:\u:\W> "
 else
+    cd ~/eic
     PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
 fi
 
+
 eic-shell() {
-    # 1. Capture whether a Conda environment is active
     local OLD_CONDA="$CONDA_DEFAULT_ENV"
-    
-    # 2. Deactivate Conda temporarily to prevent library/compiler conflicts
     if [ -n "$OLD_CONDA" ]; then
         conda deactivate
     fi
-    
-    # 3. Clean environment and launch eic-shell, passing EIC_SHELL_ENV=1
-    env -i HOME="$HOME" PATH="$PATH" TERM="$TERM" USER="$USER" \
-        /home/wxie/eic/eic-shell -- bash --rcfile <(echo "source ~/.bashrc; PS1='eic_shell:\u:\W> '") "$@"
 
-    # 4. Reactivate Conda and restore host PS1 formatting
+    # 1. Consolidate your core paths and WSL-specific interop bridges in one place
+    local BINDS="/home,/media,/mnt,/init:/init"
+
+    env -i \
+        HOME="$HOME" \
+        PATH="$PATH" \
+        TERM="$TERM" \
+        USER="$USER" \
+        APPTAINER_BINDPATH="$BINDS" \
+        SINGULARITY_BINDPATH="$BINDS" \
+        /home/wxie/eic/eic-shell \
+        -- bash --rcfile <(
+            echo "source ~/.bashrc; PS1='eic_shell:\u:\W> '"
+        ) "$@"
+
     if [ -n "$OLD_CONDA" ]; then
         conda activate "$OLD_CONDA"
     fi
-    # Clear the prompt hook and set PS1 explicitly
     unset PROMPT_COMMAND
     PS1="\[\e[1;32m\]$cluster_name:\[\e[0m\]:\u:\W> "
-}
 
+}
 
 export X509_USER_PROXY=/home/wxie/myproxy
 
 bind 'set bell-style none'
 
-source /cvmfs/cms.cern.ch/cmsset_default.sh
-source /cvmfs/oasis.opensciencegrid.org/osg-software/osg-wn-client/3.6/current/el8-x86_64/setup.sh
-alias voms='voms-proxy-init -voms cms -rfc -valid 168:00'
+# opencode
+export PATH=/home/wxie/.opencode/bin:$PATH
+export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
