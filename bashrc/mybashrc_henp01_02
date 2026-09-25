@@ -37,8 +37,12 @@ export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
 export bell=wxie@bell.rcac.purdue.edu
-export brown=wxie@brown.rcac.purdue.edu
-export brown00=wxie@brown-fe00.rcac.purdue.edu
+export gautschi=wxie@gautschi.rcac.purdue.edu
+export gautschi00=wxie@login00.gautschi.rcac.purdue.edu
+export gautschi01=wxie@login01.gautschi.rcac.purdue.edu
+export gautschi02=wxie@login02.gautschi.rcac.purdue.edu
+export gautschi03=wxie@login03.gautschi.rcac.purdue.edu
+export gautschi04=wxie@login04.gautschi.rcac.purdue.edu
 export opc=wxie-opc.physics.purdue.edu
 export henp01=wxie@henp01.physics.purdue.edu
 export henp02=wxie@henp02.physics.purdue.edu
@@ -50,11 +54,9 @@ export negishi03=wxie@login03.negishi.rcac.purdue.edu
 export negishi04=wxie@login04.negishi.rcac.purdue.edu
 export gilbreth00=wxie@gilbreth-fe00.rcac.purdue.edu
 export gilbreth=wxie@gilbreth.rcac.purdue.edu
-export Brian2=/local/scratch/a/wxie/Brian2
+export Brian2=/home/wxie/Brian2
 alias brian='cd $Brian2'
-alias b2g='cd /local/scratch/a/wxie/local_pkgs/brian2genn/brian2genn'
-alias b2='cd /local/scratch/a/wxie/local_pkgs/brian2/brian2'
-export PYTHONPATH=$Brian2/../:$PYTHONPATH
+alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
@@ -105,8 +107,6 @@ alias lg_bell01='ssh -X wxie@bell-fe01.rcac.purdue.edu'
 alias lg_bell02='ssh -X wxie@bell-fe02.rcac.purdue.edu'
 alias lg_bell03='ssh -X wxie@bell-fe03.rcac.purdue.edu'
 alias lg_bell04='ssh -X wxie@bell-fe04.rcac.purdue.edu'
-alias lg_brown='ssh  -X $brown'
-alias lg_brown00='ssh  -X $brown00'
 alias lg_negishi='ssh  -X $negishi'
 alias lg_negishi00='ssh  -X $negishi00'
 alias lg_negishi01='ssh  -X $negishi01'
@@ -115,43 +115,109 @@ alias lg_negishi03='ssh  -X $negishi03'
 alias lg_negishi04='ssh  -X $negishi04'
 alias lg_gilbreth00='ssh -X  $gilbreth00'
 alias lg_gilbreth='ssh -X  $gilbreth'
+alias lg_gautschi='ssh  -X $gautschi'
+alias lg_gautschi00='ssh  -X $gautschi00'
+alias lg_gautschi01='ssh  -X $gautschi01'
+alias lg_gautschi02='ssh  -X $gautschi02'
+alias lg_gautschi03='ssh  -X $gautschi03'
+alias lg_gautschi04='ssh  -X $gautschi04'
 alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 alias rmb='rm -r syn_out cpp_standalone* cuda_standalone* root_file neuron_group  __pycache__ ray_log; find . -type d -name "__pycache__" -exec rm -rf {} +'
 alias nb2py='jupyter nbconvert --to script '
+#alias eic_shell='/home/wxie/eic/eic-shell -- bash -c "exec bash --rcfile ~/.bashrc"'
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
 
 cd ~/
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/local/scratch/a/wxie/local_pkgs/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/local/scratch/a/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/local/scratch/a/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh"
+# don't run when in eic_shell
+if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_NAME" ]; then
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/local/scratch/a/wxie/local_pkgs/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+	    eval "$__conda_setup"
     else
-        export PATH="/local/scratch/a/wxie/local_pkgs/miniconda3/bin:$PATH"
+	    if [ -f "/local/scratch/a/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh" ]; then
+		    . "/local/scratch/a/wxie/local_pkgs/miniconda3/etc/profile.d/conda.sh"
+	    else
+		    export PATH="/local/scratch/a/wxie/local_pkgs/miniconda3/bin:$PATH"
+	    fi
     fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+    conda activate brian2 
+    export PATH=$PATH:/usr/local/go/bin
+    export PATH=$PATH:$(go env GOPATH)/bin
+    export PS1="\h:\u:\W>"
+    export CPATH=$CPATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
+    export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
+    export PYTHIA8DATA=/home/wxie/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
+    export PYTHONPATH=$Brian2/../:/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
+
+    mkdir -p $HOME/tmp
+    export SINGULARITY_TMPDIR=$HOME/tmp
+    export APPTAINER_TMPDIR=$HOME/tmp
+    export APPTAINER_CACHEDIR=$HOME/.apptainer/cache
+
+else
+    PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
+    # 1. Add your custom ML packages (scikit-learn, xgboost, lightgbm)
+    export PYTHONPATH="/home/wxie/.eic_python_pkgs:$PYTHONPATH"
+
+    # 2. Add custom binaries (ruff, pyright) to PATH
+    export PATH="/home/wxie/.eic_python_pkgs/bin:$PATH"
+
+    if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
+        export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
+    fi
+
 fi
-unset __conda_setup
-# <<< conda initialize <<<
+#
 
-#xrdb -merge ~/.Xresources
-conda activate brian2
-export PYTHONPATH=/local/scratch/a/wxie:/local/scratch/a/wxie/Brian2/pkgs:/local/scratch/a/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
-export PYTHIA8DATA=/local/scratch/a/wxie/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
+PATH="$HOME/.local/bin:$PATH"
 
-export CUDA_PATH=/usr/local/cuda
-export PATH=$PATH:$HOME/local_pkgs/genn/bin:/local/scratch/a/swig-4.0.2/build/bin:$CUDA_PATH/bin:/local/scratch/a/wxie/.codon/bin
-export LD_LIBRARY_PATH=/local/scratch/a/wxie/local_pkgs/miniconda3/envs/brian2/lib:$LD_LIBRARY_PATH
-export PYTHONUNBUFFERED=True # disable buffering
+eic-shell() {
+    local OLD_CONDA="$CONDA_DEFAULT_ENV"
+    if [ -n "$OLD_CONDA" ]; then
+        conda deactivate
+    fi
+
+    # 1. Consolidate your core paths and WSL-specific interop bridges in one place
+    local BINDS="/home,/media,/mnt,/init:/init,/usr/bin/wslpath:/usr/bin/wslpath,/run/WSL:/run/WSL"
+
+    # 2. Launch cleanly without dropping required WSL sockets
+    env -i \
+        HOME="$HOME" \
+        PATH="$PATH" \
+        TERM="$TERM" \
+        USER="$USER" \
+        WSL_INTEROP="$WSL_INTEROP" \
+        WSL_DISTRO_NAME="$WSL_DISTRO_NAME" \
+        APPTAINER_BINDPATH="$BINDS" \
+        SINGULARITY_BINDPATH="$BINDS" \
+        /home/wxie/eic/eic-shell \
+        -- bash --rcfile <(
+            echo "source ~/.bashrc; PS1='eic_shell:\u:\W> '"
+        ) "$@"
+
+    if [ -n "$OLD_CONDA" ]; then
+        conda activate "$OLD_CONDA"
+    fi
+    unset PROMPT_COMMAND
+    export PS1="\h:\u:\W> "
+}
+
 unset __conda_setup
 unset JUPYTER_CONFIG_DIR
-PS1="\h:\u:\W>"
+
+#xrdb -merge ~/.Xresources
+
+export CUDA_PATH=/usr/local/cuda
+export PYTHONUNBUFFERED=True # disable buffering
+
 export LS_OPTIONS='--color=auto'
 eval "$(dircolors -b)"
 alias ls='ls $LS_OPTIONS'
@@ -178,3 +244,8 @@ fi
 alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+# opencode
+export PATH=/home/wxie/.opencode/bin:$PATH
+export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
+[ -f ~/.api_keys ] && source ~/.api_keys
