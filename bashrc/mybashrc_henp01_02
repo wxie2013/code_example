@@ -54,9 +54,9 @@ export negishi03=wxie@login03.negishi.rcac.purdue.edu
 export negishi04=wxie@login04.negishi.rcac.purdue.edu
 export gilbreth00=wxie@gilbreth-fe00.rcac.purdue.edu
 export gilbreth=wxie@gilbreth.rcac.purdue.edu
-export Brian2=/home/wxie/Brian2
+export Brian2=$HOME/Brian2
 alias brian='cd $Brian2'
-alias b2='cd /home/wxie/local_pkgs/brian2/brian2'
+alias b2='cd $HOME/local_pkgs/brian2/brian2'
 alias ana_brian='cd $Brian2/ana'
 alias job_brian='cd $Brian2/jobs_sub/ray_tune/'
 alias model_brian='cd $Brian2/model'
@@ -125,7 +125,6 @@ alias lg_STAR_gateway='ssh weixie@ssh.sdcc.bnl.gov'
 alias lg_sPHENIX_gateway='ssh wxie@ssh.sdcc.bnl.gov'
 alias rmb='rm -r syn_out cpp_standalone* cuda_standalone* root_file neuron_group  __pycache__ ray_log; find . -type d -name "__pycache__" -exec rm -rf {} +'
 alias nb2py='jupyter nbconvert --to script '
-#alias eic_shell='/home/wxie/eic/eic-shell -- bash -c "exec bash --rcfile ~/.bashrc"'
 #alias lg_sphenix='ssh sphnx01.sdcc.bnl.gov'
 #alias lg_star='ssh rcas6009'
 export sftp_sphnx='wxie@sftp.sdcc.bnl.gov' # e.g. sftp localfile $scp_sphnx:.
@@ -148,27 +147,27 @@ if [ -z "$EIC_SHELL_PREFIX" ] && [ -z "$SINGULARITY_NAME" ] && [ -z "$APPTAINER_
     unset __conda_setup
     # <<< conda initialize <<<
     conda activate brian2 
-    export PATH=$PATH:/usr/local/go/bin
-    export PATH=$PATH:$(go env GOPATH)/bin
+    export PATH="$HOME/.local/apptainer/bin:$PATH"
     export PS1="\h:\u:\W>"
-    export CPATH=$CPATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
-    export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:/home/wxie/local_pkgs/tunfold_standalone:/home/wxie/local_pkgs/RooUnfold
-    export PYTHIA8DATA=/home/wxie/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
-    export PYTHONPATH=$Brian2/../:/home/wxie:/home/wxie/Brian2/pkgs:/home/wxie/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
+    export CPATH=$CPATH:$HOME/local_pkgs/tunfold_standalone:$HOME/local_pkgs/RooUnfold
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$HOME/local_pkgs/tunfold_standalone:$HOME/local_pkgs/RooUnfold
+    export ROOT_INCLUDE_PATH=$ROOT_INCLUDE_PATH:$HOME/local_pkgs/tunfold_standalone:$HOME/local_pkgs/RooUnfold
+    export PYTHIA8DATA=$HOME/local_pkgs/miniconda3/envs/brian2/share/Pythia8/xmldoc
+    export PYTHONPATH=$Brian2/../:$HOME:$HOME/Brian2/pkgs:$HOME/Brian2/pkgs/lib/python3.8/site-packages:$PYTHONPATH
 
     mkdir -p $HOME/tmp
     export SINGULARITY_TMPDIR=$HOME/tmp
     export APPTAINER_TMPDIR=$HOME/tmp
     export APPTAINER_CACHEDIR=$HOME/.apptainer/cache
+    export TMPDIR=$HOME/tmp
 
 else
     PROMPT_COMMAND="export PS1='eic_shell:\u:\W> '"
     # 1. Add your custom ML packages (scikit-learn, xgboost, lightgbm)
-    export PYTHONPATH="/home/wxie/.eic_python_pkgs:$PYTHONPATH"
+    export PYTHONPATH="$HOME/.eic_python_pkgs:$PYTHONPATH"
 
     # 2. Add custom binaries (ruff, pyright) to PATH
-    export PATH="/home/wxie/.eic_python_pkgs/bin:$PATH"
+    export PATH="$HOME/.eic_python_pkgs/bin:$PATH"
 
     if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
         export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
@@ -186,19 +185,16 @@ eic-shell() {
     fi
 
     # 1. Consolidate your core paths and WSL-specific interop bridges in one place
-    local BINDS="/home,/media,/mnt,/init:/init,/usr/bin/wslpath:/usr/bin/wslpath,/run/WSL:/run/WSL"
+    local BINDS=""
 
-    # 2. Launch cleanly without dropping required WSL sockets
     env -i \
         HOME="$HOME" \
         PATH="$PATH" \
         TERM="$TERM" \
         USER="$USER" \
-        WSL_INTEROP="$WSL_INTEROP" \
-        WSL_DISTRO_NAME="$WSL_DISTRO_NAME" \
         APPTAINER_BINDPATH="$BINDS" \
         SINGULARITY_BINDPATH="$BINDS" \
-        /home/wxie/eic/eic-shell \
+        $HOME/eic/eic-shell \
         -- bash --rcfile <(
             echo "source ~/.bashrc; PS1='eic_shell:\u:\W> '"
         ) "$@"
@@ -206,6 +202,7 @@ eic-shell() {
     if [ -n "$OLD_CONDA" ]; then
         conda activate "$OLD_CONDA"
     fi
+
     unset PROMPT_COMMAND
     export PS1="\h:\u:\W> "
 }
@@ -227,8 +224,6 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export GOOGLE_API_KEY="AIzaSyCBlHC4o5QxjJByDgJBAWYRhApXnwvvlhw"
-
 export SSH_AUTH_SOCK="$HOME/.ssh/ssh-agent.sock"
 
 # Check if our specific custom socket is working right now
@@ -246,6 +241,6 @@ alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # opencode
-export PATH=/home/wxie/.opencode/bin:$PATH
+export PATH=$HOME/.opencode/bin:$PATH
 export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
 [ -f ~/.api_keys ] && source ~/.api_keys
