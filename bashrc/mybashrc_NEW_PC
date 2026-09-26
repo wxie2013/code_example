@@ -170,10 +170,10 @@ else
     # 2. Add custom binaries (ruff, pyright) to PATH
     export PATH="/home/wxie/.eic_python_pkgs/bin:$PATH"
 
-    if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
-        export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
-    fi
-
+    #if [ -d "/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin" ]; then
+    #    export PATH="$PATH:/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft VS Code/bin"
+    #fi
+    alias code="/mnt/c/Users/wxie/AppData/Local/Programs/Microsoft\ VS\ Code/bin/code"
 fi
 #
 
