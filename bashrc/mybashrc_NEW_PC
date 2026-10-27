@@ -37,6 +37,8 @@ export cms=wxie@cms.rcac.purdue.edu
 export cern=wxie@lxplus.cern.ch
 export halstead=wxie@halstead.rcac.purdue.edu
 export bell=wxie@bell.rcac.purdue.edu
+export perlmutter=weixie@perlmutter.nersc.gov
+export polaris=wxie@polaris.alcf.anl.gov
 export gautschi=wxie@gautschi.rcac.purdue.edu
 export gautschi00=wxie@login00.gautschi.rcac.purdue.edu
 export gautschi01=wxie@login01.gautschi.rcac.purdue.edu
@@ -115,6 +117,8 @@ alias lg_negishi03='ssh  -X $negishi03'
 alias lg_negishi04='ssh  -X $negishi04'
 alias lg_gilbreth00='ssh -X  $gilbreth00'
 alias lg_gilbreth='ssh -X  $gilbreth'
+alias lg_polaris='ssh  -X $polaris'
+alias lg_perlmutter='ssh  -X $perlmutter'
 alias lg_gautschi='ssh  -X $gautschi'
 alias lg_gautschi00='ssh  -X $gautschi00'
 alias lg_gautschi01='ssh  -X $gautschi01'
@@ -249,3 +253,7 @@ alias add_ssh_key='ssh-add ~/.ssh/id_rsa'
 export PATH=/home/wxie/.opencode/bin:$PATH
 export PATH="$HOME/eic/eic-mcp/bin:$HOME/.opencode/bin:$PATH"
 [ -f ~/.api_keys ] && source ~/.api_keys
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/wxie/.local/bin:$PATH"
